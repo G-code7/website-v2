@@ -233,10 +233,13 @@ const ApliedAi = ({ data, pageContext, yml }) => {
         locations={data.allLocationYaml.edges}
         showMoreRedirect
       />
-      
+
       {/* TWO COLUMN video CREAR EN EL YML*/}
       <TwoColumn
-        left={{ image: yml.two_columns_video?.image, video: yml.two_columns_video?.video }}
+        left={{
+          image: yml.two_columns_video?.image,
+          video: yml.two_columns_video?.video,
+        }}
         right={{
           heading: yml.two_columns_video?.heading,
           sub_heading: yml.two_columns_video?.sub_heading,
@@ -416,6 +419,7 @@ export const query = graphql`
             }
             heading
             weeks
+            week_unit
             sub_heading
             left_labels {
               description
@@ -814,6 +818,8 @@ export const query = graphql`
             keywords
             redirects
             region
+            cohort_exclude_regex
+            cohort_include_regex
           }
           header {
             sub_heading
