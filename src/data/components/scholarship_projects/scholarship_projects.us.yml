@@ -8,6 +8,28 @@ institutions: Institutions that contibuted
 press: Press references
 see_project: See full project
 projects:
+  - name: CRUSA-FORTE
+    image:
+      alt: typing
+      src: "../../../../static/images/projects/costa-rica.png"
+    description: In collaboration with the Ministry for Science, Technology, Telecommunication and Innovation of Costa Rica, the IDB launched a program to invest in Costa Rica's talent. Together, we’re helping around 250 students become skilled software developers, opening doors to better job opportunities after graduation.
+    details:
+      cost: $1.5mm
+      geeks_benefited: 212
+    institutions:
+      - name: Interamerican Development Bank
+        logo: "../../../../static/images/idb-logo.png"
+      - name: MICITT
+        logo: "../../../../static/images/micitt-logo.jpg"
+      - name: 4Geeks Academy
+        logo: "../../../../static/images/4G_logo_negro.png"
+    press:
+      - name: Periodico Mensaje
+        link: https://www.periodicomensaje.com/educacion/11609-mas-de-100-mujeres-concluyeron-formacion-en-tecnologias-digitales-gracias-a-la-alianza-crusa-forte
+      - name: La Republica
+        link: https://www.larepublica.net/noticia/mas-de-100-mujeres-se-formaron-en-tecnologias-digitales-para-aumentar-sus-oportunidades-de-empleo
+    pdf: https://storage.googleapis.com/4geeks-academy-website/PDF%20and%20Docs/Costa%20Rica%20CINDE%20and%204Geeks%20(1).pdf
+
   - name: Costa Rica-CINDE and 4Geeks Project
     image:
       alt: typing
