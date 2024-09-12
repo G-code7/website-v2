@@ -66,7 +66,7 @@ two_columns_first:
     text: "Curso de Ciberseguridad validado por Chema Alonso el Hacker más Reconocido de España"
     font_size: ["28px", "28px", "28px", "23px", "23px"]
   sub_heading:
-    text: "Tanto los contenidos, como los docentes del bootcamp de ciberseguridad de 4Geeks Academy han sido validados por Chema Alonso, experto en ciberseguridad. Se trata de un curso de alta calidad, con contenido actualizado en el que aprenderás a trabajar con los estándares ISO y NIST, y adquirirás experiencia práctica en técnicas de prevención de pérdida de datos (DLP), pruebas de penetración, etc. Además incluye :"
+    text: "Tanto los contenidos, como los docentes del bootcamp de ciberseguridad de 4Geeks Academy han sido validados por Chema Alonso, experto en ciberseguridad. Se trata de un curso de alta calidad, con contenido actualizado en el que aprenderás a trabajar con los estándares ISO y NIST, y adquirirás experiencia práctica en técnicas de prevención de pérdida de datos (DLP), pruebas de penetración, etc. Además los estudiantes en nuestra sede de España tendran:"
     font_size: ["16px", "16px", "16px", "16px", "16px"]
   button:
     text: "Inscríbete ahora"
