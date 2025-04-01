@@ -48,9 +48,9 @@ info_box:
   address: "Av. Manquehue Sur 350, Oficina 110, Las Condes, Región Metropolitana, Chile"
   iframeMapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1469.1601939813802!2d-70.56719882328042!3d-33.41054249403315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cfff900b7a6b%3A0x37af5bee84731bcc!2s4Geeks%20Academy%20Chile!5e0!3m2!1ses-419!2scl!4v1621011176304!5m2!1ses-419!2scl"
   contact_heading: "Contacts"
-  whatsapp: "+56 9 2006 5786"
-  whatsapp_link: "https://api.whatsapp.com/send/?phone=56920065786&text&type=phone_number&app_absent=0&utm_source=web_site&utm_medium=web_site&utm_campaign=web_site&utm_id=web_site&utm_term=web_site&utm_content=Web_site"
-  phone: "+56 9 2006 5786"
+  whatsapp: "+56 9 7284 8039"
+  whatsapp_link: "https://api.whatsapp.com/send/?phone=56972848039&text&type=phone_number&app_absent=0&utm_source=web_site&utm_medium=web_site&utm_campaign=web_site&utm_id=web_site&utm_term=web_site&utm_content=Web_site"
+  phone: "+56 9 7284 8039"
   email: "chile@4GeeksAcademy.com"
   image: "../../../static/images/locations/santiago-map.png"
   map_url: https://www.google.com/maps/place/4Geeks+Academy+Chile/@-33.4104594,-70.5662933,15z/data=!4m2!3m1!1s0x0:0x37af5bee84731bcc?sa=X&ved=2ahUKEwj35Kmp_-zrAhUFTd8KHeaZDHMQ_BIwE3oECBYQCA
@@ -61,7 +61,7 @@ badges:
     4Geeks Academy es el lugar donde los desarrolladores crecen y prosperan. 
     Estamos autorizados por el Departamento de Educación de Florida. 
     Elegido como uno de los 35 mejores cursos de programacion del mundo y 
-    el mejor <a href="https://4geeksacademy.com/es/curso-de-programacion-desde-cero/?lang=es" rel="nofollow">curso de programacion</a> en Miami según SwitchUp. 
+    el mejor <a href="/es/curso-de-programacion-desde-cero">curso de programacion</a> en Miami según SwitchUp. 
     4Geeks Academy ha sido reconocida como uno de los 10 mejores bootcamps de codificación en los Estados Unidos según Newsweek. 
     Una comunidad construida para desarrolladores.
 news:
@@ -91,14 +91,14 @@ two_columns:
   proportions: [6, 6]
   image:
     style: '{"border" : "5px solid black", "backgroundSize": "contain" }'
-    src: "/static/images/staff/luisa.png"
+    src: "/static/images/testimonials/joshua-bravo-testimonial.jpg"
     shadow: true  
-  video: "https://www.youtube.com/watch?v=PWkgaAT8pHg&t=13s"
+  video: "https://www.youtube.com/watch?v=rtpfwwfE0yY"
   heading:
-    text: "La Experiencia de Luisa Glum en 4Geeks Academy en Santiago, Chile"
+    text: "La Experiencia de Joshua Bravo en 4Geeks Academy Chile"
     font_size: ["30px", "30px", "30px", "30px", "30px"]
   sub_heading:
-    text: "Desarrolla tus Habilidades Tecnológicas desde Santiago, Chile"
+    text: "Programa tu historia con 4Geeks Academy en Santiago de Chile"
     font_size: ["18px", "18px", "22px", "22px", "22px"]
   button:
     text: "¡Únete ahora!"
@@ -107,9 +107,56 @@ two_columns:
     path: "/es/aplica"
   bullets:
     items: 
-    - text: "Luisa Glum comparte su trayectoria personal y cómo 4Geeks Academy transformó su camino profesional en el cambiante panorama tecnológico de Santiago"
-    - text: "4Geeks Academy se enorgullece de tener una tasa de colocación laboral del 95% en los seis meses posteriores a la graduación, garantizando un progreso profesional concreto para nuestros estudiantes"
-    - text: "Preparación para desafíos del mundo real y oportunidades laborales en tecnología"
+    - text: "Joshua comparte su trayectoria personal que pasó a ser asistente de cocina a programador Fullstack"
+    - text: "Aprendió todo lo necesario para construir una pagina web desde cero, conocimientos que utilizó en su proyecto final y ahora en su carrera"
+    - text: "Con el Plan de ingresos compartidos Joshua pudo convertirse en un desarrollador sin tener que esperar a tener un pago completo"
+
+# Two Columns - Rigo
+two_columns_rigo:
+  proportions: [7, 5]
+  background: "#FFFFFF"
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center", "border" : "2px solid black", "border-radius": "4px"}'
+    src: "/images/landing/ai-mentor-esp.jpg"
+    shadow: true
+  video: "cOFm_deKj6Q"
+  heading: 
+    text: "¡Nuestras herramientas de IA mejoran y agilizan tu aprendizaje!"
+    font_size: ["31px", "31px", "31px", "29px", "29px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Luego de años de investigación y experiencia, hemos perfeccionado nuestros métodos de enseñanza para optimizar tu curva de aprendizaje y tu tasa de éxito. A través de nuestra plataforma de aprendizaje 4Geeks.com, te brindamos las estrategias y herramientas para garantizar tu progreso constante y eficiente."
+    font_size: ["16px","16px","16px","16px","16px"]
+    style: '{ "font-size":"16px", "margin":"15px 0", "font-weight":"300", "text-align": "justify" }'
+  content:
+    style: '{ "font-size":"16px", "margin":"15px 0"}'
+    text: "¡Experimenta la diferencia que marcan nuestras nuevas herramientas de Inteligencia Artificial! Nuestro enfoque ha demostrado mantenerte comprometido, motivado y encaminado a lograr tus objetivos de programación."
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Rigobot, nuestra IA personalizada, ofrece de forma ilimitada:"
+        text: |
+          • Tutoría instantánea mientras programas.
+          <br />
+          • Evaluaciones de habilidades para seguir tu progreso.
+          <br />
+          • Asistencia para corregir errores.
+          <br /><br />
+          ¡Es el complemento perfecto para nuestro programa de mentoría humana!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "LearnPack, nuestro software de aprendizaje fácil de usar, proporciona:"
+        text: |
+          • Cientos de ejercicios interactivos para ayudarte a dominar y retener habilidades.
+          <br />
+          • Pruebas automatizadas para ayudarte a seguir tu progreso.
+          <br />
+          • Y mucho más…
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
 
 active_campaign_location_slug: "santiago-chile"
 breathecode_location_slug: "santiago-chile"
@@ -118,14 +165,14 @@ in_person_available: true # important to accept in-person applicants
 consents:
   - slug: "gdpr_consent"
     name: "GDPR Consent"
-    active: true
-    message: 'Al completar este formulario acepto que mi información será utilizada para enviarme información comercial sobre 4Geeks Academy y que podría resultar una relación comercial a partir de esto. Revisa nuestra <a style={{ marginLeft: "5px" }} target="_blank" rel="noopener noreferrer nofollow" className="decorated" href="/es/privacidad">Política de Privacidad</a>'
+    active: false
+    message: 'Al completar este formulario acepto que mi información será utilizada para enviarme información comercial sobre 4Geeks Academy y que podría resultar una relación comercial a partir de esto.'
     error_message: "Debes aceptar el consent de GDPR"
   - slug: "wa_consent"
     name: "WhatsApp Consent"
     active: true
-    message: "Al completar este formulario acepto que me contacten por WhatsApp."
-    error_message: "Debes aceptar el consent de WhatsApp"
+    message: 'Acepto recibir información vía email, WhatsApp y/o otros canales sobre talleres de programación, eventos, cursos y otros materiales de marketing. Nunca compartiremos tu información de contacto y puedes darte de baja fácilmente en cualquier momento.'
+    error_message: "Debes aceptar el consentimiento de Whatsapp."
 
 city: "Santiago de Chile"
 hasFinancialsOption: true
@@ -140,19 +187,19 @@ zip_code: ""
 state: ""
 country: "Chile"
 country_shortname: "cl"
-socials:
-  - name: "Facebook"
-    icon: "facebook"
-    link: "https://www.facebook.com/4GeeksAcademyCL"
-  - name: "Twitter"
-    icon: "x-logo"
-    link: "https://twitter.com/4geeksacademycl"
-  - name: "Instagram"
-    icon: "instagram"
-    link: "https://www.instagram.com/4geeksacademycl"
-  - name: "Eventbrite"
-    icon: "eventbrite"
-    link: "https://www.eventbrite.com/o/4geeks-academy-chile-impulsando-carreras-18840433269"
+# socials:
+#   - name: "Facebook"
+#     icon: "facebook"
+#     link: "https://www.facebook.com/4GeeksAcademyCL"
+#   - name: "Twitter"
+#     icon: "x-logo"
+#     link: "https://twitter.com/4geeksacademycl"
+#   - name: "Instagram"
+#     icon: "instagram"
+#     link: "https://www.instagram.com/4geeksacademycl"
+#   - name: "Eventbrite"
+#     icon: "eventbrite"
+#     link: "https://www.eventbrite.com/o/4geeks-academy-chile-impulsando-carreras-18840433269"
 courses:
   - "Full-Time"
   - "Part-Time"

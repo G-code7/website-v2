@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "gatsby";
 import { Button, Colors, Img } from "../Styling";
-import { Grid, Div } from "../Sections";
-import { H4, H3, H2, H1, Paragraph } from "../Heading";
+import { Div } from "../Sections";
+import { H3, H2, H1, Paragraph } from "../Heading";
+import { smartRedirecting } from "../../utils/utils.js";
 import Icon from "../Icon";
 
 const CardsCarousel = ({
-  lang,
-  landingTemplate,
   title,
   cardWidth,
   sub_title,
@@ -30,7 +29,7 @@ const CardsCarousel = ({
         flexDirection="column"
         gap="10px"
         margin="60px 10% 30px 10%"
-        maxWidth_tablet="1366px"
+        maxWidth_tablet="1280px"
         margin_md="60px auto 20px auto"
         padding_tablet="0px"
         padding_xs="10px 0 0 0"
@@ -69,7 +68,7 @@ const CardsCarousel = ({
         justifyContent_tablet={cards.length < 3 ? "center" : "flex-start"}
         justifyContent_md={cards.length > 3 ? "flex-start" : "center"}
         justifyContent_lg="center"
-        maxWidth_tablet="1366px"
+        maxWidth_tablet="1280px"
         margin="auto"
       >
         {cards.map((card, index) => (
@@ -150,18 +149,15 @@ const CardsCarousel = ({
         ))}
       </Div>
 
-      {content && /<\/?[a-z0-9]+>/g.test(content.text) ? (
+      {content?.text && (
         <Paragraph
           padding="0 32px"
           margin="30px 0 0 0"
+          onClick={(e) => {
+            if (e.target.tagName === "A") smartRedirecting(e, content.path);
+          }}
           dangerouslySetInnerHTML={{ __html: content.text }}
         />
-      ) : (
-        content && (
-          <Paragraph padding="0 32px" margin="30px 0 0 0">
-            {content.text}
-          </Paragraph>
-        )
       )}
       <Div padding="0 0 30px 0" justifyContent="center">
         {button && (

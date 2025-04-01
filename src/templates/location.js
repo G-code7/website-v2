@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
+import React, { useState, useEffect, useRef, lazy } from "react";
 import { graphql, Link } from "gatsby";
 import process from "process";
 import ChooseProgram from "../components/ChooseProgram";
@@ -9,17 +9,11 @@ import ChooseYourProgram from "../components/ChooseYourProgram";
 import UpcomingDates from "../components/UpcomingDates";
 import Staff from "../components/Staff";
 import "dayjs/locale/de";
-import {
-  Div,
-  GridContainerWithImage,
-  GridContainer,
-  Divider,
-} from "../components/Sections";
+import { Div, GridContainer } from "../components/Sections";
 import { H1, H2, H3, Paragraph } from "../components/Heading";
 import { Colors, StyledBackgroundSection } from "../components/Styling";
 import BaseRender from "./_baseLayout";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Icon from "../components/Icon";
 import { SessionContext } from "../session";
 import JobGuaranteeSmall from "../components/JobGuaranteeSmall";
@@ -27,9 +21,8 @@ import RelatedPosts from "../components/RelatedPosts";
 import FaqCard from "../components/FaqCard";
 import TwoColumn from "../components/TwoColumn/index.js";
 import GeeksInfo from "../components/GeeksInfo";
-import With4Geeks from "../components/With4Geeks";
 import MosaicImages from "../components/MosaicImages/index.js";
-import Carousel from "../components/Carousel/index.js";
+import OurPartners from "../components/OurPartners";
 import Gallery from "../components/Gallery/index.js";
 
 const MapFrame = lazy(() => import("../components/MapFrame"));
@@ -37,8 +30,8 @@ const MapFrame = lazy(() => import("../components/MapFrame"));
 const Location = ({ data, pageContext, yml }) => {
   const { lang } = pageContext;
   const { session } = React.useContext(SessionContext);
-  const hiring = data.allPartnerYaml.edges[0].node;
-  const images = data.allLocationYaml.edges[0].node;
+  // const hiring = data.allPartnerYaml.edges[0].node;
+  const hiring = yml.our_partners;
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -76,18 +69,13 @@ const Location = ({ data, pageContext, yml }) => {
         padding_lg="40px 0px"
         padding_tablet="40px 40px"
         columns_tablet="14"
-        margin={
-          isCustomBarActive(session)
-            ? "138px auto 30px auto"
-            : "72px auto 30px auto"
-        }
         margin_md={
           isCustomBarActive(session)
             ? "120px auto 30px auto"
             : "72px auto 30px auto"
         }
         childMargin="auto"
-        childMaxWidth="1366px"
+        childMaxWidth="1280px"
       >
         <Div
           flexDirection="column"
@@ -99,7 +87,12 @@ const Location = ({ data, pageContext, yml }) => {
           <H1 type="h1" textAlign="left" margin="0 0 11px 0" color="#606060">
             {yml.seo_title}
           </H1>
-          <H2 textAlign="left" fontSize="50px" lineHeight="60px">
+          <H2
+            textAlign="left"
+            fontSize="50px"
+            lineHeight="60px"
+            color={Colors.black}
+          >
             {`${yml.header.tagline}`}
           </H2>
           <H3 textAlign="left" type="h3" margin="15px 0 25px 0">
@@ -238,7 +231,7 @@ const Location = ({ data, pageContext, yml }) => {
         margin="40px auto"
         paragraph={yml.badges.paragraph}
         bottom_paragraph
-        maxWidth="1366px"
+        maxWidth="1280px"
         paddingText_tablet="0 10% 55px 10%"
       />
 
@@ -263,6 +256,24 @@ const Location = ({ data, pageContext, yml }) => {
         session={session}
       />
 
+      {/* Two Columns Rigo */}
+      <TwoColumn
+        right={{
+          image: yml.two_columns_rigo?.image,
+          video: yml.two_columns_rigo?.video,
+        }}
+        left={{
+          heading: yml.two_columns_rigo?.heading,
+          heading_image: yml.two_columns_rigo?.heading_image,
+          sub_heading: yml.two_columns_rigo?.sub_heading,
+          bullets: yml.two_columns_rigo?.bullets,
+          content: yml.two_columns_rigo?.content,
+          button: yml.two_columns_rigo?.button,
+        }}
+        proportions={yml.two_columns_rigo?.proportions}
+        session={session}
+      />
+
       {/* GEEKSINFO IS A TWOCOLUMN WITH TITLE */}
       <GeeksInfo lang={pageContext.lang} />
 
@@ -273,7 +284,7 @@ const Location = ({ data, pageContext, yml }) => {
           paragraph={yml?.images_box?.content}
           widthImage="315px"
           heightImage="347px"
-          previewArrow
+          previousArrow
           nextArrow
           //customSettingsCarousel={}
         />
@@ -297,6 +308,7 @@ const Location = ({ data, pageContext, yml }) => {
         locations={data.allLocationYaml.edges}
         message={yml.upcoming.no_dates_message}
         actionMessage={yml.upcoming.actionMessage}
+        showMoreRedirect
       />
 
       <Staff lang={pageContext.lang} heading={yml?.staff?.heading} />
@@ -318,11 +330,20 @@ const Location = ({ data, pageContext, yml }) => {
         )}
       </Div> */}
 
+      {hiring && (
+        <OurPartners
+          images={hiring.images}
+          variant="carousel"
+          title={hiring.tagline}
+          paragraph={hiring.sub_heading}
+        />
+      )}
+
       <FaqCard
         faqs={data.allFaqYaml.edges[0].node.faq}
-        topicSlug="enrollment"
+        // topicSlug="enrollment"
         minPriority="1"
-        // locationSlug={yml.breathecode_location_slug}
+        locationSlug={yml.breathecode_location_slug}
       />
 
       <RelatedPosts
@@ -330,7 +351,7 @@ const Location = ({ data, pageContext, yml }) => {
         posts={data.allMarkdownRemark.edges}
         relatedClusters={yml.meta_info.related_clusters}
       />
-      <Loc lang={pageContext.lang} allLocationYaml={data.test} />
+      <Loc lang={pageContext.lang} allLocationYaml={data.locations} />
     </>
   );
 };
@@ -386,6 +407,24 @@ export const query = graphql`
             title
             paragraph
           }
+          our_partners {
+            tagline
+            images {
+              name
+              link
+              follow
+              featured
+              image {
+                childImageSharp {
+                  gatsbyImageData(
+                    layout: FULL_WIDTH # --> CONSTRAINED || FIXED || FULL_WIDTH
+                    width: 200
+                    placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
+                  )
+                }
+              }
+            }
+          }
           news {
             title
           }
@@ -417,6 +456,7 @@ export const query = graphql`
             alt
           }
           meta_info {
+            slug
             title
             description
             image
@@ -473,10 +513,44 @@ export const query = graphql`
               }
             }
           }
+          two_columns_rigo {
+            proportions
+            image {
+              style
+              src
+              shadow
+            }
+            video
+            heading {
+              text
+              font_size
+              style
+              heading_image {
+                src
+              }
+            }
+            sub_heading {
+              text
+              font_size
+              style
+            }
+            content {
+              text
+              style
+            }
+            bullets {
+              items {
+                heading
+                text
+                icon
+                icon_color
+              }
+            }
+          }
         }
       }
     }
-    test: allLocationYaml(filter: { fields: { lang: { eq: $lang } } }) {
+    locations: allLocationYaml(filter: { fields: { lang: { eq: $lang } } }) {
       edges {
         node {
           city
@@ -490,58 +564,13 @@ export const query = graphql`
             image
             keywords
             region
+            cohort_exclude_regex
+            cohort_include_regex
           }
           seo_title
           online_available
           active_campaign_location_slug
           breathecode_location_slug
-          header {
-            sub_heading
-            tagline
-            alt
-            image {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                  width: 800
-                  quality: 100
-                  placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                )
-              }
-            }
-          }
-          info_box {
-            heading
-            address
-            contact_heading
-            phone
-            email
-            image {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                  width: 800
-                  placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                )
-              }
-            }
-          }
-          images_box {
-            images {
-              path {
-                childImageSharp {
-                  gatsbyImageData(
-                    layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                    width: 100
-                    placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                  )
-                }
-              }
-              alt
-            }
-            content
-            heading
-          }
         }
       }
     }
@@ -600,7 +629,6 @@ export const query = graphql`
             title
             description
             icon
-            comming_soon
             text_link
           }
         }
@@ -646,57 +674,6 @@ export const query = graphql`
               }
               featured
             }
-          }
-          coding {
-            images {
-              name
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                    width: 100
-                    placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                  )
-                }
-              }
-              featured
-            }
-            tagline
-            sub_heading
-          }
-          influencers {
-            images {
-              name
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                    width: 100
-                    placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                  )
-                }
-              }
-              featured
-            }
-            tagline
-            sub_heading
-          }
-          financials {
-            images {
-              name
-              image {
-                childImageSharp {
-                  gatsbyImageData(
-                    layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                    width: 100
-                    placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                  )
-                }
-              }
-              featured
-            }
-            tagline
-            sub_heading
           }
         }
       }

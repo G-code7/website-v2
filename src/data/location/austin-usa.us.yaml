@@ -15,6 +15,7 @@ meta_info:
   cohort_include_regex: ['miami']
   cohort_exclude_regex: ['usa-\d{1,10}-spanish']
 
+
 seo_title: "Coding Bootcamp in Austin"
 header:
   tagline: "4Geeks Academy in Austin"
@@ -24,6 +25,18 @@ header:
   image: "../../../static/images/locations/austin-location.webp"
   alt: "4Geeks Academy live coding bootcamp in Austin, Texas"
 
+consents:
+  - slug: "gdpr_consent"
+    name: "GDPR Consent"
+    active: false
+    message: 'By submitting this form, I accept that my data may be used for a quote request that could result in a commercial relationship. Check out our complete <a style={{ marginLeft: "5px" }} target="_blank" rel="noopener noreferrer nofollow" className="decorated" href="/us/privacy-policy">Privacy Policy</a>'
+    error_message: "You need to accept the privacy terms"
+  - slug: "wa_consent"
+    name: "WhatsApp Consent"
+    active: true
+    message: "I agree to receive information through email, WhatsApp, and/or other channels about coding workshops, events, courses, and other marketing materials. We'll never share your contact information, and you can easily opt out at any moment."
+    error_message: "You need to accept Whatsapp consent"
+    
 badges:
   title: ""
   paragraph: |
@@ -54,14 +67,14 @@ button:
 
 custom_bar:
   active: true
-  message: 'Change your life with Code. Starting at $150 a month. Or you can pay after you get a job! <a class="customBar-link" href="/us/apply">Apply</a>'
+  message: 'Transform Your Future with Code for Just $120/Month. <a class="customBar-link" href="/us/apply">Apply</a>'
   button: 
     label: "" # leave empty to hide button
     path: "/us/apply" #string (can be inline path using #, relative path or absolute path)
 
 info_box:
   heading: ""
-  address: "4201 Main St Ste 200, Houston, TX 77002"
+  address: "106 E 6th St #900, Austin, TX 78701"
   iframeMapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.4976302493887!2d-95.38481442403555!3d29.734308033197614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640bf708cbfffff%3A0x4f27b43b5c32577e!2s4201%20Main%20St%20Suite%20200%2C%20Houston%2C%20TX%2077002%2C%20USA!5e0!3m2!1sen!2sve!4v1708561512277!5m2!1sen!2sve"
   open_on_maps: ""
   contact_heading: "Contacts"
@@ -77,7 +90,7 @@ images_box:
       alt: "4Geeks Own People Coding"
     - path: "../../../static/images/locations/location-austin3.webp"
       alt: "Austin city"
-    - path: "../../../static/images/ownmancoding.jpg"
+    - path: "../../../static/images/ownmancoding.webp"
       alt: "Remote-Coding-Bootcamp"
     - path: "../../../static/images/locations/location-austin1.webp"
       alt: "Austin city"
@@ -111,6 +124,57 @@ two_columns:
     - text: "Practical projects refining skills on demand within professional environment"
     - text: "Curriculum aligned with industry needs for seamless job market integration"
     - text: "Professional guidance maximizing opportunities within Austin's thriving tech industry"
+
+# Two Columns - Rigo
+two_columns_rigo:
+  proportions: [7, 5]
+  background: "#FFFFFF"
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center", "border" : "2px solid black", "border-radius": "4px"}'
+    src: "/images/landing/ai-mentor.jpg"
+    shadow: true
+  video: "6m1Jyya7eCc"
+  heading: 
+    text: "Our AI-powered features make all the difference!"
+    font_size: ["33px", "33px", "33px", "33px", "33px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Through years of research and experience, we've perfected the strategies and tools to ensure your constant and efficient progress. To optimize your learning curve and empower you to tackle challenges with confidence, we've now incorporated the power of AI."
+    font_size: ["16px","16px","16px","16px","16px"]
+    style: '{ "font-size":"16px", "margin":"15px 0", "font-weight":"300", "text-align": "justify" }'
+  content:
+    style: '{ "font-size":"16px", "margin":"15px 0"}'
+    text: "Experience the difference our AI-powered features make. Our tried-and-tested approach keeps you engaged, motivated, and on the fast track to achieving your coding goals!"
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Meet Rigobot, our AI coding assistant:"
+        text: |
+          • Instant tutoring as you code.
+          <br />
+          • Skill evaluations to track your progress.
+          <br />
+          • Expert bug fixing assistance.
+          <br /><br />
+          It perfectly complements our human mentorship program!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "Learnpack, our interactive learning software, provides:"
+        text: |
+          • There are hundreds of interactive exercises to help you master and retain skills.
+          <br />
+          • Automated tests to help track your progress.
+          <br />
+          • Structured practice.
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+
+staff:
+  heading: "Meet your Staff"
+  sub_heading: ""
 
 active_campaign_location_slug: "austin-usa"
 breathecode_location_slug: "austin-usa"

@@ -1,19 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { H1, H2, H3, H4, Title, Separator, Paragraph } from "../Heading";
-import { Anchor, Colors, Button } from "../Styling";
-import { Row, GridContainer, Div } from "../Sections";
+import { H3, H4, Paragraph } from "../Heading";
+import { Anchor } from "../Styling";
+import { Div } from "../Sections";
 import Fragment from "../Fragment";
-import styled from "styled-components";
 import Icon from "../Icon";
-import DraggableDiv from "../DraggableDiv";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { SessionContext } from "../../session";
-import Slider from "react-slick";
 import "../../assets/css/staff-css.css";
 import Carousel from "../Carousel";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 const Staff = (props) => {
   const data = useStaticQuery(graphql`
@@ -76,8 +71,6 @@ const Staff = (props) => {
         n.location.includes(sessionLocation)
     );
 
-  const sliderRef = useRef();
-
   return (
     <Fragment github="/components/staff">
       <Div
@@ -89,29 +82,11 @@ const Staff = (props) => {
         padding_tablet="40px 40px 10px 40px"
         margin_tablet="0 auto 30px auto"
         margin="0 0 36px 0"
-        maxWidth="1366px"
+        maxWidth="1280px"
         containerColumns_tablet="repeat(12,1fr)"
         gridColumn_tablet="1 / span 12"
         gap="36px 0px"
       >
-        <Div
-          alignItems="center"
-          flexDirection="column"
-          gridColumn_tablet="2 /12"
-        >
-          <H4
-            fontSize="30px"
-            //textTransform="uppercase"
-            lineHeight="19px"
-            fontWeight="500"
-          >
-            {props.heading || staffList.heading}
-          </H4>
-          <Paragraph fontSize="18px" textAlign="center" margin="20px 0 0 0">
-            {props.paragraph || staffList.sub_heading}
-          </Paragraph>
-        </Div>
-
         <Div
           alignItems="center"
           justifyContent="between"
@@ -119,9 +94,13 @@ const Staff = (props) => {
           display="block"
         >
           <Carousel
-            previewArrow
+            previousArrow
             nextArrow
-            customSettings={{
+            content={{
+              heading: props.heading || staffList.heading,
+              content: props.paragraph || staffList.sub_heading,
+            }}
+            settings={{
               dotsClass: "slick-dots-staff",
               slidesToShow: 4,
               slidesToScroll: 3,

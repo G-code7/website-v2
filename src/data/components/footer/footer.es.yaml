@@ -9,7 +9,7 @@ footer:
     heading: "COMPAÑÍA"
     width: 3
     items:
-      - name: "Porqué 4Geeks"
+      - name: "Por qué 4Geeks"
         link: "/es/porque-4geeks"
       - name: "La Academia"
         link: "/es/sobre-la-academia"
@@ -72,7 +72,7 @@ footer:
       - name: "Costa Rica"
         link: "/es/coding-campus/bootcamp-programacion-costa-rica"
       - name: "Venezuela"
-        link: "/es/coding-campus/bootcamp-programacion-caracas"
+        link: "/es/coding-campus/curso-informatica-caracas-venezuela"
       - name: "Europa"
         link: "/es/coding-campus/bootcamp-programacion-europa-online"
   - column_five:
@@ -100,6 +100,7 @@ socials:
   # - name: "Youtube"
   #   link: "https://www.youtube.com/4GeeksAcademy"
 
+we_accept: "Aceptamos:"
 policy:
   - name: "Políticas de Privacidad"
     link: "/es/privacidad"

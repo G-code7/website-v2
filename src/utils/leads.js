@@ -9,9 +9,7 @@ export const save_form = async (
   formData = null,
   tags = [],
   automations = [],
-  session = null,
-  token = null,
-  action = null
+  session = null
 ) => {
   if (!Array.isArray(tags)) throw Error("Tags must be an array");
   if (typeof session !== "object") throw Error("Missing session");
@@ -36,14 +34,14 @@ export const save_form = async (
     return undefined;
   };
 
+  const ab_test_variant = (typeof window !== "undefined" && window.PageSenseAPI?.getVariationName) ? window.PageSenseAPI.getVariationName() : null;
+
   const resp = await fetch(`${getEnvironmentAPI()}/marketing/lead`, {
     headers: new Headers({ "content-type": "application/json" }),
     method: "POST",
     body: JSON.stringify({
       ...formData,
       ...session.utm,
-      token,
-      action,
       tags: tags.join(","),
       automations: automations.join(","),
       utm_language: formData.utm_language || session.language,
@@ -59,6 +57,9 @@ export const save_form = async (
         formData.location ||
         session.location.active_campaign_location_slug,
       utm_url: formData.utm_url || window.location.href,
+      custom_fields: {
+        ab_test_variant: ab_test_variant
+      }
     }),
   });
   if (resp.status >= 200 && resp.status < 400) {

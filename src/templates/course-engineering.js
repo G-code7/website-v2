@@ -24,7 +24,7 @@ import Overlaped from "../components/Overlaped";
 import JobGuaranteeSmall from "../components/JobGuaranteeSmall";
 import Loc from "../components/Loc";
 
-const Program = ({ data, pageContext, yml }) => {
+const CourseEngineering = ({ data, pageContext, yml }) => {
   const { session } = React.useContext(SessionContext);
   const courseDetails = data.allCourseYaml.edges[0].node;
   const geek = data.allCourseYaml.edges[0].node;
@@ -80,9 +80,9 @@ const Program = ({ data, pageContext, yml }) => {
         fontSize_title="40px"
         fontSizeTitle_tablet="60px"
         fontFamily_title="Archivo-Black"
-        fontSize_paragraph="24px"
+        fontSize_paragraph="21px"
         gridTemplateColumns_tablet="repeat(14, 1fr)"
-        maxWidth="1366px"
+        maxWidth="1280px"
         uppercase
       >
         <Img
@@ -231,6 +231,7 @@ const Program = ({ data, pageContext, yml }) => {
         message={courseDetails.upcoming?.no_dates_message}
         actionMessage={courseDetails.upcoming?.actionMessage}
         locations={data.allLocationYaml.edges}
+        showMoreRedirect
       />
 
       <PricesAndPayment
@@ -397,6 +398,8 @@ export const query = graphql`
             }
             heading
             sub_heading
+            weeks
+            week_unit
             left_labels {
               description
               projects
@@ -682,45 +685,6 @@ export const query = graphql`
         }
       }
     }
-    allAlumniProjectsYaml(filter: { fields: { lang: { eq: $lang } } }) {
-      edges {
-        node {
-          header {
-            tagline
-            sub_heading
-          }
-          projects {
-            project_name
-            slug
-            project_image {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                  width: 800
-                  placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                )
-              }
-            }
-            project_content
-            project_video
-            live_link
-            github_repo
-            alumni {
-              first_name
-              last_name
-              job_title
-              github
-              linkedin
-              twitter
-            }
-          }
-          button_section {
-            button_text
-            button_link
-          }
-        }
-      }
-    }
     allCredentialsYaml(filter: { fields: { lang: { eq: $lang } } }) {
       edges {
         node {
@@ -778,6 +742,8 @@ export const query = graphql`
             keywords
             redirects
             region
+            cohort_exclude_regex
+            cohort_include_regex
           }
           header {
             sub_heading
@@ -812,4 +778,4 @@ export const query = graphql`
     }
   }
 `;
-export default BaseRender(Program);
+export default BaseRender(CourseEngineering);

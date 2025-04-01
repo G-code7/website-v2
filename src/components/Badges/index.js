@@ -1,18 +1,100 @@
 import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
-import { Grid, Div, GridContainer } from "../Sections";
-import { Paragraph } from "../Heading";
+import { Div, GridContainer } from "../Sections";
+import DraggableDiv from "../DraggableDiv";
+import { Paragraph, H2, SubTitle } from "../Heading";
 import { Colors } from "../Styling";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Fragment from "../Fragment";
+
+const SquaresVariant = ({
+  id,
+  title,
+  paragraph,
+  background,
+  padding,
+  padding_tablet,
+  margin,
+  maxWidth,
+  content,
+  imageBackground,
+  imageBorder,
+}) => {
+  return (
+    <>
+      <Div
+        id={id}
+        width="100%"
+        margin_tablet="0 auto"
+        justifyContent="center"
+        background={background}
+        padding_xxs="0 20px"
+        padding_tablet="0 40px"
+        padding_md="0 80px"
+        padding_lg="0px"
+      >
+        <GridContainer
+          containerColumns_tablet="repeat(12, 1fr)"
+          gridColumn_tablet="1/ span 12"
+          background={background}
+          padding={padding}
+          padding_tablet={padding_tablet}
+          rows={paragraph && "3"}
+          margin={margin}
+          maxWidth={maxWidth}
+          childMaxWidth="1280px"
+        >
+          {title && <H2 type="h2">{title}</H2>}
+          {paragraph && (
+            <Div margin="15px 0">
+              <SubTitle dangerouslySetInnerHTML={{ __html: paragraph }} />
+            </Div>
+          )}
+          <Div width="100%" style={{ overflowX: "auto" }}>
+            <DraggableDiv gap="20px">
+              {content.badges.slice(0, 5).map((l) => {
+                return (
+                  <Div
+                    width="240px"
+                    height="140px"
+                    background={imageBackground || Colors.white}
+                    flexDirection="column"
+                    justifyContent="center"
+                    borderRadius="4px"
+                    flexShrink="0"
+                    flexShrink_tablet="0"
+                    border={imageBorder}
+                  >
+                    <GatsbyImage
+                      key={l.name}
+                      style={{
+                        height: "65px",
+                        minWidth: "80px",
+                        margin: "auto",
+                      }}
+                      imgStyle={{ objectFit: "contain" }}
+                      loading="eager"
+                      alt={l.name}
+                      draggable={false}
+                      image={getImage(l.image.childImageSharp.gatsbyImageData)}
+                    />
+                  </Div>
+                );
+              })}
+            </DraggableDiv>
+          </Div>
+        </GridContainer>
+      </Div>
+    </>
+  );
+};
 
 const Badges = ({
   id,
   lang,
-  loading,
   link,
   short_link,
   short_text,
+  title,
   paragraph,
   background,
   padding,
@@ -23,10 +105,10 @@ const Badges = ({
   wrapped_images,
   maxWidth,
   badges,
-  height_badge,
-  style,
-  paragraph_style,
   bottom_paragraph,
+  imageBackground,
+  imageBorder,
+  variant,
 }) => {
   const data = useStaticQuery(graphql`
     query myNewQueryBadges {
@@ -67,16 +149,30 @@ const Badges = ({
   let content = data.allBadgesYaml.edges.find(
     ({ node }) => node.fields.lang === lang
   );
-  // if (content) content = content.node;
-  // else return null;
+
   content = badges || content.node || null;
+
+  if (variant === "squares")
+    return (
+      <SquaresVariant
+        id={id}
+        title={title}
+        imageBorder={imageBorder}
+        paragraph={paragraph}
+        background={background}
+        padding={padding}
+        padding_tablet={padding_tablet}
+        margin={margin}
+        maxWidth={maxWidth}
+        imageBackground={imageBackground}
+        content={content}
+      />
+    );
 
   return (
     <>
-      {/* <Fragment github="/components/badges"> */}
       <Div
         width="100%"
-        maxWidth={maxWidth || "1366px"}
         margin_tablet="0 auto"
         justifyContent="center"
         background={background}
@@ -92,21 +188,18 @@ const Badges = ({
           background={background}
           padding={padding}
           padding_tablet={padding_tablet}
-          rows={paragraph && `3`}
+          rows={paragraph && "3"}
           margin={margin}
           maxWidth={maxWidth}
+          childMaxWidth="1280px"
         >
-          {/* <Grid columns_md="12" background={background} padding_md={padding_md} rows={paragraph && `3`} padding="0 17px" margin="36px 0 58px 0" margin_md="73px 0"> */}
           {!bottom_paragraph && paragraph && (
             <Div className="badge-slider" justifyContent="between">
               <Paragraph
                 fontFamily="Lato-Light"
                 padding={paddingText || "0 10px 45px 10px"}
                 padding_tablet={paddingText_tablet || "0 5% 55px 5%"}
-                fontSize={short_link || short_text ? "16px" : "16px"}
-                fontSize_tablet={short_link || short_text ? "16px" : "16px"}
                 lineHeight={short_link || short_text ? "29px" : "38px"}
-                fontWeight="400"
                 color={Colors.darkGray}
                 dangerouslySetInnerHTML={{ __html: paragraph }}
                 margin="15px 0 0 0"
@@ -120,12 +213,12 @@ const Badges = ({
               justifyContent="center"
               rowGap="3rem"
               flexWrap="wrap"
-              columnGap="1rem"
+              columnGap="0rem"
             >
-              {content.badges.map((l, i) => {
+              {content.badges.map((l) => {
                 return (
                   <GatsbyImage
-                    key={i}
+                    key={l.name}
                     style={{
                       height: "65px",
                       minWidth: "150px",
@@ -134,8 +227,6 @@ const Badges = ({
                     }}
                     imgStyle={{ objectFit: "contain" }}
                     loading="eager"
-                    // draggable={false}
-                    // fadeIn={false}
                     alt={l.name}
                     image={getImage(l.image.childImageSharp.gatsbyImageData)}
                   />
@@ -144,18 +235,13 @@ const Badges = ({
             </Div>
           ) : (
             <Div width="100%" style={{ overflowX: "auto" }}>
-              <Div
-                className="badge-slider hideOverflowX__"
-                margin="auto"
-                // justifyContent="center"
-                // alignItems="center"
-              >
+              <Div className="badge-slider hideOverflowX__" margin="auto">
                 {short_link
                   ? content.badges.map((l, i) => {
                       return (
                         i < 4 && (
                           <GatsbyImage
-                            key={i}
+                            key={l.name}
                             style={{
                               height: "65px",
                               minWidth: "80px",
@@ -163,8 +249,6 @@ const Badges = ({
                             }}
                             imgStyle={{ objectFit: "contain" }}
                             loading="eager"
-                            // draggable={false}
-                            // fadeIn={false}
                             alt={l.name}
                             image={getImage(
                               l.image.childImageSharp.gatsbyImageData
@@ -173,20 +257,18 @@ const Badges = ({
                         )
                       );
                     })
-                  : content.badges.map((l, i) => {
+                  : content.badges.map((l) => {
                       return (
                         <GatsbyImage
-                          key={i}
+                          key={l.name}
                           style={{
                             height: "85px",
-                            // minWidth: "200px",
                             minWidth: "150px",
-                            margin: "0 24px",
+                            margin: "0 14px",
                           }}
                           imgStyle={{ objectFit: "contain" }}
                           loading="eager"
                           draggable={false}
-                          // fadeIn={false}
                           alt={l.name}
                           image={getImage(
                             l.image.childImageSharp.gatsbyImageData
@@ -197,10 +279,9 @@ const Badges = ({
 
                 {short_link && (
                   <Link to={content.link_to}>
-                    <Paragraph
-                      width="150px"
-                      color={Colors.blue}
-                    >{`${content.short_link_text} >`}</Paragraph>
+                    <Paragraph width="150px" color={Colors.blue}>
+                      {`${content.short_link_text} >`}
+                    </Paragraph>
                   </Link>
                 )}
               </Div>
@@ -213,9 +294,6 @@ const Badges = ({
                 fontFamily="Lato"
                 padding={paddingText || "0 10px 45px 10px"}
                 padding_tablet={paddingText_tablet || "0 5% 55px 5%"}
-                fontSize={short_link || short_text ? "14px" : "14px"}
-                fontSize_tablet={short_link || short_text ? "14px" : "14px"}
-                lineHeight={short_link || short_text ? "29px" : "38px"}
                 color={Colors.black}
                 dangerouslySetInnerHTML={{ __html: paragraph }}
                 margin="15px 0 0 0"
@@ -232,7 +310,6 @@ const Badges = ({
           )}
         </GridContainer>
       </Div>
-      {/* </Fragment> */}
     </>
   );
 };

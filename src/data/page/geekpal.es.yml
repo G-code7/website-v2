@@ -11,10 +11,10 @@ seo_title: Geekpal - 4Geeks Academy
 
 header:
   title: "<strong style='color:black; font-family: Archivo-Black;'>Geek</strong>
-  <strong style = 'color:#CD0000; font-family: Archivo-Black;'>PAL</strong> <br> 
-  <strong style='font-family: Archivo;'>nunca vuelvas a codificar solo</strong>"
+    <strong style = 'color:#CD0000; font-family: Archivo-Black;'>PAL</strong> <br> 
+    <strong style='font-family: Archivo;'>nunca vuelvas a codificar solo</strong>"
   image: "../../../static/images/bg/companies-bg.jpg"
-  image_alt: ""
+  image_alt: "Geekpal - Mentorías ilimitadas y acceso a una comunidad de programadores"
   paragraph: "GeekPAL es una membresía instantánea que obtienes cuando te conviertes en estudiante de 4Geeks Academy."
   bullets: 
     - No volverás a codificar sólo.
@@ -45,26 +45,73 @@ list:
         text: "En 4Geeks creemos que el proceso personalizado da mejores resultados, es por esto que nuestras clases están pensadas para un máximo de 8 estudiantes y contamos con un ratio de <span style='font-weight: bold'> 1 profesor por cada 5 alumnos.</span>"
       - title: "MENTORÍAS 1:1"
         text: "Contamos con una red de mentores que están dispuestos a darte 
-        <span style='font-weight: bold'> soporte 1:1</span> de manera presencial o remota, de forma ilimitada. Estas 
-        <span style='font-weight: bold'> mentorias ilimitadas continúan</span> incluso después de haber finalizado tus estudios en 4geeks."
+          <span style='font-weight: bold'> soporte 1:1</span> de manera presencial o remota, de forma ilimitada. Estas 
+          <span style='font-weight: bold'> mentorias ilimitadas continúan</span> incluso después de haber finalizado tus estudios en 4geeks."
         
   - title: "Dónde sea y cuando sea"
-    image: "../../../static/images/mujer-leyendo-cafeteria.png"
+    image: "../../../static/images/mujer-leyendo-cafeteria.webp"
     position: "left"
     text: "En 4Geeks no solo ajustamos las sesiones 
-    <span style='font-weight: bold'> acordes tu calendario</span>, sino que también te damos la oportunidad de verlas de forma 
-    <span style='font-weight: bold'> online o presencial</span>, esto debido a que contamos con campus en muchas diversas ciudades y por ende husos horarios.<br/>
-    <br/>En cualquier sea el caso, te aseguramos tener la oportunidad de mentorias constantes y siempre que las necesites."
+      <span style='font-weight: bold'> acordes tu calendario</span>, sino que también te damos la oportunidad de verlas de forma 
+      <span style='font-weight: bold'> online o presencial</span>, esto debido a que contamos con campus en muchas diversas ciudades y por ende husos horarios.<br/>
+      <br/>En cualquier sea el caso, te aseguramos tener la oportunidad de mentorias constantes y siempre que las necesites."
 
   - title: "Apoyo de la Comunidad"
-    image: "../../../static/images/Group-6606.png"
+    image: "../../../static/images/Group-6606.webp"
     position: "right"
     sub:
       - title: "4Geeks.com"
         text: "Es una comunidad creada para acelerar la forma en que los desarrolladores junior aprenden y evolucionan utilizando la tecnología. <a href='https://4geeks.com'>4Geeks.com</a> te da acceso a muchos recursos para mejorar tus habilidades, pero también puedes contribuir para ayudar a otros con su código. "
       - title: "Comunidad Slack"
         text: "Nuestra comunidad internacional de más de 
-        <span style='font-weight: bold'> 2100 personas</span>, que te brindará todo el apoyo que necesites."
+          <span style='font-weight: bold'> 2100 personas</span>, que te brindará todo el apoyo que necesites."
+
+# Two Columns - Rigo
+two_columns:
+  proportions: [5, 7]
+  background: "#FFFFFF"
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center"}'
+    src: "/images/landing/rigobot-section.webp"
+    shadow: false
+  # video: "https://www.youtube.com/watch?v=PWkgaAT8pHg&t=13s"
+  heading: 
+    text: "¡Nuestras herramientas de IA mejoran y agilizan tu aprendizaje!"
+    font_size: ["31px", "31px", "31px", "29px", "29px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Luego de años de investigación y experiencia, hemos perfeccionado nuestros métodos de enseñanza para optimizar tu curva de aprendizaje y tu tasa de éxito. A través de nuestra plataforma de aprendizaje 4Geeks.com, te brindamos las estrategias y herramientas para garantizar tu progreso constante y eficiente."
+    font_size: ["16px","16px","16px","16px","16px"]
+    style: '{ "font-weight":"600"}'
+  content:
+    style: '{ "font-size":"16px", "margin":"0", "font-weight":"600" }'
+    text: "¡Experimenta la diferencia que marcan nuestras nuevas herramientas de Inteligencia Artificial! Nuestro enfoque ha demostrado mantenerte comprometido, motivado y encaminado a lograr tus objetivos de programación."
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Rigobot, nuestra IA personalizada, ofrece de forma ilimitada:"
+        text: |
+          • Tutoría instantánea mientras programas.
+          <br />
+          • Evaluaciones de habilidades para seguir tu progreso.
+          <br />
+          • Asistencia para corregir errores.
+          <br /><br />
+          ¡Es el complemento perfecto para nuestro programa de mentoría humana!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "LearnPack, nuestro software de aprendizaje fácil de usar, proporciona:"
+        text: |
+          • Cientos de ejercicios interactivos para ayudarte a dominar y retener habilidades.
+          <br />
+          • Pruebas automatizadas para ayudarte a seguir tu progreso.
+          <br />
+          • Y mucho más…
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
 
 # benefits:
 #   - p:

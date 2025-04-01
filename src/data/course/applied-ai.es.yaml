@@ -1,22 +1,23 @@
 meta_info:
-  slug: applied-ai
+  slug: curso-inteligencia-artificial
   title: "Curso de Inteligencia Artificial Aplicada"
   description: "Explora a detalle la inteligencia artificial y cómo aplicarla en diferentes industrias, roles y en tu trabajo. Sin conocimientos previos requeridos."
   bc_slug: "applied-ai"
-  image: "/images/og-preview/datascience-ml.es.png"
+  template: "course-applied-ai"
+  image: "/images/og-preview/applied-ai-bg-es.jpg"
   visibility: "visible"
   keywords: ""
-  show_in_apply: false
+  show_in_apply: true
   redirects: ["/es/applied-ai"]
   related_clusters: ["trends-and-tech"]
 
 apply_form:
-  label: Curso de Inteligencia Artificial Aplicada
+  label: Inteligencia Artificial Aplicada (sin codificación)
 
 seo_title: "Curso de Inteligencia Artificial Aplicada"
 header:
-  title: "Aprende I.A. y como utilizarla en tu trabajo"
-  paragraph: "¡Conviértete un experto en AI y como aplicarla en las empresas, en diferentes roles y en tu trabajo!"
+  title: "Aprende I.A. y cómo utilizarla en tu trabajo"
+  paragraph: "¡Automatiza y delega tus tareas a un AI, en diferentes roles y en tu empresa!"
   image: "../../../static/images/bg/circles.jpg"
   image_alt: "círculos"
 
@@ -64,8 +65,8 @@ upcoming:
 #     Entrénate con expertos en Data Science, Machine Learning e Inteligencia Artificial. Aprende Data Science desde las bases, recolecta, manipula y modela datos. Crea modelos de Machine Learning e iníciate en el Deep Learning.\n
 #     Practica con escenarios típicos de empresas de la vida real y conoce algunas de las herramientas más utilizadas en la industria. \n
 overlaped:
-  heading: "Utilizar AI en tu trabajo es indispensable"
-  paragraph: "La inteligencia artificial te reemplazará en tú trabajo, sino que potenciará tu productividad hasta el punto de que en el futuro cercano solo contratarán a profesionales competentes en IA. Haz más con menos. No te quedes atrás."
+  heading: "El futuro del trabajo es la IA. ¿Estás listo para tomarlo?"
+  paragraph: "La inteligencia artificial (IA) está transformando el panorama laboral a un ritmo acelerado. No temas a este cambio, adóptalo. La IA no te reemplazará, sino que potenciará tus habilidades y te convertirá en un profesional altamente valioso."
   button:
     text: "MÁS INFORMACIÓN"
     color: "blue"  
@@ -78,28 +79,29 @@ details:
   about:
     title: "Sobre este programa"
     sub_title: |
-      Este curso de inteligencia artificial está diseñado para quienes búscan integrar la inteligencia artificial (IA) en sus trabajos y roles actuales. A lo largo de seis semanas, los participantes obtendrán una comprensión integral de la IA y sus aplicaciones prácticas en diversas industrias.
+      Este curso de inteligencia artificial está diseñado para quienes buscan integrar la inteligencia artificial (IA) en sus trabajos y roles actuales. A lo largo de seis semanas, los participantes obtendrán una comprensión integral de la IA y sus aplicaciones prácticas en diversas industrias.
       El curso abarca conceptos esenciales como definiciones de IA, beneficios en el entorno laboral y elementos clave como Contexto, Prompts y Modelos. Los participantes aprenderán a identificar oportunidades para implementar IA, superar desafíos, desarrollar estrategias efectivas de IA y crear comandos prácticos.
         
     list:
       - label: "Duración"
-        content:  "6 semanas"
-        icon: "calendar"
+        content: "6 semanas"
+        icon: "duration-icon"
       - label: "Clases"
-        content: "2 Clases semanales"
-        icon: "book"
+        content: "2 clases semanales"
+        icon: "book-2"
       - label: "Tamaño de la clase"
         content: "12 personas máx"
-        icon: "laptop"
+        icon: "people"
       - label: "Certificado"
         content: "Nuestros certificados están reconocidos por múltiples instituciones."
-        icon: "certificate"
+        icon: "certification"
       - label: "Requisitos"
         content: "No se necesita experiencia previa"
         icon: "contract-checked"
 
   heading: "DETALLES DEL PROGRAMA"
   weeks: 6
+  week_unit: "sem"
   facts:
     - label: "Duración"
       value: "6 semanas"
@@ -135,7 +137,7 @@ details:
       description: "Comparación entre la IA y los humanos en diversas tareas, cuándo utilizar la Inteligencia Artificial, ejemplos de prompts relacionados con los campos de los estudiantes, y consejos de Ingeniería de Prompts."
       projects: "Creación de flujos de trabajo para profesiones como profesores, lingüistas y desarrolladores."
       slug: "generation-estrategies"
-      duration: "1 semanas"
+      duration: "1 semana"
       step: 2
     - module_name: "Generación de Texto"
       title: "Generación de Texto"
@@ -144,19 +146,19 @@ details:
       slug: "text-generation"
       duration: "2 semanas"
       step: 3
-    - module_name: "Generación de imagenes"
+    - module_name: "Generación de Imágenes"
       title: "Generación de Imágenes e Implementación de IA"
-      description: "Revisión de capacidades de modelos populares para generación de imágenes como Stable Diffusion, Dall-E, Midjourney. Cómo redactar buenos prompts para modelos de generación de imágenes."
+      description: "Revisión de capacidades de modelos populares para generación de imágenes como Stable Diffusion, Dall-E, Entre otras, A demás de cómo redactar buenos prompts para modelos de generación de imágenes."
       projects: "Desarrollo de una estrategia de Inteligencia Artificial y creación de prompts útiles para generar imágenes en casos de uso específicos."
       slug: "img-generation"
       duration: "1 semana"
       step: 4
-    - module_name: "Herramientas y Futuo de las IAs"
+    - module_name: "IA: Herramientas y Futuro"
       title: "Herramientas y el Futuro de las IAs"
       description: "Evaluación de herramientas de Inteligencia Artificial, proyectos prácticos utilizando herramientas populares."
       projects: "Graduación del curso, preguntas finales, tareas y próximos pasos..."
       slug: "final-project"
-      duration: "1 semanas"
+      duration: "1 semana"
       step: 5
 
 
@@ -235,6 +237,58 @@ faq:
   read_more: "Ver más preguntas"
   link: "/faq"
 
+
+## TWO COLUMNS
+two_columns:
+  proportions: [6, 6]
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center"}'
+    src: "../../images/landing/applied-ai-icons.webp"
+    shadow: false
+  heading:
+    text: "¡Expande tus capacidades y aumenta tu eficiencia!"
+    font_size: ["30px", "30px", "30px", "26px", "24px"]
+  sub_heading:
+    text: |-
+      En el curso, aprenderás a sacar el máximo provecho de los modelos generativos basados en texto, como ChatGPT, Gemini, Perplexity y Claude.
+
+      Además, explorarás herramientas de generación de imágenes como Midjourney, Stable Diffusion y Open source colabs. 
+      También, te sumergirás en el mundo de la inteligencia artificial aplicada a video con Stable Video, y en el ámbito del audio con Whisper y ElevenLabs. 
+      ¡Prepárate para dominar estas potentes herramientas AI y llevar tus habilidades al siguiente nivel!
+    font_size: ["16px", "16px", "16px", "16px", "16px"]
+  button:
+    text: "Aplicar al programa"
+    color: "white"
+    background: "black"
+    path: "#prices_and_payment"
+
+
+two_columns_video:
+  proportions: [6, 6]
+  image:
+    style: '{"border" : "3px solid black", "backgroundSize": "contain" }'
+    src: "/static/images/landing/inteligencia-artificial-para-profesionales.jpg"
+    shadow: true  
+  video: "https://www.youtube.com/watch?v=N_oJOAfge80"
+  heading:
+    text: "Programa de Inteligencia Artificial Aplicada para Profesionales"
+      #xl      lg     md     sm    xs
+    font_size: ["40px", "34px", "34px", "25px", "20px"]
+  sub_heading:
+    style: '{}'
+    text: |- 
+      El programa de Applied AI para Profesionales en 4Geeks Academy te ofrece la oportunidad única de desarrollar habilidades especializadas en Inteligencia Artificial aplicada a contextos profesionales.
+    font_size: ["16px"]
+  button:
+    text: "Aplicar al programa"
+    color: "white"
+    background: "black"
+    path: "#prices_and_payment"
+  bullets:
+    items: 
+    - text: "Domina técnicas avanzadas de IA para resolver problemas complejos en entornos empresariales."
+    - text: "Aprende a implementar soluciones de IA que mejoren la eficiencia operativa y la toma de decisiones."
+    - text: "Explora casos de estudio reales y ejemplos prácticos de éxito en la implementación de IA en diversas industrias."
 
 # button:
 #   syllabus_heading: "Descargar Syllabus"

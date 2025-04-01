@@ -4,7 +4,7 @@ import { GridContainer, Div, Grid, Header } from "../components/Sections";
 import { H2, H3, Paragraph } from "../components/Heading";
 import { Colors, StyledBackgroundSection } from "../components/Styling";
 import { isCustomBarActive } from "../actions";
-import session, { SessionContext } from "../session";
+import { SessionContext } from "../session";
 import Badges from "../components/Badges";
 import OurPartners from "../components/OurPartners";
 import Credentials from "../components/Credentials";
@@ -28,7 +28,7 @@ const Why = (props) => {
         image={yml.header.image.childImageSharp.fluid}
         padding="70px 0 70px 0"
         padding_tablet="70px 0 70px 0"
-        margin={isCustomBarActive(session) ? "130px 0 0 0" : "70px 0 0 0"}
+        margin_md={isCustomBarActive(session) ? "130px 0 0 0" : "70px 0 0 0"}
         position="relative"
       >
         <Circle
@@ -89,7 +89,7 @@ const Why = (props) => {
       <Badges
         lang={pageContext.lang}
         paragraph={yml.badges.paragraph}
-        background={Colors.lightYellow}
+        background={Colors.darkYellow}
         link
         padding="58px 17px"
         padding_tablet="70px 0"
@@ -102,6 +102,8 @@ const Why = (props) => {
         columns_tablet="2"
         padding="0"
         margin_tablet="0 0 88px 0"
+        childMaxWidth="1280px"
+        childMargin="auto"
       >
         <Div
           flexDirection="column"
@@ -125,19 +127,24 @@ const Why = (props) => {
           padding_tablet="56px 0 0 0"
         >
           <StyledBackgroundSection
-            height={`390px`}
+            height="390px"
             width="100%"
             image={
               yml.what_is_4geeks.image &&
               yml.what_is_4geeks.image.childImageSharp.gatsbyImageData
             }
-            bgSize={`cover`}
+            bgSize="cover"
             alt={yml.what_is_4geeks.image_alt}
           />
         </Div>
       </GridContainer>
       <Credentials lang={data.allCredentialsYaml.edges} />
-      <GridContainer margin="0 0 40px 0" padding="0">
+      <GridContainer
+        margin="0 0 40px 0"
+        padding="0"
+        childMaxWidth="1280px"
+        childMargin="auto"
+      >
         <Div flexDirection="column">
           <H2>{cornerstones.title}</H2>
         </Div>

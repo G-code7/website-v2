@@ -1,5 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { graphql, navigate } from "gatsby";
+import ReCAPTCHA from "react-google-recaptcha";
 import { Div, GridContainer, Header, Grid } from "../components/Sections";
 import { H3, Paragraph } from "../components/Heading";
 import { Colors, Button } from "../components/Styling";
@@ -11,6 +12,7 @@ import { Circle } from "../components/BackgroundDrawing";
 import { apply, tagManager } from "../actions";
 import PhoneInput from "../components/LeadForm/PhoneInput";
 import Modal from "../components/Modal_v2";
+import { isWindow } from "../utils/utils";
 
 const us = {
   "(In-person and from home available)": "(In-person and from home available)",
@@ -40,6 +42,7 @@ const formIsValid = (formData = null) => {
 
 const Apply = (props) => {
   const { data, pageContext, yml } = props;
+  const captcha = useRef(null);
   const { session } = useContext(SessionContext);
   const [formStatus, setFormStatus] = useState({
     status: "idle",
@@ -55,6 +58,10 @@ const Apply = (props) => {
     course: { value: null, valid: false },
   });
   const [consentValue, setConsentValue] = useState([]);
+
+  React.useEffect(() => {
+    if (isWindow) window.GATSBY_CAPTCHA_KEY = process.env.GATSBY_CAPTCHA_KEY;
+  }, []);
 
   const programs = data.allCourseYaml.edges
     .filter(
@@ -91,8 +98,8 @@ const Apply = (props) => {
           (m.online_available == false
             ? ""
             : m.in_person_available == true
-            ? trans[pageContext.lang]["(In-person and from home available)"]
-            : trans[pageContext.lang]["(From home until further notice)"]),
+              ? trans[pageContext.lang]["(In-person and from home available)"]
+              : trans[pageContext.lang]["(From home until further notice)"]),
         value: m.active_campaign_location_slug,
         region: m.meta_info.region,
         dialCode: m.meta_info.dialCode,
@@ -102,10 +109,27 @@ const Apply = (props) => {
 
   React.useEffect(() => {
     tagManager("application_rendered");
-    window.captcha_key = process.env.GATSBY_CAPTCHA_KEY;
   }, []);
+
+  React.useEffect(() => {
+    if (formData.location.value) {
+      const selectedLocation = locations?.find(l => l.value === formData.location.value);
+      const activeConsents = selectedLocation?.consents?.filter(c => c.active) || [];
+      if (activeConsents.length !== consentValue.length) {
+        setConsentValue(new Array(activeConsents.length).fill(false));
+      }
+    }
+  }, [formData.location.value]);
+
   React.useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+
+    // Pre-fill the region
+    let _region = urlParams.get("region");
+    if (!_region && session.location?.meta_info?.region) {
+      _region = session.location.meta_info.region; // e.g. 'latam'
+    }
+
     // Pre-fill the location
     let _location = urlParams.get("location");
     if (!_location && session.location)
@@ -124,7 +148,6 @@ const Apply = (props) => {
     // Pre-fill the course
     let _course = urlParams.get("course");
     if (!_course && props.location.state) _course = props.location.state.course;
-
     if (typeof _course === "string")
       _course = programs.find((p) => p.value === _course);
 
@@ -138,13 +161,18 @@ const Apply = (props) => {
       utm_url: _utm_url,
       // this is the line that automatically sets the location, we don't want that anymore
       // its better if leads choose the location themselves
-      // location: {value: _location || "", valid: typeof (_location) === "string" && _location !== ""},
+      location: {
+        value: _location || "",
+        valid: typeof _location === "string" && _location !== "",
+      },
       course: {
         value: _course || null,
         valid: _course && _course.value ? true : false,
       },
       referral_key: { value: session?.utm?.referral_code || null, valid: true },
     }));
+
+    setRegionVal(_region || null);
   }, [session]);
 
   let privacy = data.privacy.edges.find(
@@ -152,11 +180,12 @@ const Apply = (props) => {
   );
   if (privacy) privacy = privacy.node;
 
-  const submitForm = () => {
+  const submitForm = (payload) => {
     setFormStatus({ status: "loading", msg: "Loading..." });
     apply(
       {
         ...formData,
+        ...payload,
         course: formData.course.value,
         location: formData.location.value,
       },
@@ -184,6 +213,13 @@ const Apply = (props) => {
           msg: error.message || error,
         });
       });
+  };
+
+  const captchaChange = () => {
+    const captchaValue = captcha?.current?.getValue();
+    if (captchaValue)
+      setVal({ ...formData, token: { value: captchaValue, valid: true } });
+    else setVal({ ...formData, token: { value: null, valid: false } });
   };
   return (
     <>
@@ -415,23 +451,29 @@ const Apply = (props) => {
           flexDirection="column"
         >
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (formStatus.status === "error")
-                setFormStatus({ status: "idle", msg: "Resquest" });
+            onSubmit={async (e) => {
+              try {
+                e.preventDefault();
+                if (formStatus.status === "error")
+                  setFormStatus({ status: "idle", msg: "Resquest" });
 
-              const valid = formIsValid(formData);
-              if (valid !== true) {
-                setFormStatus({
-                  status: "error",
-                  msg: "There are some errors in your form: " + valid,
-                });
-              } else {
-                if (showPhoneWarning && regionVal !== "online") {
-                  setShowModal(true);
+                const valid = formIsValid(formData);
+                if (valid !== true) {
+                  setFormStatus({
+                    status: "error",
+                    msg: `${yml.left.form_section.errors.default} ${valid}`,
+                  });
                 } else {
-                  submitForm();
+                  if (showPhoneWarning && regionVal !== "online") {
+                    setShowModal(true);
+                  } else {
+                    const token = await captcha.current.executeAsync();
+                    submitForm({ token });
+                  }
                 }
+              } catch (e) {
+                console.log("e");
+                console.log(e);
               }
             }}
           >
@@ -520,11 +562,11 @@ const Apply = (props) => {
                 tabindex="1"
                 bgColor={Colors.black}
                 options={regions}
-                // value={locations?.find(
-                //   (el) => el.value === formData.location.value
-                // )}
+                value={
+                  regionVal ? regions.find((r) => r.value === regionVal) : null
+                }
                 placeholder={yml.left.regions_title}
-                inputId={"dropdown_region_selector"}
+                inputId="dropdown_region_selector"
                 onChange={(value) => {
                   setRegionVal(value.value);
                   setVal({
@@ -560,30 +602,30 @@ const Apply = (props) => {
                 contenteditable="true"
                 margin_tablet="11px 0 23px 0"
               >
-                <SelectRaw
-                  tabindex="1"
-                  bgColor={Colors.black}
-                  options={
-                    regionVal === "online"
-                      ? [
-                          {
-                            dialCode: null,
-                            label: "Online",
-                            region: "online",
-                            value: "online",
-                          },
-                        ]
-                      : locations?.filter(
-                          (academy) => academy.region === regionVal
-                        )
-                  }
-                  value={formData.location.value}
-                  placeholder={yml.left.locations_title}
-                  inputId={"dropdown_academy_selector"}
-                  onChange={(value, valid) => {
-                    setVal({ ...formData, location: { value, valid } });
-                  }}
-                />
+                {(() => {
+                  const options = regionVal === "online"
+                    ? [{ label: "Online", value: "online" }]
+                    : locations?.filter(academy => academy.region === regionVal) || [];
+
+                  return (
+                    <SelectRaw
+                      bgColor={Colors.black}
+                      options={options}
+                      value={locations?.find(el => el.value === formData.location.value)}
+                      placeholder={yml.left.locations_title}
+                      inputId={"dropdown_academy_selector"}
+                      onChange={(value) => {
+                        setVal(prev => ({
+                          ...prev,
+                          location: {
+                            value: value.value,
+                            valid: !!value.value
+                          }
+                        }));
+                      }}
+                    />
+                  );
+                })()}
               </Div>
             )}
             {formData.referral_key.value &&
@@ -603,48 +645,58 @@ const Apply = (props) => {
                 setVal({ ...formData, referral_key: { value, valid } })
               }
             />
-            {session &&
-              session.location &&
-              formData.location.value.consents &&
-              formData.location.value.consents.map((consent, index) => {
-                if (consent.active)
-                  return (
-                    <Div position="relative" margin="10px 0 0 0">
-                      <input
-                        required
-                        name="isGoing"
-                        type="checkbox"
-                        checked={consentValue[index]}
-                        onChange={() => {
-                          const updatedConsentValue = [...consentValue];
-                          updatedConsentValue[index] = !consentValue[index];
-                          setConsentValue(updatedConsentValue);
-                          setVal({
-                            ...formData,
-                            consents: {
-                              ...formData.consents,
-                              value: updatedConsentValue,
-                            },
-                          });
-                        }}
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          top: "10px",
-                          left: "7px",
-                        }}
-                      />
-                      <Paragraph
-                        fontSize="11px"
-                        margin="5px 0 0 5px"
-                        textAlign="left"
-                        dangerouslySetInnerHTML={{
-                          __html: consent.message,
-                        }}
-                      ></Paragraph>
-                    </Div>
-                  );
-              })}
+            {session?.location && formData.location.value && (
+              locations
+                ?.find(l => l.value === formData.location.value)
+                ?.consents
+                ?.filter(consent => consent.active)
+                ?.map((consent, index) => (
+                  <Div
+                    key={`consent-${index}`}
+                    margin="15px 0 0 0"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <input
+                      required
+                      type="checkbox"
+                      checked={consentValue[index] || false}
+                      onChange={() => {
+                        const newConsentValue = [...consentValue];
+                        newConsentValue[index] = !newConsentValue[index];
+                        setConsentValue(newConsentValue);
+                        setVal({
+                          ...formData,
+                          consents: {
+                            ...formData.consents,
+                            value: newConsentValue,
+                            valid: newConsentValue.every(v => v)
+                          }
+                        });
+                      }}
+                      style={{
+                        width: "22px",
+                        height: "22px",
+                        marginRight: "7px"
+                      }}
+                    />
+                    <Paragraph
+                      margin="0 0 0 15px"
+                      fontSize="10px"
+                      lineHeight="15px"
+                      textAlign="justify"
+                      dangerouslySetInnerHTML={{ __html: consent.message }}
+                    />
+                  </Div>
+                ))
+            )}
+            <Div width="fit-content" margin="10px auto 0 auto">
+              <ReCAPTCHA
+                ref={captcha}
+                sitekey={process.env.GATSBY_CAPTCHA_KEY}
+                size="invisible"
+              />
+            </Div>
             <Div
               flexDirection_tablet="column"
               flexDirection="column"
@@ -659,8 +711,11 @@ const Apply = (props) => {
                 variant="full"
                 type="submit"
                 margin="2rem auto"
-                margin_tablet="2rem 0 2rem auto"
-                transform="translateY(-15px)"
+                margin_tablet="2rem 0 0 auto"
+                width="100%"
+                textAlign="center"
+                display="block"
+                borderRadius="4px"
                 color={
                   formStatus.status === "loading"
                     ? Colors.darkGray
@@ -674,6 +729,19 @@ const Apply = (props) => {
                   ? "Loading..."
                   : yml.left.button.button_text}
               </Button>
+              <Paragraph fontSize="10px" textAlign="left">
+                {yml.left.terms.agree_terms_text}{" "}
+                <a
+                  href={yml.left.terms.terms_and_conditions_link}
+                  target="_blank"
+                >
+                  {yml.left.terms.terms_and_conditions}
+                </a>{" "}
+                {yml.left.terms.connector_and}{" "}
+                <a href={yml.left.terms.privacy_policy_link} target="_blank">
+                  {yml.left.terms.privacy_policy}
+                </a>
+              </Paragraph>
             </Div>
             <Modal
               show={showModal}
@@ -682,9 +750,7 @@ const Apply = (props) => {
               title={yml.left.form_section.modal.title}
               padding="20px 10px"
             >
-              <Paragraph fontSize="14px" lineHeight="24px">
-                {yml.left.form_section.modal.text}
-              </Paragraph>
+              <Paragraph>{yml.left.form_section.modal.text}</Paragraph>
               <Div justifyContent="between">
                 <Button
                   variant="full"
@@ -738,14 +804,7 @@ const Apply = (props) => {
           </H3>
           {yml.right.content_section.map((m, i) => {
             return (
-              <Paragraph
-                textAlign="left"
-                margin="20px 0"
-                key={i}
-                fontSize="15px"
-                lineHeight="19px"
-                fontWeight="400"
-              >
+              <Paragraph textAlign="left" margin="20px 0" key={i}>
                 {m}
               </Paragraph>
             );
@@ -798,12 +857,23 @@ export const query = graphql`
               button_text
               button_link
             }
+            terms {
+              agree_terms_text
+              terms_and_conditions
+              terms_and_conditions_link
+              privacy_policy
+              privacy_policy_link
+              connector_and
+            }
             form_section {
               first_name
               last_name
               email
               phone
               phone_warning
+              errors {
+                default
+              }
               modal {
                 title
                 text

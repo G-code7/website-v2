@@ -5,7 +5,7 @@ import Card from "../Card";
 import { Div } from "../Sections";
 import { H3, H4, Paragraph } from "../Heading";
 
-const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority }) => {
+const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority, template }) => {
   const [buttonToggle, setButtonToggle] = useState(false);
   const [toggleIndex, setToggleIndex] = useState();
 
@@ -13,10 +13,18 @@ const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority }) => {
     if (!locationSlug) return true;
     if (
       Array.isArray(question.locations) &&
-      question.locations.includes(locationSlug)
+      (question.locations.includes(locationSlug) ||
+        question.locations.includes("all"))
     )
       return true;
     return false;
+  };
+
+  const filterByTemplate = (question) => {
+    if (!template) return true;
+    return (
+      Array.isArray(question.templates) && question.templates.includes(template)
+    );
   };
 
   const filterByPriority = (question) => {
@@ -31,13 +39,14 @@ const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority }) => {
   filteredTopics.forEach((element) => {
     element.questions = element.questions
       .filter(filterByLocation)
+      .filter(filterByTemplate)
       .filter(filterByPriority);
   });
 
   return (
     <Div
       display="block"
-      maxWidth="1366px"
+      maxWidth="1280px"
       margin="0 auto"
       padding_xxs="40px 20px"
       padding_md="40px 80px"
@@ -93,8 +102,8 @@ const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority }) => {
                           type="h4"
                           textAlign="left"
                           fontSize="13px"
-                          align={`left`}
-                          align_sm={`left`}
+                          align="left"
+                          align_sm="left"
                           color={Colors.black}
                           paddingRight="5%"
                           textTransform="uppercase"
@@ -119,13 +128,11 @@ const FaqCard = ({ faqs, topicSlug, locationSlug, minPriority }) => {
                             <Paragraph
                               textAlign="left"
                               letterSpacing="0.05em"
-                              lineHeight="22px"
                               fontWeight="normal"
                               dangerouslySetInnerHTML={{ __html: faq.answer }}
-                              margin={`20px 0 0 0`}
+                              margin="20px 0 0 0"
                               align_sm="left"
-                              fontFamily="Lato, sans-serif"
-                            ></Paragraph>
+                            />
                           )}
                       </Div>
                     </Div>

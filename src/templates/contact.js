@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { graphql, Link } from "gatsby";
+import ReCAPTCHA from "react-google-recaptcha";
 import BaseRender from "./_baseLayout";
 import { SessionContext } from "../session.js";
 import { contactUs } from "../actions.js";
@@ -14,6 +15,7 @@ import { HR, Grid, Div, Old_Grid } from "../components/Sections";
 
 const Contact = (props) => {
   const { data, pageContext, yml } = props;
+  const captcha = useRef(null);
   const { session } = useContext(SessionContext);
   const [alignment, setAlignment] = useState("left");
   const [formStatus, setFormStatus] = useState({
@@ -38,9 +40,16 @@ const Contact = (props) => {
     }
     return true;
   };
+
+  const captchaChange = () => {
+    const captchaValue = captcha?.current?.getValue();
+    if (captchaValue)
+      setVal({ ...formData, token: { value: captchaValue, valid: true } });
+    else setVal({ ...formData, token: { value: null, valid: false } });
+  };
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         if (formStatus.status === "error") {
           setFormStatus({ status: "idle", msg: "Resquest" });
@@ -52,7 +61,11 @@ const Contact = (props) => {
           });
         } else {
           setFormStatus({ status: "loading", msg: "Loading..." });
-          contactUs(formData, session)
+          const token = await captcha.current.executeAsync();
+          contactUs(
+            { ...formData, token: { value: token, valid: true } },
+            session
+          )
             .then((data) => {
               if (data.error !== false && data.error !== undefined) {
                 setFormStatus({ status: "error", msg: "Fix errors" });
@@ -135,7 +148,7 @@ const Contact = (props) => {
         padding_md="40px 80px"
         padding_lg="40px 0px"
         padding_tablet="40px 40px"
-        maxWidth="1366px"
+        maxWidth="1280px"
       >
         <Div
           paddingRight="0px"
@@ -324,9 +337,16 @@ const Contact = (props) => {
                       errorMsg="Please leave us a comment"
                     />
                   </Div>
+                  <Div width="fit-content" margin="10px auto 0 auto">
+                    <ReCAPTCHA
+                      ref={captcha}
+                      sitekey={process.env.GATSBY_CAPTCHA_KEY}
+                      size="invisible"
+                    />
+                  </Div>
                   <Div
                     direction="rtl"
-                    textAlign={`-webkit-center`}
+                    textAlign="-webkit-center"
                     textAlign_md="right"
                     display="block"
                     justifyContent="flex-end"

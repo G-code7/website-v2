@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import React, { useState } from "react";
 import { Div } from "../Sections";
 import { H3, H4, Paragraph } from "../Heading";
 import { Colors, Anchor } from "../Styling";
@@ -74,7 +73,7 @@ const TestimonialCard = ({
       borderRadius="3px"
       padding="16px"
       border={`1px solid ${Colors.lightGray}`}
-      boxShadow={`0px 2px 5px rgba(0, 0, 0, 0.1)`}
+      boxShadow="0px 2px 5px rgba(0, 0, 0, 0.1)"
       style={{ breakInside: "avoid", marginBottom: "32px" }}
       width_xxs={width_xxs}
       width_xs={width_xs}
@@ -100,12 +99,7 @@ const TestimonialCard = ({
           />
           {stories ? ( //Where the component is called (true/false)
             <Div flexDirection="column" margin="0 0 0 9px">
-              <H3
-                fontSize="15px"
-                lineHeight="19px"
-                textAlign="left"
-                fontFamily="Lato-Black"
-              >
+              <H3 fontSize="16px" textAlign="left" fontFamily="Lato-Black">
                 {name}
               </H3>
               <H4
@@ -148,38 +142,14 @@ const TestimonialCard = ({
           </Div>
         )}
       </Div>
-      {!video &&
-        (description && /<\/?[a-z0-9]+>/g.test(description) ? (
-          <Paragraph
-            textAlign="left"
-            margin="12px 0 0 0"
-            fontSize="13px"
-            lineHeight="22px"
-            letterSpacing="0.05em"
-            fontWeight="300"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        ) : (
-          <Paragraph
-            textAlign="left"
-            margin="0 0 0 0"
-            fontSize="13px"
-            lineHeight="22px"
-            letterSpacing="0.05em"
-            fontWeight="300"
-          >
-            {description.length > 500 && !isExpanded
-              ? description.substring(0, 500) + "..."
-              : description}
-          </Paragraph>
-        ))}
+
       {video && (
         <>
           <Div padding_tablet="0" width="100%" style={{ breakInside: "avoid" }}>
             <ReactPlayer
               margin_tablet="0px 0px"
-              With_Modal={true}
-              className={"react-player-testimonials-small"}
+              With_Modal
+              className="react-player-testimonials-small"
               thumb={image}
               id={video && video}
               width="100%"
@@ -190,6 +160,21 @@ const TestimonialCard = ({
           </Div>
         </>
       )}
+
+      {description && (
+        <Paragraph
+          textAlign="left"
+          margin="12px 0 0 0"
+          letterSpacing="0.05em"
+          dangerouslySetInnerHTML={{
+            __html:
+              description.length > 500 && !isExpanded
+                ? description.substring(0, 500) + "..."
+                : description,
+          }}
+        />
+      )}
+
       {description.length > 500 && (
         <Paragraph
           textAlign="left"

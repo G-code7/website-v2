@@ -191,7 +191,7 @@ const Landing = (props) => {
           margin="0"
           margin_tablet="auto"
           gridTemplateColumns_tablet="repeat(16, 1fr)"
-          maxWidth_tablet="1366px"
+          maxWidth_tablet="1280px"
         >
           <Div
             //height="auto"
@@ -523,6 +523,9 @@ export const query = graphql`
             swipable
             proportions
             layout
+            justify
+            videoHeight
+            videoWidth
             text_link
             icons {
               icon
@@ -568,6 +571,7 @@ export const query = graphql`
                 heading
                 text
                 icon
+                icon_color
               }
             }
             background
@@ -585,9 +589,6 @@ export const query = graphql`
               heading {
                 text
                 font_size
-              }
-              button {
-                text
               }
             }
             columns {
@@ -961,6 +962,8 @@ export const query = graphql`
           }
           details {
             heading
+            weeks
+            week_unit
             sub_heading
             left_labels {
               description
@@ -1023,6 +1026,9 @@ export const query = graphql`
             tagline
             sub_heading
           }
+          project
+          made_by
+          description
           projects {
             project_name
             slug

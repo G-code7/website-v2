@@ -9,18 +9,13 @@ import Icon from "../components/Icon";
 import { Colors } from "../components/Styling";
 import ReactPlayer from "../components/ReactPlayer";
 import OurPartners from "../components/OurPartners";
-import IconsBanner from "../components/IconsBanner";
 import Overlaped from "../components/Overlaped";
-import {
-  Div,
-  Grid,
-  HR,
-  GridContainerWithImage,
-  GridContainer,
-} from "../components/Sections";
-import { H1, H2, H3, Paragraph } from "../components/Heading";
-import { Button, RoundImage, Img } from "../components/Styling";
+import { Div, Grid } from "../components/Sections";
+import { H2, H3, Paragraph } from "../components/Heading";
+import { Img } from "../components/Styling";
 import { StyledBackgroundSection } from "../components/Styling";
+import Iconogram from "../components/Iconogram";
+import TwoColumn from "../components/TwoColumn/index.js";
 
 const GeekForce = (props) => {
   const { data, pageContext, yml } = props;
@@ -57,7 +52,7 @@ const GeekForce = (props) => {
             ? "120px auto 24px auto"
             : "70px auto 24px auto"
         }
-        maxWidth="1366px"
+        maxWidth="1280px"
         position="relative"
         gridTemplateColumns_tablet="repeat(21, 1fr)"
         gridGap="0px"
@@ -195,11 +190,9 @@ const GeekForce = (props) => {
                 <React.Fragment key={i}>
                   {item.videoId === "" ? (
                     <StyledBackgroundSection
-                      height={`280px`}
-                      // width={`85%`}
-                      //borderRadius={`3px`}
+                      height="280px"
                       image={item.image.childImageSharp.gatsbyImageData}
-                      bgSize={`contain`}
+                      bgSize="contain"
                       alt="geekforce image"
                     />
                   ) : (
@@ -209,7 +202,7 @@ const GeekForce = (props) => {
                       thumb={item.image}
                       //imageSize="maxresdefault"
                       videoHeight="280px"
-                      bgSize={`contain`}
+                      bgSize="contain"
                       style={{
                         width: "100%",
                         height: "280px",
@@ -224,48 +217,22 @@ const GeekForce = (props) => {
         </Div>
       </Grid>
 
-      {/* ICONOGRAM-GEEKPAL */}
-      <Div
-        display="flex"
-        flexDirection="column"
-        id="iconogram"
-        containerColumns_tablet="repeat(14, 1fr)"
-        columns="1"
-        rows="2"
-        margin="auto"
-        height="auto"
-        width="100%"
-        background={Colors.lightYellow}
-      >
-        <Div
-          display="flex"
-          flexDirection="column"
-          flexDirection_tablet="row "
-          justifyContent="center"
-          // gap="45px"
-          //gap_tablet={content.icons.length > 4 ? "0px" : "5%"}
-          //gap_md="10%"
-          maxWidth="1366px"
-          margin="20px auto 0 auto"
-          padding_tablet="50px 40px"
-          padding_md="50px 80px"
-          padding_lg="50px 0"
-          //className="badge-slider hideOverflowX__"
-        >
-          {Array.isArray(content.icons) &&
-            content.icons?.map((item, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <IconsBanner
-                    icon={item.icon}
-                    title={item.title}
-                    content={item.content}
-                  />
-                </React.Fragment>
-              );
-            })}
-        </Div>
-      </Div>
+      <Iconogram yml={content.iconogram} />
+
+      {/* Two Columns Rigo */}
+      <TwoColumn
+        left={{ image: yml.two_columns?.image, video: yml.two_columns?.video }}
+        right={{
+          heading: yml.two_columns?.heading,
+          heading_image: yml.two_columns?.heading_image,
+          sub_heading: yml.two_columns?.sub_heading,
+          bullets: yml.two_columns?.bullets,
+          content: yml.two_columns?.content,
+          button: yml.two_columns?.button,
+        }}
+        proportions={yml.two_columns?.proportions}
+        session={session}
+      />
 
       {Array.isArray(content.list) &&
         content.list.map((m, i) => {
@@ -290,7 +257,7 @@ const GeekForce = (props) => {
                     padding_lg={i === 0 ? "100px 0 50px 0" : "50px 0 100px 0"}
                     padding_xxs="0 20px"
                     columns_tablet="14"
-                    maxWidth_tablet="1366px"
+                    maxWidth_tablet="1280px"
                     margin_tablet="0 auto"
                     gridGap="0px"
                   >
@@ -327,7 +294,7 @@ const GeekForce = (props) => {
                               >
                                 <Div display="" inline>
                                   <Icon
-                                    icon={"check"}
+                                    icon="check"
                                     width="13px"
                                     display="inline"
                                     color={Colors.blue}
@@ -353,8 +320,6 @@ const GeekForce = (props) => {
                                   letterSpacing="0.05em"
                                   textAlign="left"
                                   margin="0 0 20px 0"
-                                  fontSize="15px"
-                                  lineHeight="22px"
                                   dangerouslySetInnerHTML={{
                                     __html: sub?.text,
                                   }}
@@ -367,10 +332,8 @@ const GeekForce = (props) => {
                         <>
                           <Paragraph
                             letterSpacing="0.05em"
-                            fontSize="15px"
                             textAlign="left"
                             margin="0 0 20px 0"
-                            lineHeight="22px"
                             dangerouslySetInnerHTML={{ __html: m?.text }}
                           />
                         </>
@@ -434,7 +397,7 @@ const GeekForce = (props) => {
                         height_lg="450px"
                         width="100%"
                         image={m.image.childImageSharp.gatsbyImageData}
-                        bgSize={`contain`}
+                        bgSize="contain"
                         alt="geekforce image"
                       />
                     </Div>
@@ -455,7 +418,7 @@ const GeekForce = (props) => {
         padding_lg="100px 0px 100px 0px"
       >
         <Div
-          maxWidth="1366px"
+          maxWidth="1280px"
           margin="0 auto"
           style={{
             background: "white",
@@ -537,9 +500,49 @@ export const query = graphql`
               color
             }
           }
-          icons {
-            icon
-            title
+          iconogram {
+            heading {
+              text
+              style
+            }
+            swipable
+            icons {
+              icon
+              content
+            }
+          }
+          two_columns {
+            proportions
+            image {
+              style
+              src
+              shadow
+            }
+            heading {
+              text
+              font_size
+              style
+              heading_image {
+                src
+              }
+            }
+            sub_heading {
+              text
+              font_size
+              style
+            }
+            content {
+              text
+              style
+            }
+            bullets {
+              items {
+                heading
+                text
+                icon
+                icon_color
+              }
+            }
           }
           geekForce {
             videoId

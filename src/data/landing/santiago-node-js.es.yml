@@ -39,9 +39,15 @@ apply_schollarship: # form that is displayed at the end of the landing
 
 # jumbotron on the top (cannot be commented out)
 header_data:
-  background: "#FFF1D1"
+  background: "#ffffff"
   tagline: Curso de NodeJS
   sub_heading: "<Continua programando tu historia/> ¡Aprende nuevas tecnologías!"
+  tagline_color: "#1c1c1c"
+  form_styles:
+    background: "#0084FF"
+    color: "white"
+    button:
+      background: "black"
   badge: "../../../static/images/badges/Course-Report-Badge-2024.webp"
   image_filter: brightness(0.3)
 
@@ -54,7 +60,7 @@ features:
     - Requiere saber Javascript
     - Horario part-time
     - Mentorías de por vida
-    - Financiamiento hasta 9 cuotas sin interés
+    - Paga desde 3 a 12 cuotas sin interés
 
 short_badges:
   - name: "Premios Tecnologia Siglo XXI"
@@ -77,13 +83,13 @@ short_badges:
 follow_bar:
   position: "top" # top, bottom, hidden
   content:
-    text: "Puedes llamarnos o enviarnos un mensaje por WhatsApp"
-    text_mobile: "Puedes llamarnos o enviarnos un mensaje por WhatsApp"
+    text: "Puedes enviarnos un mensaje por WhatsApp al"
+    text_mobile: "Puedes enviarnos un mensaje por WhatsApp al"
     # devices:    XL      LG      MD      SM       XS
     font_size: ["25px", "25px", "25px", "18px", "4.3vw"]
   button:
-    text: "Obtener más información"
-    path: "#leadform_header"
+    text: "Escribir por WhatsApp"
+    path: "https://api.whatsapp.com/send/?phone=56972848039&text&type=phone_number&app_absent=0&utm_source=GADS&utm_medium=GADS&utm_campaign=GADS&utm_id=GADS&utm_term=GADS&utm_content=GADS"
   phone:
     text: "Llama "
 

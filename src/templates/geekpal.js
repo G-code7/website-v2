@@ -22,6 +22,7 @@ import { Button, RoundImage, Img } from "../components/Styling";
 import { StyledBackgroundSection } from "../components/Styling";
 import LandingHeader from "../components/LandingHeader";
 import Overlaped from "../components/Overlaped";
+import TwoColumn from "../components/TwoColumn/index.js";
 
 const GeekPal = (props) => {
   const { data, pageContext, yml } = props;
@@ -58,7 +59,7 @@ const GeekPal = (props) => {
             ? "120px auto 24px auto"
             : "70px auto 24px auto"
         }
-        maxWidth="1366px"
+        maxWidth="1280px"
         position="relative"
         gridTemplateColumns_tablet="repeat(21, 1fr)"
         gridGap="0px"
@@ -196,11 +197,9 @@ const GeekPal = (props) => {
                 <React.Fragment key={i}>
                   {item.videoId === "" ? (
                     <StyledBackgroundSection
-                      height={`280px`}
-                      // width={`85%`}
-                      //borderRadius={`3px`}
+                      height="280px"
                       image={item.image.childImageSharp.gatsbyImageData}
-                      bgSize={`contain`}
+                      bgSize="contain"
                       alt="geekforce image"
                     />
                   ) : (
@@ -210,7 +209,7 @@ const GeekPal = (props) => {
                       margin_tablet="0px"
                       //imageSize="maxresdefault"
                       videoHeight="280px"
-                      bgSize={`contain`}
+                      bgSize="contain"
                       style={{
                         width: "100%",
                         height: "280px",
@@ -243,7 +242,7 @@ const GeekPal = (props) => {
           flexDirection="column"
           flexDirection_tablet="row "
           justifyContent="center"
-          maxWidth="1366px"
+          maxWidth="1280px"
           margin="20px auto 0 auto"
           padding_tablet="50px 40px"
           padding_md="50px 80px"
@@ -264,6 +263,21 @@ const GeekPal = (props) => {
             })}
         </Div>
       </Div>
+
+      {/* Two Columns Rigo */}
+      <TwoColumn
+        left={{ image: yml.two_columns?.image, video: yml.two_columns?.video }}
+        right={{
+          heading: yml.two_columns?.heading,
+          heading_image: yml.two_columns?.heading_image,
+          sub_heading: yml.two_columns?.sub_heading,
+          bullets: yml.two_columns?.bullets,
+          content: yml.two_columns?.content,
+          button: yml.two_columns?.button,
+        }}
+        proportions={yml.two_columns?.proportions}
+        session={session}
+      />
 
       {Array.isArray(content.list) &&
         content.list.map((m, i) => {
@@ -286,7 +300,7 @@ const GeekPal = (props) => {
                     padding_lg={i === 0 ? "50px 0 0 0" : "0 0 50px 0"}
                     padding_xxs="0 20px"
                     columns_tablet="14"
-                    maxWidth_tablet="1366px"
+                    maxWidth_tablet="1280px"
                     margin_tablet="0 auto"
                     gridGap="0px"
                   >
@@ -410,7 +424,7 @@ const GeekPal = (props) => {
                         height_tablet="350px"
                         // width={`85%`}
                         image={m.image.childImageSharp.gatsbyImageData}
-                        bgSize={`contain`}
+                        bgSize="contain"
                         alt="geekforce image"
                       />
                     </Div>
@@ -485,6 +499,39 @@ export const query = graphql`
           icons {
             icon
             title
+          }
+          two_columns {
+            proportions
+            image {
+              style
+              src
+              shadow
+            }
+            heading {
+              text
+              font_size
+              style
+              heading_image {
+                src
+              }
+            }
+            sub_heading {
+              text
+              font_size
+              style
+            }
+            content {
+              text
+              style
+            }
+            bullets {
+              items {
+                heading
+                text
+                icon
+                icon_color
+              }
+            }
           }
           geekPal {
             videoId

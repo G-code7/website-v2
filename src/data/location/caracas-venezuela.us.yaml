@@ -67,10 +67,10 @@ info_box:
   heading: "Find us in Caracas"
   address: "Torre Jalisco, nivel E2, Municipio Baruta Distrito Capital, 1080, Miranda, Venezuela"
   contact_heading: "Contacts"
-  whatsapp: "+58424-1711725"
-  whatsapp_link: "https://api.whatsapp.com/send?phone=+584241711725&text=Hola+4Geeks&utm_source=web_site&utm_medium=web_site&utm_campaign=web_site&utm_id=web_site&utm_term=web_site&utm_content=Web_site"
-  phone: "+58424-1711725"
-  email: "info@4GeeksAcademy.com"
+  phone: "Call us +58 412 2326485"
+  whatsapp: +58 412 2326485
+  whatsapp_link: "https://wa.me/+5804122326485"
+  email: "latam@4geeksacademy.com"
   image: "../../../static/images/locations/caracas-map.png"
   alt: ""
 images_box:
@@ -83,7 +83,7 @@ images_box:
       alt: "Caracas Office Jalisco"
     - path: "../../../static/images/ownpeoplecoding2.webp"
       alt: "4Geeks Own People Coding"
-    - path: "../../../static/images/ownmancoding.jpg"
+    - path: "../../../static/images/ownmancoding.webp"
       alt: "Remote-Coding-Bootcamp"
     - path: "../../../static/images/locations/caracas-graduates.png"
       alt: "4Geeeks Caracas graduates"
@@ -114,6 +114,53 @@ two_columns:
     - text: "Industry-aligned curriculum for real-world readiness"
     - text: "Discover why 4Geeks Academy stands out as the best option to learn programming"
 
+# Two Columns - Rigo
+two_columns_rigo:
+  proportions: [7, 5]
+  background: "#FFFFFF"
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center", "border" : "2px solid black", "border-radius": "4px"}'
+    src: "/images/landing/ai-mentor.jpg"
+    shadow: true
+  video: "6m1Jyya7eCc"
+  heading: 
+    text: "Our AI-powered features make all the difference!"
+    font_size: ["33px", "33px", "33px", "33px", "33px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Through years of research and experience, we've perfected the strategies and tools to ensure your constant and efficient progress. To optimize your learning curve and empower you to tackle challenges with confidence, we've now incorporated the power of AI."
+    font_size: ["16px","16px","16px","16px","16px"]
+    style: '{ "font-size":"16px", "margin":"15px 0", "font-weight":"300", "text-align": "justify" }'
+  content:
+    style: '{ "font-size":"16px", "margin":"15px 0"}'
+    text: "Experience the difference our AI-powered features make. Our tried-and-tested approach keeps you engaged, motivated, and on the fast track to achieving your coding goals!"
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Meet Rigobot, our AI coding assistant:"
+        text: |
+          • Instant tutoring as you code.
+          <br />
+          • Skill evaluations to track your progress.
+          <br />
+          • Expert bug fixing assistance.
+          <br /><br />
+          It perfectly complements our human mentorship program!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "Learnpack, our interactive learning software, provides:"
+        text: |
+          • There are hundreds of interactive exercises to help you master and retain skills.
+          <br />
+          • Automated tests to help track your progress.
+          <br />
+          • Structured practice.
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+
 ## START FROM HERE - DON'T CHANGE ANYTHING ABOVE
 ## HEADING SECTION
 heading_section:
@@ -130,6 +177,11 @@ consents:
     active: false
     message: 'By submitting this form, I accept that my data may be used for a quote request that could result in a commercial relationship. Check out our complete <a style={{ marginLeft: "5px" }} target="_blank" rel="noopener noreferrer nofollow" className="decorated" href="/us/privacy-policy">Privacy Policy</a>'
     error_message: "You need to accept the privacy terms"
+  - slug: "wa_consent"
+    name: "WhatsApp Consent"
+    active: true
+    message: "I agree to receive information through email, WhatsApp, and/or other channels about coding workshops, events, courses, and other marketing materials. We'll never share your contact information, and you can easily opt out at any moment."
+    error_message: "You need to accept Whatsapp consent"
 
 city: "Caracas"
 name: "Venezuela"

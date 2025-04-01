@@ -191,7 +191,7 @@ const Landing = (props) => {
           margin="0"
           margin_tablet="auto"
           gridTemplateColumns_tablet="repeat(16, 1fr)"
-          maxWidth_tablet="1366px"
+          maxWidth_tablet="1280px"
         >
           <Div
             //height="auto"
@@ -368,6 +368,7 @@ export const query = graphql`
             }
             phone {
               text
+              number
             }
           }
           navbar {
@@ -386,7 +387,6 @@ export const query = graphql`
             margin_md
           }
           features {
-            marginTop
             text
             bullets
             styles
@@ -394,6 +394,7 @@ export const query = graphql`
           badges {
             position
             heading
+            sub_heading
           }
           short_badges {
             name
@@ -446,6 +447,7 @@ export const query = graphql`
           rating_reviews {
             position
             heading
+            background
             rating_list {
               alt
               image {
@@ -522,16 +524,21 @@ export const query = graphql`
             swipable
             background
             proportions
+            alignment
             layout
             video
             height
             width
             videoHeight
             videoWidth
+            justify
             filter_indexes
+            variant
             text_link
+            topic
             icons {
               icon
+              color
               title
               content
             }
@@ -564,6 +571,9 @@ export const query = graphql`
               text
               font_size
               style
+              heading_image {
+                src
+              }
             }
             sub_heading {
               text
@@ -582,9 +592,11 @@ export const query = graphql`
                 heading
                 text
                 icon
+                icon_color
               }
             }
             cards {
+              background
               image {
                 src
                 style
@@ -593,13 +605,6 @@ export const query = graphql`
                 text
                 style
                 font_size
-              }
-              content {
-                text
-                style
-              }
-              button {
-                text
               }
             }
             columns {
@@ -617,6 +622,14 @@ export const query = graphql`
           header_data {
             background
             tagline
+            tagline_color
+            form_styles {
+              background
+              color
+              button {
+                background
+              }
+            }
             sub_heading
             image_filter
             partner_logo_url {
@@ -701,7 +714,6 @@ export const query = graphql`
             button_label
           }
           features {
-            marginTop
             text
             bullets
             styles
@@ -835,6 +847,7 @@ export const query = graphql`
               src
               style
               link
+              shadow
             }
             programs {
               title
@@ -850,6 +863,7 @@ export const query = graphql`
               text
               color
               path
+              background
             }
             heading {
               text
@@ -936,6 +950,40 @@ export const query = graphql`
         }
       }
     }
+    allJobGuaranteeSmallYaml(filter: { fields: { lang: { eq: $lang } } }) {
+      edges {
+        node {
+          title
+          icons {
+            title
+            icon
+          }
+          link {
+            url
+            label
+          }
+        }
+      }
+    }
+    allFaqYaml(filter: { fields: { lang: { eq: $lang } } }) {
+      edges {
+        node {
+          faq {
+            topic
+            slug
+            questions {
+              locations
+              priority
+              question
+              answer
+            }
+          }
+          fields {
+            lang
+          }
+        }
+      }
+    }
     allCredentialsYaml(filter: { fields: { lang: { eq: $lang } } }) {
       edges {
         node {
@@ -988,6 +1036,7 @@ export const query = graphql`
               }
             }
             weeks
+            week_unit
             sub_heading
             left_labels {
               description
@@ -1041,6 +1090,9 @@ export const query = graphql`
             tagline
             sub_heading
           }
+          project
+          made_by
+          description
           projects {
             project_name
             slug

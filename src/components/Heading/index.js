@@ -7,10 +7,10 @@ import { Devices } from "../Responsive";
 import { Blink } from "../Animations";
 import { redirectTo } from "@reach/router";
 
-const Heading = ({ type, children, className, id }) => {
+const Heading = ({ type, children, className, id, ...rest }) => {
   const Comp = type;
   return (
-    <Comp id={id} className={className}>
+    <Comp id={id} className={className} {...rest}>
       {children}
     </Comp>
   );
@@ -49,7 +49,6 @@ const BaseHeading = styled(Heading)`
   padding: ${(props) => props.padding};
   border-bottom: ${(props) => props.borderBottom};
   text-decoration: ${(props) => props.textDecoration};
-  text-decoration-offset: ${(props) => props.textDecorationOffset};
 
   &:hover {
     background-color: ${(props) => props.bgHover || props.bg};
@@ -115,13 +114,13 @@ export const H2 = styled(BaseHeading)`
   z-index: ${(props) => props.zIndex};
   letter-spacing: 0.05em;
   text-align: ${(props) => props.textAlign};
+  font-family: ${(props) => props.fontFamily};
   @media ${Devices.xxs} {
     text-align: ${(props) => props.textAlign_xxs};
   }
   @media ${Devices.tablet} {
     text-align: ${(props) => props.textAlign_tablet};
   }
-  font-family: ${(props) => props.fontFamily};
 `;
 export const H3 = styled(BaseHeading)`
   font-weight: ${(props) => props.fontWeight || "700"};
@@ -141,6 +140,7 @@ export const H4 = styled(BaseHeading)`
   font-weight: ${(props) => props.fontWeight || "400"};
   letter-spacing: 0.05em;
   padding-right: ${(props) => props.paddingRight};
+  font-family: ${(props) => props.fontFamily};
 `;
 export const H5 = styled(BaseHeading)`
   font-weight: 700;
@@ -198,6 +198,12 @@ Separator.defaultProps = {
   variant: "default",
 };
 
+const paragraphSizes = {
+  l: "21px",
+  md: "16px",
+  sm: "14px",
+};
+
 export const Paragraph = styled.p`
   display: ${(props) => props.display};
   direction: ${(props) => props.direction};
@@ -205,7 +211,7 @@ export const Paragraph = styled.p`
   width: ${(props) => props.width || "100%"};
   cursor: ${(props) => props.cursor};
   margin: ${(props) => props.margin || "0"};
-  font-size: ${(props) => props.fontSize};
+  font-size: ${(props) => paragraphSizes[props.fontSize] || props.fontSize};
   flex-direction: ${(props) => props.flexDirection};
   flex-shrink: ${(props) => props.flexShrink};
   font-family: ${(props) => props.fontFamily};
@@ -226,8 +232,7 @@ export const Paragraph = styled.p`
   height: ${(props) => props.height};
   z-index: ${(props) => props.zIndex};
   border-left: ${(props) => props.borderLeft};
-  opacity: ${(props) =>
-    props.isActive ? 1 : props.opacity ? props.opacity : 0.8};
+  opacity: ${(props) => props.opacity};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   a {
@@ -242,9 +247,9 @@ export const Paragraph = styled.p`
     padding: ${(props) => props.padding_xs};
     display: ${(props) => props.display_xs};
     margin: ${(props) => props.margin_xs};
-    font-size: ${(props) => props.fontSize_xs};
-    font-weight: ${(props) =>
-      props.isActive ? "bold" : props.fontWeight_xs || "400"};
+    font-size: ${(props) =>
+      paragraphSizes[props.fontSize_xs] || props.fontSize_xs};
+    font-weight: ${(props) => (props.isActive ? "bold" : props.fontWeight_xs)};
     line-height: ${(props) => props.lineHeight_xs};
   }
   @media ${Devices.sm} {
@@ -252,15 +257,16 @@ export const Paragraph = styled.p`
     padding: ${(props) => props.padding_sm};
     text-transform: ${(props) => props.textTransform_sm};
     font-size: ${(props) => props.fontSize_sm};
+    text-align: ${(props) => props.textAlign_sm};
   }
   @media ${Devices.tablet} {
     display: ${(props) => props.display_tablet};
     justify-content: ${(props) => props.justifyContent_tablet};
     width: ${(props) => props.width_tablet};
     max-width: ${(props) => props.maxWidth_tablet};
-    font-size: ${(props) => props.fontSize_tablet};
-    font-weight: ${(props) =>
-      props.isActive ? "bold" : props.fontWeight_tablet || "400"};
+    font-size: ${(props) =>
+      paragraphSizes[props.fontSize_tablet] || props.fontSize_tablet};
+    font-weight: ${(props) => props.fontWeight_tablet};
     text-align: ${(props) => props.textAlign_tablet};
     align-self: ${(props) => props.alignSelf_tablet};
     padding: ${(props) => props.padding_tablet};
@@ -278,13 +284,16 @@ export const Paragraph = styled.p`
     max-width: ${(props) => props.maxWidth_md};
   }
   @media ${Devices.lg} {
-    font-size: ${(props) => props.fontSize_lg};
+    font-size: ${(props) =>
+      paragraphSizes[props.fontSize_lg] || props.fontSize_lg};
   }
   @media ${Devices.xl} {
   }
   @media ${Devices.xxl} {
   }
 `;
+
+export const SubTitle = styled(Paragraph)``;
 
 export const Title = (props) => {
   const variants = {
@@ -372,9 +381,18 @@ Title.defaultProps = {
 // }
 Paragraph.defaultProps = {
   fontFamily: "Lato, sans-serif",
-  fontSize: "15px",
-  lineHeight: "22px",
+  fontSize: "16px",
+  lineHeight: "22.85px",
   textAlign: "center",
+  color: `${Colors.darkGray}`,
+};
+
+SubTitle.defaultProps = {
+  fontFamily: "Archivo",
+  fontSize: "21px",
+  lineHeight: "22.85px",
+  textAlign: "center",
+  fontWeight: "400",
   color: `${Colors.darkGray}`,
 };
 Separator.defaultProps = {
@@ -383,22 +401,24 @@ Separator.defaultProps = {
   border: `2px solid black`,
 };
 H1.defaultProps = {
-  fontSize: "13px",
-  lineHeight: "16px",
-  fontWeight: "700",
+  fontSize: "21px",
+  lineHeight: "22.85px",
+  fontWeight: "400",
   letterSpacing: "0.05em",
 };
 H2.defaultProps = {
-  fontSize: "30px",
-  lineHeight: "24px",
-  fontWeight: "700",
+  fontSize: "35px",
+  lineHeight: "38.08px",
+  fontWeight: "400",
+  fontFamily: "Archivo",
+  color: Colors.darkBlue,
 };
 H3.defaultProps = {
-  fontSize: "22px",
-  lineHeight: "26px",
+  fontSize: "21px",
+  lineHeight: "22.85px",
 };
 H4.defaultProps = {
-  fontSize: "15px",
+  fontSize: "16px",
   lineHeight: "26px",
   letterSpacing: "0.05em",
 };

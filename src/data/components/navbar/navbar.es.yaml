@@ -1,6 +1,6 @@
 navbar:
   - name: "Programas"
-    link: "/es/coding-bootcamps/full-stack-part-time"
+    link: "/es/coding-bootcamps/desarrollador-full-stack"
     sub_menu:
       icon: ""
       title: "Programas"
@@ -24,19 +24,27 @@ navbar:
             - text: "Ver Programa"
               link: "/es/coding-bootcamps/curso-datascience-machine-learning"
               
-        - title: "Blockchain y Web3"
+        - title: "Especialista en seguridad informática"
           level: "Desde cero"
-          icon: "blockchain"
-          paragraph: "Construye applicaciones en la Web3 utilizando Solidity y Etherium Blockchain. Obtén un trabajo como desarrolaldor de blockchain."
+          icon: "cyber-security"
+          paragraph: "Conviértete en un hacker ético y aprende a detectar, corregir y protegerte de ataques y vulnerabilidades en sistemas informáticos "
           buttons:
-            - text: "Registro temprano"
-              link: "#"
+            - text: "Ver Programa"
+              link: "/es/coding-bootcamps/curso-ciberseguridad"
 
-  - name: "Porqué 4Geeks"
+        - title: "Inteligencia Artificial"
+          level: "Desde cero"
+          icon: "applied-ai"
+          paragraph: "Explora a detalle las herramientas actuales de inteligencia artificial y cómo aplicarla para escalar en diferentes industrias, roles y en tu trabajo."
+          buttons:
+            - text: "Ver Programa"
+              link: "/es/coding-bootcamps/curso-inteligencia-artificial"
+
+  - name: "Por qué 4Geeks"
     link: "/es/porque-4geeks"
     sub_menu:
       icon: "awards"
-      title: "Porqué 4Geeks Academy"
+      title: "Por qué 4Geeks Academy"
       link: "/es/porque-4geeks"
       paragraph: "Este es el lugar para impulsar tu carrera aprendiendo a codificar. Piensa de manera diferente, ten más confianza en ti mismo, da vida a tus ideas y gana más dinero."
       width: "950px"
@@ -121,6 +129,8 @@ navbar:
               link_to: "/es/coding-campus/bootcamp-programacion-houston"
             - title: "Austin, USA"
               link_to: "/es/coding-campus/bootcamp-programacion-austin"
+            - title: "Tampa, USA"
+              link_to: "/es/coding-campus/bootcamp-programacion-tampa"
             - title: "Toronto, Canada"
               link_to: "/es/coding-campus/bootcamp-programacion-toronto-canada"
         - title: "Latam"
@@ -144,7 +154,7 @@ navbar:
             - title: "Uruguay"
               link_to: "/es/coding-campus/bootcamp-programacion-uruguay"
             - title: "Venezuela"
-              link_to: "/es/coding-campus/bootcamp-programacion-caracas-venezuela"
+              link_to: "/es/coding-campus/curso-informatica-caracas-venezuela"
             - title: "Peru"
               link_to: "/es/coding-campus/bootcamp-programacion-lima-peru"
             - title: "Otra locación en America"
@@ -195,10 +205,10 @@ button:
 #   - name: "La Academia"
 #     link: "/es/la-academia"
 #   - name: "Programas"
-#     link: "/es/coding-bootcamps/full-stack-part-time"
+#     link: "/es/coding-bootcamps/desarrollador-full-stack"
 #     links:
 #       - name: "Full Stack Development"
-#       - link: "/es/coding-bootcamps/full-stack-part-time"
+#       - link: "/es/coding-bootcamps/desarrollador-full-stack"
 #       - name: "Senior Software Engineering"
 #       - link: "/es/coding-bootcamps/ingenieria-de-software-programacion"
 #   # - name: "Precios"

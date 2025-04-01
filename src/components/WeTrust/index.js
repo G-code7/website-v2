@@ -1,14 +1,10 @@
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
-import ReactPlayer from "../ReactPlayer";
-import { H2, Paragraph, H3 } from "../Heading";
+import { H2, H3, Paragraph, SubTitle } from "../Heading";
 import Icon from "../Icon";
 import { Div } from "../Sections";
-import { Button, Colors, Img } from "../Styling";
-import { navigate } from "gatsby";
-import { transferQuerystrings, smartRedirecting } from "../../utils/utils";
+import { Colors } from "../Styling";
 
-const WeTrust = ({ we_trust }) => {
+const WeTrust = ({ we_trust, background, titleProps, paragraphProps }) => {
   return (
     <Div
       id="we-trust"
@@ -21,31 +17,23 @@ const WeTrust = ({ we_trust }) => {
     >
       <Div
         padding="50px 30px"
-        padding_md="40px 80px"
+        padding_md="40px 90px"
         padding_lg="40px"
-        padding_tablet="40px 40px"
+        padding_tablet="40px 0"
         margin="0 auto"
-        background={Colors.lightBlue}
+        background={background || Colors.lightBlue}
         display="block"
-        maxWidth="1366px"
+        maxWidth="1280px"
       >
-        <Div display="block">
-          <H2
-            textAlign="left"
-            margin="0 0 22px 0"
-            fontSize_tablet="32px"
-            fontSize="21px"
-            lineHeight=""
-          >
+        <Div display="block" padding="0 0 32px 0">
+          <H2 textAlign="left" {...titleProps}>
             {we_trust.title}
           </H2>
-          <Paragraph
+          <SubTitle
             textAlign="left"
-            color={Colors.darkGray}
-            opacity="1"
-            fontSize_tablet="18px"
-            fontSize="16px"
+            margin="22px 0 0 0"
             dangerouslySetInnerHTML={{ __html: we_trust.text }}
+            {...paragraphProps}
           />
         </Div>
         <Div
@@ -72,6 +60,7 @@ const WeTrust = ({ we_trust }) => {
               padding="15px"
               alignItems="center"
               alignItems_tablet="normal"
+              overflow="hidden"
             >
               <Icon icon={box.icon} width="89px" height="89px" color={null} />
               <Div

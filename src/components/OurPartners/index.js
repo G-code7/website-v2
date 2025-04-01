@@ -1,11 +1,12 @@
 import React from "react";
 import { Div, GridContainer, Grid } from "../Sections";
 import { Colors } from "../Styling";
-import { H1, H2, Paragraph } from "../Heading";
+import { H1, H2, Paragraph, SubTitle } from "../Heading";
 import { Link } from "gatsby";
 import { smartRedirecting } from "../../utils/utils.js";
 import Fragment from "../Fragment";
 import Marquee from "../Marquee";
+import CarouselV2 from "../CarouselV2/index.js";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 // Display centered TITLE + PARAGRAPH
@@ -13,7 +14,7 @@ const Title_Paragraph = (props) => {
   return (
     <>
       <Grid
-        maxWidth="1366px"
+        maxWidth="1280px"
         margin="0 auto 20px auto"
         background={props.background}
         gridTemplateColumns_tablet="1fr repeat(12, 1fr) 1fr"
@@ -29,12 +30,7 @@ const Title_Paragraph = (props) => {
           {/*<H2 margin="0 0 15px 0" fontSize="15px" lineHeight="19px" fontWeight="900">{title}</H2>*/}
           <H2
             type="h2"
-            fontFamily="Lato"
-            fontWeight="900"
-            fontSize="32px"
-            lineHeight="40px"
             letterSpacing="0.05em"
-            color="#3A3A3A"
             width="100%"
             margin="0 0 23px 0"
             textTransform="uppercase"
@@ -44,21 +40,17 @@ const Title_Paragraph = (props) => {
           </H2>
 
           {/*<Paragraph>{paragraph}</Paragraph>*/}
-          <Paragraph
-            fontFamily="Lato"
-            fontWeight="normal"
-            fontSize={props.fontSize || "16px"}
-            lineHeight="22px"
+          <SubTitle
+            fontSize={props.fontSize}
             padding="0"
             padding_tablet="0px 10%"
             letterSpacing="0.06em"
-            color="#3A3A3A"
             width="100%"
             margin="0 0 15px 0"
             style={{ fontStyle: "normal" }}
           >
             {props.paragraph}
-          </Paragraph>
+          </SubTitle>
         </Div>
       </Grid>
     </>
@@ -197,7 +189,7 @@ const Images_Featured = (props) => {
         display_sm="none"
         //display_tablet="block"
         justifyContentChild="center"
-        maxWidth="1366px"
+        maxWidth="1280px"
         margin="0 auto"
         columns_tablet={
           imagesFiltered.length <= 4 ? imagesFiltered.length : "3"
@@ -238,6 +230,150 @@ const Images_Featured = (props) => {
   );
 };
 
+const SquareBoxPartner = ({ border, elem, width, height }) => {
+  let follow = elem.follow;
+  if (typeof elem.follow === "string" && elem.follow === "false")
+    follow = false;
+  return (
+    <Div
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      border={border}
+      background={Colors.white}
+      borderRadius="4px"
+      height={height}
+      width={width}
+      margin="auto"
+    >
+      {elem.link ? (
+        <a href={elem.link} rel={!follow ? "nofollow" : ""} target="__blank">
+          <GatsbyImage
+            style={{
+              cursor: "pointer",
+              margin: "auto",
+              width: "60%",
+              display: "block",
+            }}
+            height="112px"
+            objectFit="contain"
+            alt={elem.name}
+            image={getImage(elem.image.childImageSharp.gatsbyImageData)}
+          />
+        </a>
+      ) : (
+        <GatsbyImage
+          style={{
+            margin: "auto",
+            height: "112px",
+            width: "60%",
+          }}
+          objectFit="contain"
+          alt={elem.name}
+          image={getImage(elem.image.childImageSharp.gatsbyImageData)}
+        />
+      )}
+    </Div>
+  );
+};
+
+const VariantCarousel = ({
+  title,
+  paragraph,
+  images,
+  background,
+  multiLine,
+  ...rest
+}) => {
+  const multiLineImages = multiLine
+    ? images.reduce(
+        (rows, key, index) =>
+          (index % 2 == 0
+            ? rows.push([key])
+            : rows[rows.length - 1].push(key)) && rows,
+        []
+      )
+    : [];
+
+  return (
+    <CarouselV2
+      background={background || "#FBFCFC"}
+      padding="40px 0"
+      heading={title}
+      content={paragraph}
+      settings={{
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+          {
+            breakpoint: 1124,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true,
+            },
+          },
+          {
+            breakpoint: 780,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2,
+              dots: false,
+            },
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2,
+              dots: false,
+            },
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: false,
+            },
+          },
+        ],
+      }}
+      {...rest}
+    >
+      {multiLine
+        ? multiLineImages.map((group, i) => (
+            <Div key={`${i}-partners`}>
+              <Div flexDirection="column" gap="24px">
+                {group.map((elem) => (
+                  <SquareBoxPartner
+                    key={elem.name}
+                    elem={elem}
+                    border={!background && "1px solid #C4C4C4"}
+                    height="236px"
+                    width="260px !important"
+                  />
+                ))}
+              </Div>
+            </Div>
+          ))
+        : images.map((elem) => (
+            <Div key={elem.name}>
+              <SquareBoxPartner
+                elem={elem}
+                border={!background && "1px solid #C4C4C4"}
+                height="236px"
+                width="260px !important"
+              />
+            </Div>
+          ))}
+    </CarouselV2>
+  );
+};
+
 //Punto de entrada al componente
 const OurPartners = ({
   title,
@@ -259,6 +395,7 @@ const OurPartners = ({
   gridColumn,
   maxWidth,
   gray,
+  variant,
   ...rest
 }) => {
   let FragmentStyle = {
@@ -267,7 +404,20 @@ const OurPartners = ({
     padding: `${padding || "75px 0"}`,
     borderBottom: borderBottom,
     width: width,
+    maxWidth: maxWidth,
   };
+
+  if (variant === "carousel")
+    return (
+      <VariantCarousel
+        images={images}
+        title={title}
+        paragraph={paragraph}
+        background={background}
+        margin={margin}
+        {...rest}
+      />
+    );
   //Renderized...
   return (
     <Fragment github="/components/partner" style={FragmentStyle}>

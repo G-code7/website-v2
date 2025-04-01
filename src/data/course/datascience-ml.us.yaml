@@ -64,7 +64,7 @@ badges:
 
 # OVERLAPED
 overlaped:
-  heading: "Learn to create predictive models and Master Machine Learning with 4Geeks Academy"
+  heading: "Learn to create predictive models and master machine learning with 4Geeks Academy"
   paragraph: "Dive into the world of machine learning with 4Geeks Academy's specialized program. Gain the skills to build predictive models for practical applications like fraud detection and natural language processing, using industry-leading tools such as Python, TensorFlow, and Scikit-learn."
   button:
     text: "LEARN MORE"
@@ -73,30 +73,59 @@ overlaped:
   image:
     src: "/images/landing/tres-personas-reloaded.webp"
 
-## TWO COLUMNS
+
+two_columns_info:
+  proportions: [6, 6]
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center"}' 
+    shadow: false 
+    src: "/images/landing/grupo-ventanas.webp"
+  section_heading: 
+    text: "Learn to Apply Machine Learning to Real-World Problems"
+  heading:
+    text: ""
+          #xl      lg     md     sm    xs
+    font_size: ["40px", "34px", "34px", "25px", "20px"]
+  sub_heading:
+    style: '{}'
+    text: "Our data science bootcamp is focused on providing all the tools and support necessary for you to succeed in this field."
+    font_size: ["16px"]
+  content:
+    text: ""
+  button:
+    text: "Compare Prices and Plans"
+    path: "#prices_and_payment"
+    color: "white"
+    background: "black"
+    hover: "lightBlue"
+  bullets:
+    items: 
+    - heading: "UNLIMITED MENTORING"
+      text: "Get expert support for all your questions. Our mentors are always available online, ready to assist you from day one and beyond."
+    - heading: "1:7 STUDENT-TEACHER RATIO"
+      text: "Experience personalized attention with our above-average student-teacher ratio."
+    - heading: "PERSONALIZED PROFESSIONAL SUPPORT"
+      text: "Receive unlimited advice, guidance, and training tailored to your unique profile and specific job offers."
+
+# TWO COLUMNS
 two_columns:
   proportions: [6, 6]
   image:
-    style: '{"border" : "3px solid black", "backgroundSize": "contain" }'
-    src: "/static/images/staff/luisa.png"
+    style: '{"border" : "3px solid black", "backgroundSize": "cover", "backgroundPosition": "right" }'
+    src: "../../../static/images/testimonials/alissa-datascience.jpg"
     shadow: true  
-  video: "https://www.youtube.com/watch?v=PWkgaAT8pHg&t=13s"
+  video: "https://www.youtube.com/watch?v=snI-n8Ruvxg"
   heading:
-    text: "4Geeks, Miami and a story full of opportunities"
+    text: "Discover data science with Alissa, our campus manager in Miami"
     font_size: ["30px", "30px", "30px", "30px", "30px"]
   sub_heading:
-    text: "We are Miami based and we have been focusing in bringing on more opportunities in South Florida."
+    text: "Hear our campus manager explain the fundamentals of data science and its applications! Discover the core concepts of 4Geeks Data Science & Machine Learning Bootcamp, including data analysis, predictive model building, and the use of tools such as Python, SQL, Looker, and Streamlit."
     font_size: ["16px", "16px", "16px", "16px", "16px"]
   button:
     text: "Apply now"
     color: "white"
     background: "black"
-    path: "#prices_and_payment"
-  bullets:
-    items: 
-    - text: "There is always a full or partial scholarship open"
-    - text: "There is always opportunities for everyone in Miami-Dade County, Broward and Palm Beach"
-    - text: "We have ongoing partnerships with Miami Dade College, Miami Tech Coalition, UWM, The City of Miami, Miami Dade County and many more."
+    path: "/us/apply"
 
 
 upcoming:
@@ -116,27 +145,28 @@ details:
       list:
         - label: "Duration"
           content:  "16 Weeks"
-          icon: "calendar"
+          icon: "duration-icon"
         - label: "Classes"
           content: "3 classes weekly"
-          icon: "book"
+          icon: "book-2"
         - label: "Class size"
           content: "12 people max"
-          icon: "laptop"
+          icon: "people"
         - label: "Certificate"
           content: "Our certificates are recognized by multiple organizations."
           link_text: "See example"
           link: "https://certificate.4geeks.com/44c61b294a248f91088f5355aea09606126795e3"
-          icon: "certificate"
+          icon: "certification"
         - label: "Requisites"
           content: "No previous experience needed"
           icon: "contract-checked"
         - label: "Language"
           content: "You can choose between English and Spanish for the syllabus and content. Live classes are taught in the language of your campus."
-          icon: "contract-checked"
+          icon: "language"
           
   heading: Data Science and Machine Learning Syllabus
   weeks: 16
+  week_unit: "wk"
   weeks_label: "weeks"
   facts:
     - label: "Duration"

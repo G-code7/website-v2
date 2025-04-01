@@ -41,8 +41,13 @@ apply_schollarship: # form that is displayed at the end of the landing
 header_data:
   background: "#FFFFFF"
   tagline: ¡Bienvenido a 4Geeks Academy! La academia de programación líder en el mundo
-  tagline_color: "black"
   sub_heading: Con más de 7 años de experiencia tenemos presencia en USA, Europa y Latinoamérica. En nuestra academia, te enseñamos habilidades y destrezas relevantes para el futuro
+  tagline_color: "#1c1c1c"
+  form_styles:
+    background: "#0084FF"
+    color: "white"
+    button:
+      background: "black"
   # background_image: "../../../static/images/bg/main-bg.jpg"
   #video: "https://www.videoask.com/fm984j5nz"
   image_filter: brightness(0.4)
@@ -138,11 +143,11 @@ components:
       path: "#leadform_header"
     bullets:
       items:
-        - heading: "¡Conviértete en un FullStack developer en tan solo 18 semanas!"
+        - text: "¡Conviértete en un FullStack developer en tan solo 18 semanas!"
           icon: "check" #string with icon for example ['check', 'cicle', etc]
-        - heading: "Desarrollo de habilidades altamente valoradas en el mercado profesional."
+        - text: "Desarrollo de habilidades altamente valoradas en el mercado profesional."
           icon: "check" #string with icon for example ['check', 'cicle', etc]
-        - heading: "Acceso a oportunidades laborales al momento de la graducación."
+        - text: "Acceso a oportunidades laborales al momento de la graducación."
           icon: "check" #string with icon for example ['check', 'cicle', etc]
     content:
       font_size: ["16px"]

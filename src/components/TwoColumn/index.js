@@ -1,5 +1,4 @@
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
 import ReactPlayer from "../ReactPlayer";
 import { H2, Paragraph, H3 } from "../Heading";
 import Icon from "../Icon";
@@ -18,6 +17,7 @@ const Side = ({
   heading,
   sub_heading,
   content,
+  disclosure,
   button,
   bullets,
   boxes,
@@ -43,7 +43,7 @@ const Side = ({
     );
   if (image) {
     const imgStyles = image.style ? JSON.parse(image.style) : null;
-    const [img_h_xl, img_h_lg, img_h_md, img_h_sm, img_h_xs] =
+    const [img_h_lg, img_h_md, img_h_tablet, img_h_sm, img_h_xs] =
       imgStyles && imgStyles.height
         ? Array.isArray(imgStyles.height)
           ? imgStyles.height
@@ -61,11 +61,13 @@ const Side = ({
         style={imgStyles}
         alt="4Geeks Academy Section"
         margin="0px"
-        height_md={img_h_xl || "100%"}
-        minHeight="500px"
+        height_lg={img_h_lg || "100%"}
+        height_md={img_h_md || "100%"}
+        height_tablet={img_h_tablet || "100%"}
+        height_sm={img_h_sm}
+        height_xxs={img_h_xs || "270px"}
+        minHeight="auto"
         width={imgStyles ? imgStyles.width || "100%" : "100%"}
-        h_sm={img_h_sm}
-        height_xxs={img_h_xs || "500px"}
         backgroundSize={image.shadow ? "cover" : "contain"}
         position={side}
         //border={image.shadow && "3px solid black"}
@@ -75,7 +77,6 @@ const Side = ({
       <GatsbyImage
         height_xxs="450px"
         image={getImage(image.childImageSharp.gatsbyImageData)}
-        //bgSize={`contain`}
         alt="geekforce image"
       />
     );
@@ -87,10 +88,9 @@ const Side = ({
     sub_heading && Array.isArray(sub_heading.font_size)
       ? sub_heading.font_size
       : [];
-  const [c_xl, c_lg, c_md, c_sm, c_xs] = content ? content.font_size : [];
-
-  let subHeadingStyles = {};
-  if (sub_heading?.style) subHeadingStyles = JSON.parse(sub_heading.style);
+  const [c_xl, c_lg, c_md, c_sm, c_xs] = content?.font_size
+    ? content.font_size
+    : [];
 
   return (
     <Div
@@ -120,36 +120,44 @@ const Side = ({
         </Div>
       )}
       {heading && (
-        <H2
-          type="h2"
-          textAlign_tablet="left"
-          lineHeight="38px"
-          lineHeight_tablet="38px"
-          fontSize={h_xs || "30px"}
-          fs_xl={h_xl}
-          fontSize_xxs={h_xs || "21px"}
-          fontSize_md={h_md || "30px"}
-          fontSize_sm={h_sm}
-          margin="30px 0 20px 0"
-          style={heading.style ? JSON.parse(heading.style) : null}
-        >
-          {heading.text}
-        </H2>
+        <Div alignItems="center" gap="12px">
+          {heading.heading_image && (
+            <Img
+              src={heading.heading_image.src}
+              margin="0px"
+              width="60px"
+              height="60px"
+              backgroundSize="contain"
+            />
+          )}
+          <H2
+            type="h2"
+            textAlign_tablet="left"
+            fontSize={h_xs}
+            fontSize_xxs={h_xs}
+            fontSize_md={h_md}
+            fontSize_sm={h_sm}
+            fontSize_tablet={h_lg}
+            fontSize_lg={h_xl}
+            margin="30px 0 20px 0"
+            style={heading.style ? JSON.parse(heading.style) : null}
+          >
+            {heading.text}
+          </H2>
+        </Div>
       )}
       {sub_heading && (
         <Paragraph
           textAlign_tablet="left"
-          fontFamily="Lato-Bold"
+          fontFamily="Archivo"
+          fontWeight="600"
           textAlign="left"
           margin="0"
-          letterSpacing="0.06em"
-          fontSize={sh_xl || "16px"}
-          fontSize_sm={sh_sm || "16px"}
-          fonSize_md={sh_md}
+          fontSize={sh_xs || sh_xl || "21px"}
           fontSize_xs={sh_xs}
-          fontHeight="30px"
-          fontWeight={subHeadingStyles["font-weight"] || 700}
-          opacity="1"
+          fontSize_sm={sh_sm}
+          fontSize_tablet={sh_md}
+          fonSize_md={sh_lg}
           style={sub_heading.style ? JSON.parse(sub_heading.style) : null}
         >
           {sub_heading.text}
@@ -158,79 +166,61 @@ const Side = ({
 
       {Array.isArray(bullets?.items) && (
         <Div
-          display="grid"
-          gridAutoFlow="dense"
-          gridTemplateColumns="repeat(auto-fill, minmax(40%, 100%))"
-          gridAutoRows="auto" //"minmax(100px, auto);"
+          flexDirection="column"
           margin={sub_heading ? "16px 0 16px 0" : "0 0 16px 0"}
-          gridGap="24px"
+          gap="5px"
         >
           {bullets.items?.map((bullet, index) => {
             return (
               <Div
                 key={index}
-                gridColumn_tablet="1/1"
                 height="auto"
                 alignItems="center"
-                padding="16px 5px 0 0"
-                padding_tablet="16px 0 0 0"
-                display="grid"
-                gridTemplateColumns="100%"
-                //gridAutoRows="auto"
-                gridGap="0"
+                margin="12px 0 0 0"
+                display="block"
                 style={
                   bullets.item_style ? JSON.parse(bullets.item_style) : null
                 }
               >
-                <Div
-                  display="flex"
-                  flexDirection="row"
-                  alignSelf="left"
-                  padding="0 8px 0 0"
-                >
-                  <Icon
-                    icon={bullet.icon || "check"}
-                    width="13px"
-                    display="inline"
-                    color={Colors.blue}
-                    fill={Colors.yellow}
-                    style={{ strokeWidth: "2px" }}
-                  />
-                  {bullet.heading ? (
-                    <H2
-                      type="h3"
-                      textAlign="left"
-                      fontSize="15px"
-                      fontWeight="900"
-                      lineHeight="19px"
-                      textTransform="uppercase"
-                      padding="0 0 0 5px"
-                    >
-                      {bullet.heading}
-                    </H2>
-                  ) : (
-                    <Paragraph
+                {bullet.heading && (
+                  <Div display="flex" flexDirection="row" gap="5px">
+                    <Icon
+                      icon={bullet.icon || "check"}
+                      width="13px"
+                      display="inline"
+                      color={bullet.icon_color || Colors.blue}
+                      fill={Colors.yellow}
+                      style={{ strokeWidth: "2px" }}
+                    />
+                    <H3
+                      as="h3"
                       textAlign="left"
                       fontSize="16px"
-                      letterSpacing="0.06em"
-                      fontWeight="400"
-                      lineHeight="22px"
-                      margin="0px 0px 0px 5px"
+                      fontWeight="900"
+                      lineHeight="16px"
+                      textTransform="uppercase"
                     >
-                      {bullet.text}
-                    </Paragraph>
-                  )}
-                </Div>
-                {bullet.heading && (
-                  <Paragraph
-                    textAlign="left"
-                    fontSize="15px"
-                    fontWeight="400"
-                    lineHeight="22px"
-                    margin="12px 0 0 0"
-                  >
-                    {bullet.text}
-                  </Paragraph>
+                      {bullet.heading}
+                    </H3>
+                  </Div>
+                )}
+                {bullet.text && (
+                  <Div margin="12px 0 0 0" alignItems="center" gap="5px">
+                    {!bullet.heading && (
+                      <Icon
+                        icon={bullet.icon || "check"}
+                        width="13px"
+                        display="inline"
+                        color={bullet.icon_color || Colors.blue}
+                        fill={Colors.yellow}
+                        style={{ strokeWidth: "2px" }}
+                      />
+                    )}
+                    <Paragraph
+                      textAlign="left"
+                      dangerouslySetInnerHTML={{ __html: bullet.text }}
+                    />
+                  </Div>
                 )}
               </Div>
             );
@@ -243,12 +233,17 @@ const Side = ({
           textAlign="left"
           textAlign_tablet="left"
           margin="10px 0"
-          opacity="1"
-          fontSize={c_xl || "16px"}
-          fontSize_sm={c_sm}
-          fonSize_md={c_md}
+          fontSize={c_xs || c_xl}
           fontSize_xs={c_xs}
+          fontSize_sm={c_sm}
+          fontSize_tablet={c_md}
+          fontSize_md={c_lg}
+          fontSize_lg={c_xl}
           style={content.style ? JSON.parse(content.style) : null}
+          onClick={(e) => {
+            if (e.target.tagName === "A" && content.path)
+              smartRedirecting(e, content.path);
+          }}
           dangerouslySetInnerHTML={{ __html: content.text }}
         />
       ) : (
@@ -259,13 +254,50 @@ const Side = ({
             textAlign="left"
             textAlign_tablet="left"
             margin="10px 0"
-            opacity="1"
-            fontSize={c_xl || "16px"}
-            fontSize_sm={c_sm}
-            fonSize_md={c_md}
+            fontSize={c_xs || c_xl}
             fontSize_xs={c_xs}
+            fontSize_sm={c_sm}
+            fontSize_tablet={c_md}
+            fontSize_md={c_lg}
+            fontSize_lg={c_xl}
             style={content.style ? JSON.parse(content.style) : null}
-            fontHeight="30px"
+            onClick={(e) => {
+              if (e.target.tagName === "A" && content.path)
+                smartRedirecting(e, content.path);
+            }}
+          >
+            {p}
+          </Paragraph>
+        ))
+      )}
+
+      {disclosure && /<\/?[a-z0-9]+>/g.test(disclosure.text) ? (
+        <Paragraph
+          textAlign="left"
+          textAlign_tablet="left"
+          margin="10px 0"
+          fontSize="13px"
+          style={disclosure.style ? JSON.parse(disclosure.style) : null}
+          dangerouslySetInnerHTML={{ __html: disclosure.text }}
+          onClick={(e) => {
+            if (e.target.tagName === "A" && disclosure.path)
+              smartRedirecting(e, disclosure.path);
+          }}
+        />
+      ) : (
+        disclosure &&
+        disclosure.text.split("\n").map((p, i) => (
+          <Paragraph
+            key={`${i}-${p}`}
+            textAlign="left"
+            textAlign_tablet="left"
+            margin="10px 0"
+            fontSize="13px"
+            style={disclosure.style ? JSON.parse(disclosure.style) : null}
+            onClick={(e) => {
+              if (e.target.tagName === "A" && disclosure.path)
+                smartRedirecting(e, disclosure.path);
+            }}
           >
             {p}
           </Paragraph>
@@ -281,12 +313,12 @@ const Side = ({
           textColor={Colors.black}
           textTransform="none"
           color={Colors[button.color] || button.color}
-          fontSize="15px"
+          fontSize="21px"
+          height="auto"
           textAlign="left"
-          margin="2rem 0"
-          padding_xxs="0 .5rem"
-          padding_xs="0 .85rem"
-          //padding_tablet="32px .85rem 0 .85rem"
+          margin="1rem 0"
+          padding="10px 20px"
+          borderRadius="4px"
           onClick={() => {
             if (button.path && button.path.indexOf("http") > -1)
               window.open(transferQuerystrings(button.path, utm));
@@ -358,7 +390,7 @@ const Side = ({
   );
 };
 
-const TwoColumn = ({ left, right, proportions, session }) => {
+const TwoColumn = ({ left, right, proportions, session, alignment }) => {
   const [left_size, right_size] = proportions ? proportions : [];
   return (
     <Div
@@ -366,6 +398,7 @@ const TwoColumn = ({ left, right, proportions, session }) => {
       gap={left?.gap || right?.gap || "0px"}
       gap_tablet={left?.gap_tablet || right?.gap_tablet || "20px"}
       flexDirection_tablet="row"
+      alignItems_tablet={alignment}
       m_sm="0px auto 100px auto"
       margin_tablet="0 auto"
       margin_xxs="0"
@@ -375,10 +408,18 @@ const TwoColumn = ({ left, right, proportions, session }) => {
       padding_lg="40px 0px"
       padding_tablet="40px 40px"
       width_tablet="100%"
-      maxWidth_md="1366px"
+      maxWidth_md="1280px"
     >
       <Div
-        justifyContent={left?.video ? "center" : left?.image ? "end" : "start"}
+        justifyContent={
+          left?.justify
+            ? left.justify
+            : left?.video
+            ? "center"
+            : left?.image
+            ? "start"
+            : "end"
+        }
         flexDirection="column"
         size_tablet={left_size || 6}
         size="12"
@@ -391,7 +432,13 @@ const TwoColumn = ({ left, right, proportions, session }) => {
       </Div>
       <Div
         justifyContent={
-          right?.video ? "center" : right?.image ? "end" : "start"
+          right?.justify
+            ? right.justify
+            : right?.video
+            ? "center"
+            : right?.image
+            ? "end"
+            : "start"
         }
         flexDirection="column"
         size_tablet={right_size || 6}

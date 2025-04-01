@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GridContainer, Grid, Div } from "../Sections";
-import { H2, H3, H4, Paragraph } from "../Heading";
+import { H2, H3, H4, Paragraph, SubTitle } from "../Heading";
 import { Colors, Anchor } from "../Styling";
 import Icon from "../Icon";
 import Link from "gatsby-link";
@@ -43,8 +43,9 @@ const ProgramDetails = (props) => {
 
   const weeks = [];
   const totalWeeks = props.details.weeks || 16;
+  const weekUnit = props.details.week_unit;
   for (let i = 1; i <= totalWeeks; i++) {
-    weeks.push(i.toString() + "sm.");
+    weeks.push(`${i.toString()} ${weekUnit}`);
   }
 
   const steps = props.details.details_modules.reduce(
@@ -53,6 +54,8 @@ const ProgramDetails = (props) => {
   );
 
   const { title, sub_title, list } = props.details.about;
+  const subHeading = props.sub_heading || props.details.sub_heading;
+  const splitedSubHeading = subHeading.replaceAll("\n", "</br>");
 
   useEffect(() => {
     const inter = setInterval(() => {
@@ -70,7 +73,7 @@ const ProgramDetails = (props) => {
     <>
       <Grid
         gridTemplateColumns_tablet="repeat(14,1fr)"
-        maxWidth="1366px"
+        maxWidth="1280px"
         margin_xs="0 auto 45px auto"
         padding_tablet="0 40px"
         padding_md="0 80px"
@@ -85,16 +88,11 @@ const ProgramDetails = (props) => {
           margin="40px 20px 13px 20px"
         >
           <H3 textAlign="start">{title}</H3>
-          {sub_title && /<\/?[a-z0-9]+>/g.test(sub_title) ? (
+          {sub_title && (
             <Paragraph
               textAlign="start"
-              lineHeight="26px"
               dangerouslySetInnerHTML={{ __html: sub_title }}
             />
-          ) : (
-            <Paragraph textAlign="start" lineHeight="26px">
-              {sub_title}
-            </Paragraph>
           )}
         </Div>
         <Div
@@ -102,7 +100,7 @@ const ProgramDetails = (props) => {
           gridColumn_tablet="8/16"
           padding="15px"
           margin_tablet="100px 0 0 0"
-          background={Colors.veryLightBlue}
+          background={Colors.verylightGray3}
           margin="13px 20px 40px 20px"
         >
           {list.map((item, index) => {
@@ -145,15 +143,11 @@ const ProgramDetails = (props) => {
       </Grid>
 
       <Div flexWrap="wrap" margin_xxs="20px" margin_tablet="100px 0 0 0">
-        <H2 lineHeight="36px">{props.heading || props.details.heading}</H2>
-        <Paragraph
+        <H2>{props.heading || props.details.heading}</H2>
+        <SubTitle
           padding="20px 0 0 0"
-          lineHeight_xs="22px"
-          fontSize_tablet="15px"
-          fontSize_xs="18px"
-        >
-          {props.sub_heading || props.details.sub_heading}
-        </Paragraph>
+          dangerouslySetInnerHTML={{ __html: splitedSubHeading }}
+        />
       </Div>
 
       {props.withoutAnimation !== true && (
@@ -162,7 +156,7 @@ const ProgramDetails = (props) => {
           gridTemplateColumns_tablet="repeat(14,1fr)"
           margin="0 auto"
           justifyItems="center"
-          maxWidth="1366px"
+          maxWidth="1280px"
           padding_tablet="0 40px"
           padding_md="0 80px"
           padding_lg="0"
@@ -189,33 +183,28 @@ const ProgramDetails = (props) => {
                     key={index}
                     onClick={() => setSelected({ index, manual: true })}
                     cursor="pointer"
-                    flexDirection={`column`}
-                    alignItems={`center`}
+                    flexDirection="column"
+                    alignItems="center"
                     backgroundHover={Colors.grayBrown}
                     background={
                       selected.index === index ? Colors.grayBrown : null
                     }
-                    padding={"10px"}
-                    borderRadius={"3px"}
+                    padding="10px"
+                    borderRadius="3px"
                     display="flex"
+                    color={
+                      selected.index === index ? "#ffffff" : Colors.darkGray
+                    }
+                    colorHover="#ffffff"
                   >
-                    <Div
-                      alignItems={`center`}
-                      margin={`0 0 5px 0`}
-                      display="flex"
+                    <H4
+                      color="inherit"
+                      fontWeight="900"
+                      cursor="pointer"
+                      lineHeight="19px"
                     >
-                      <H4
-                        color={
-                          selected.index === index ? "#ffffff" : Colors.darkGray
-                        }
-                        colorHover="#ffffff"
-                        fontWeight="900"
-                        cursor={`pointer`}
-                        lineHeight="19px"
-                      >
-                        {item.module_name}
-                      </H4>
-                    </Div>
+                      {item.module_name}
+                    </H4>
                   </Div>
                 );
               })}
@@ -235,8 +224,9 @@ const ProgramDetails = (props) => {
               display_xs="none"
               display_tablet="flex"
             >
-              {weeks.map((sm, index) => (
+              {weeks.map((sm) => (
                 <H4
+                  key={sm}
                   margin="0 5px"
                   fontSize="15px"
                   lineHeight="22px"
@@ -247,25 +237,25 @@ const ProgramDetails = (props) => {
               ))}
             </Div>
             <Div
+              className="module-description"
               display_tablet="flex"
               display_xs="flex" // aqui
               flexDirection_xs="column"
               flexDirection_md="row"
               margin_xxs="20px"
+              gap="20px"
             >
               <Div
-                margin_md="20px 20px 0 0"
-                margin_tablet="auto"
-                margin_xs="0 0 20px 20px"
                 width_md="50%"
                 width_xs="300px"
                 width_tablet="80%"
-                height_md="fit-content"
-                height_xs="auto"
+                border={`1px solid ${Colors.lightGray}`}
+                borderRadius="4px"
+                padding="16px"
               >
                 <Icon
                   style={{ flexShrink: 0 }}
-                  icon="laptop"
+                  icon="laptop-icon-new"
                   width="52px"
                   height="39px"
                 />
@@ -274,8 +264,6 @@ const ProgramDetails = (props) => {
                     textAlign="left"
                     textTransform="uppercase"
                     margin="0 0 10px 0"
-                    fontSize_xs="18px"
-                    fontSize_tavlet="22px"
                   >
                     {props.details.details_modules[selected.index].title}
                   </H3>
@@ -286,10 +274,6 @@ const ProgramDetails = (props) => {
                         key={i}
                         textAlign="left"
                         color={Colors.darkGray}
-                        fontSize_tablet="18px"
-                        fontSize_xs="14px"
-                        lineHeight_tablet="19px"
-                        lineHeight_xs="17px"
                         margin="0 0 10px 0"
                       >
                         {detail}
@@ -298,10 +282,9 @@ const ProgramDetails = (props) => {
                 </Div>
               </Div>
               <Div
-                margin_md="20px 0 20px 20px"
-                margin_tablet="auto"
-                margin_xs="0 0 0 20px"
-                display="inline"
+                display="flex"
+                flexDirection="column"
+                gap="20px"
                 width_tablet="80%"
                 width_md="50%"
                 width_xs="320px"
@@ -310,19 +293,18 @@ const ProgramDetails = (props) => {
                   margin_md="0 10px 0 0"
                   margin_xs="0 0 20px 0"
                   width="100%"
-                  height_md="fit-content"
-                  height_xs="auto"
+                  border={`1px solid ${Colors.lightGray}`}
+                  borderRadius="4px"
+                  padding="16px"
                 >
                   <Div>
-                    <Icon icon="rocket" width="46px" height="46px" />
+                    <Icon icon="rocket-icon-new" width="46px" height="46px" />
                   </Div>
                   <Div flexDirection="column" margin="0 0 0 15px">
                     <H3
                       textAlign="left"
                       textTransform="uppercase"
                       margin="0 0 10px 0"
-                      fontSize_xs="18px"
-                      fontSize_tavlet="22px"
                     >
                       {strings[lang]["Projects"]}
                     </H3>
@@ -333,10 +315,6 @@ const ProgramDetails = (props) => {
                           key={i}
                           textAlign="left"
                           color={Colors.darkGray}
-                          fontSize_tablet="18px"
-                          fontSize_xs="14px"
-                          lineHeight_tablet="19px"
-                          lineHeight_xs="17px"
                           margin="0 0 10px 0"
                         >
                           {detail}
@@ -345,29 +323,27 @@ const ProgramDetails = (props) => {
                   </Div>
                 </Div>
                 <Div
-                  margin="0 10px 0 0"
+                  // margin="0 10px 0 0"
                   width="100%"
-                  height_md="50px"
-                  height_xs="auto"
+                  // height_md="50px"
+                  border={`1px solid ${Colors.lightGray}`}
+                  borderRadius="4px"
+                  padding="16px"
                 >
                   <Div>
-                    <Icon icon="clock" width="46px" height="46px" />
+                    <Icon icon="wall-clock-icon" width="46px" height="46px" />
                   </Div>
                   <Div flexDirection="column" margin="0 0 0 20px">
                     <H3
                       textAlign="left"
                       textTransform="uppercase"
                       margin="0 0 10px 0"
-                      fontSize_xs="18px"
-                      fontSize_tavlet="22px"
                     >
                       {strings[lang]["Duration"]}
                     </H3>
                     <Paragraph
                       textAlign="left"
                       color={Colors.darkGray}
-                      fontSize="18px"
-                      lineHeight="19px"
                       margin="0 0 10px 0"
                     >
                       {props.details.details_modules[selected.index].duration}

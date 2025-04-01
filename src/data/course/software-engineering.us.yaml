@@ -104,23 +104,24 @@ details:
   about:
       title: "About the Program"
       sub_title: "Get the skills to meet the global demand for problem solvers and logical thinkers who drive the world to real change and impact.
-      Develop distributed highly scalable cloud applications used only by Fortune 500. Land yourself a real software engineering job or create the next tech unicorn."
+        Develop distributed highly scalable cloud applications used only by Fortune 500. Land yourself a real software engineering job or create the next tech unicorn."
       list:
         - label: "Duration"
-          content:  "18 Weeks"
+          content: "18 Weeks"
           icon: "calendar"
         - label: "Classes"
-          content: "Online, 3 Classes weekly"
-          icon: "book"
+          content: "Online, 3 classes weekly"
+          icon: "book-2"
         - label: "Requisites"
           content: "1-year experience as Software Developer"
           icon: "contract-checked"
         - label: "Language"
           content: "You can choose between English and Spanish for the syllabus and content. Live classes are taught in the language of your campus."
-          icon: "contract-checked"
+          icon: "language"
           
   heading: Software Engineering Syllabus
   weeks: 18
+  week_unit: "wks"
   sub_heading: "Master exactly what is required to be a real Software Engineer."
   left_labels:
     description: "DESCRIPTION:"

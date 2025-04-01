@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { Container, Row, Column, Grid, Div, GridContainer } from "../Sections";
+import React, { useState, useRef } from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Container, Div, GridContainer } from "../Sections";
 import { Colors, RoundImage, Anchor, Button } from "../Styling";
-import { H2, H3, H4, H5, Separator, Paragraph } from "../Heading";
+import { H3, H4 } from "../Heading";
 import { Devices } from "../Responsive";
 import Icon from "../Icon";
 import { newsletterSignup } from "../../actions";
 import { SessionContext } from "../../session";
 import { Input } from "../Form";
-import { Link } from "gatsby";
-import styled from "styled-components";
 
 const formIsValid = (formData = null) => {
   if (!formData) return null;
@@ -43,17 +44,27 @@ const Form = styled.form`
 `;
 
 const Footer = ({ yml }) => {
+  const captcha = useRef(null);
   const { session } = React.useContext(SessionContext);
   let socials = session && session.location ? session.location.socials : [];
 
   const [formStatus, setFormStatus] = useState({
     status: "idle",
-    msg: "Resquest",
+    msg: "Request",
   });
   const [formData, setVal] = useState({
     email: { value: "", valid: false },
     consent: { value: true, valid: true },
   });
+
+  const captchaChange = () => {
+    const captchaValue = captcha?.current?.getValue();
+    if (captchaValue)
+      setVal({ ...formData, token: { value: captchaValue, valid: true } });
+    else setVal({ ...formData, token: { value: null, valid: false } });
+  };
+  // Año actual
+  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -67,7 +78,7 @@ const Footer = ({ yml }) => {
         padding="0 17px"
         margin="0 0 60px 0"
         childMargin="auto"
-        childMaxWidth="1366px"
+        childMaxWidth="1280px"
       >
         <Div
           justifyContent="center"
@@ -169,7 +180,7 @@ const Footer = ({ yml }) => {
               </H4>
               <Div justifyContent="center" width="100%">
                 <Form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     if (formStatus.status === "error") {
                       setFormStatus({ status: "idle", msg: "Resquest" });
@@ -181,7 +192,11 @@ const Footer = ({ yml }) => {
                       });
                     } else {
                       setFormStatus({ status: "loading", msg: "Loading..." });
-                      newsletterSignup(formData, session)
+                      const token = await captcha.current.executeAsync();
+                      newsletterSignup(
+                        { ...formData, token: { value: token, valid: true } },
+                        session
+                      )
                         .then((data) => {
                           if (
                             data.error !== false &&
@@ -255,6 +270,13 @@ const Footer = ({ yml }) => {
                   </Button>
                 </Form>
               </Div>
+              <Div width="fit-content" margin="10px auto 0 auto">
+                <ReCAPTCHA
+                  ref={captcha}
+                  sitekey={process.env.GATSBY_CAPTCHA_KEY}
+                  size="invisible"
+                />
+              </Div>
             </>
           )}
         </Div>
@@ -306,24 +328,23 @@ const Footer = ({ yml }) => {
           );
         })}
       </GridContainer>
-      <GridContainer
+      <Div
         columns_tablet="12"
-        margin_tablet="27px 0 60px 0"
+        margin="auto"
+        margin_tablet="27px auto 60px auto"
         display="none"
-        display_tablet="grid"
+        display_tablet="flex"
+        maxWidth="1280px"
       >
-        <Div
-          gridArea_tablet="1/7/1/13"
-          justifyContent="end"
-          alignItems="center"
-        >
+        <Div margin="auto" justifyContent="center" alignItems="center">
           <H4
             fontSize="13px"
             lineHeight="22px"
             width="fit-content"
             color={Colors.darkGray}
           >
-            We accept:{" "}
+            {yml.we_accept}
+            {"  "}
           </H4>
           <RoundImage
             url="/images/bitcoin.png"
@@ -339,13 +360,14 @@ const Footer = ({ yml }) => {
             bsize="contain"
           />
         </Div>
-      </GridContainer>
+      </Div>
       <Container>
         <GridContainer
           columns_tablet="12"
           background={Colors.lightGray}
           padding="11px 17px 29px 17px"
           padding_tablet="31px 0"
+          width="100%"
         >
           <Div
             gridArea_tablet="1/6/1/13"
@@ -426,7 +448,7 @@ const Footer = ({ yml }) => {
               textAlign_tablet="left"
               color={Colors.darkGray}
             >
-              @ 4Geeks Academy LLC 2019
+              @ 4Geeks Academy LLC {currentYear}
             </H4>
           </Div>
         </GridContainer>

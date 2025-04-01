@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
-import { Div, Header, GridContainer } from "../components/Sections";
+import { Div, Header, GridContainer, Grid } from "../components/Sections";
 import { H2, H3, H4, Paragraph } from "../components/Heading";
 import { Colors, Button } from "../components/Styling";
 import { Charts } from "../components/Chart";
@@ -125,7 +125,6 @@ const SVGImage = () => (
 const Outcomes = ({ data, pageContext, yml }) => {
   const { session } = React.useContext(SessionContext);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -153,7 +152,6 @@ const Outcomes = ({ data, pageContext, yml }) => {
       >
         <Header
           hideArrowKey
-          paddingParagraph="0px 14% 0px 0"
           textAlign_tablet="left"
           seo_title={yml.seo_title}
           title={yml.header.title}
@@ -161,7 +159,7 @@ const Outcomes = ({ data, pageContext, yml }) => {
           svg_image={<SVGImage />}
           margin_tablet="0px auto 0 auto"
           margin_xxs="0px auto 0 auto"
-          maxWidth="1366px"
+          maxWidth="1280px"
         />
       </Div>
       <Div
@@ -169,7 +167,6 @@ const Outcomes = ({ data, pageContext, yml }) => {
         padding_md="40px 80px"
         padding_lg="40px 0px"
         padding_tablet="40px 40px"
-        // padding="0 0 50px 0"
         flexDirection="column"
       >
         <Div
@@ -211,15 +208,13 @@ const Outcomes = ({ data, pageContext, yml }) => {
           </ScrollSpy>
         </Div>
 
-        <GridContainer
-          columns="12"
-          gridColumn_tablet="1 / span 13"
-          padding="0 0"
-          padding_tablet="0 0 0 0 "
-          maxWidth="1366px"
-          margin_tablet="0 auto"
+        <Grid
+          gridTemplateColumns_tablet="repeat(12, 1fr)"
+          gridArea_tablet="1/1/1/15"
+          maxWidth="1280px"
+          margin="auto"
         >
-          <Div gridArea="1/1/1/13" flexDirection="column">
+          <Div gridArea="1/1/1/12" flexDirection="column" padding="0 0 0 20px">
             {yml.sections
               .filter((section) => section.title !== "")
               .map((section, i) => {
@@ -256,7 +251,7 @@ const Outcomes = ({ data, pageContext, yml }) => {
                     <GridContainer
                       justifyContent="between"
                       gridGap_tablet="30px"
-                      containerColumns_tablet={`0fr repeat(12, 1fr) 1fr`}
+                      containerColumns_tablet="0fr repeat(12, 1fr) 1fr"
                       columns_tablet={
                         Array.isArray(section.stats) && section.stats.length
                       }
@@ -266,19 +261,26 @@ const Outcomes = ({ data, pageContext, yml }) => {
                         return (
                           <Div
                             key={i}
+                            gap="0"
                             gridColumnGap="40px"
                             flexDirection="column"
                             margin="0 0 38px 0"
-                            gap="10px"
                           >
                             <H2
                               type="h2"
                               textAlign_tablet="left"
                               color={Colors.blue}
+                              margin="0 0 10px 0"
+                              fontSize="27px"
+                              lineHeight="28px"
                             >
                               {m.stat}
                             </H2>
-                            <H3 type="h3" textAlign_tablet="left">
+                            <H3
+                              type="h3"
+                              textAlign_tablet="left"
+                              lineHeight="28px"
+                            >
                               {m.content}
                             </H3>
                           </Div>
@@ -305,22 +307,22 @@ const Outcomes = ({ data, pageContext, yml }) => {
                                 textAlign="left"
                                 margin_md="10px 0"
                                 dangerouslySetInnerHTML={{ __html: m.content }}
-                              ></Paragraph>
+                              />
                               {Array.isArray(m.image_section) &&
                                 m.image_section.map((m, i) => {
                                   return (
                                     <React.Fragment key={i}>
                                       <StyledBackgroundSection
                                         margin="30px 0"
-                                        minHeight={`100px`}
-                                        height={`255px`}
+                                        minHeight="100px"
+                                        height="255px"
                                         width="100%"
                                         image={
                                           m.image &&
                                           m.image.childImageSharp
                                             .gatsbyImageData
                                         }
-                                        bgSize={`contain`}
+                                        bgSize="contain"
                                       />
 
                                       <Paragraph
@@ -346,12 +348,7 @@ const Outcomes = ({ data, pageContext, yml }) => {
                                                 key={i}
                                               >
                                                 <Charts dataArray={c.data} />
-                                                <H4
-                                                  textTransform="uppercase"
-                                                  fontSize="15px"
-                                                  lineHeight="19px"
-                                                  fontWeight="900"
-                                                >
+                                                <H4 textTransform="uppercase">
                                                   {c.title}
                                                 </H4>
                                               </Div>
@@ -384,7 +381,7 @@ const Outcomes = ({ data, pageContext, yml }) => {
                 top: `${isCustomBarActive(session) ? "150px" : "90px"}`,
               }}
               borderRadius="3px"
-              border={`1px solid #e5e5e5`}
+              border="1px solid #e5e5e5"
               width="266px"
               height="fit-content"
             >
@@ -461,7 +458,7 @@ const Outcomes = ({ data, pageContext, yml }) => {
               </Modal>
             </Div>
           </Div>
-        </GridContainer>
+        </Grid>
       </Div>
     </>
   );

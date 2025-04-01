@@ -4,7 +4,7 @@ meta_info:
   visibility: "visible" # visible (default), hidden (not indexed) or unlisted (listed but not in sitemap).
   description: "Aplica a uno de los mejores bootcamps de código del mundo, online o en una de nuestras sedes: Miami, Santiago de Chile, Madrid, Costa Rica, Maracaibo y Caracas"
   image: "https://4geeks-academy-main.s3-us-west-2.amazonaws.com/PresentacionBienvenidaEstudiante1.jpg"
-  keywords: "Aplica a 4Geeks Academy Bootcamp"
+  keywords: null
   redirects: ["/aplica", "/es/apply"]
 
 ## APPLY HEADING
@@ -12,7 +12,7 @@ seo_title: "Coding Bootcamp"
 header:
   title: "Aplica a 4Geeks"
   image:
-  image_alt: ""
+  image_alt: "Aplica a 4Geeks Academy Bootcamp"
   paragraph: "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et."
   button:
 
@@ -25,6 +25,8 @@ left:
     email: "Email"
     phone: "Móvil"
     phone_warning: "¡Oye! Notamos que tu número de teléfono no es del mismo campus que seleccionó. No hay problema. Solo queríamos avisarte."
+    errors:
+      default: "Corrige los siguientes campos:"
     modal:
       title: "REVISA TU CAMPUS"
       text: "El código de país de su número de teléfono es de un país diferente al del campus al que está solicitando ingreso, ¿está seguro de que desea continuar con la solicitud?"
@@ -41,6 +43,13 @@ left:
   button:
     button_text: "APLICA"
     button_link: ""
+  terms:
+    agree_terms_text: "Al registrarte, estás aceptando nuestros"
+    terms_and_conditions: "Términos y condiciones"
+    terms_and_conditions_link: "/es/terminos"
+    privacy_policy: "Políticas de privacidad"
+    privacy_policy_link: "/es/privacidad"
+    connector_and: "y"
 
 ## APPLY RIGHT SECTION
 

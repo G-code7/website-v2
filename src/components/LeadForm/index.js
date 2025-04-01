@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Alert, Input } from "../Form/index";
 import { Row, Column, Div, GridContainer } from "../Sections";
 import { H4, Paragraph } from "../Heading";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import ReCAPTCHA from "react-google-recaptcha";
 import { SessionContext } from "../../session";
 import { Button, Colors } from "../Styling";
 import { Break, Devices } from "../Responsive";
@@ -180,6 +181,8 @@ const LeadForm = ({
   motivation,
   layout,
   inputBgColor,
+  textColor,
+  buttonStyles,
   landingTemplate,
   selectProgram,
   selectLocation,
@@ -214,6 +217,14 @@ const LeadForm = ({
               success
               error
             }
+            terms {
+              agree_terms_text
+              terms_and_conditions
+              terms_and_conditions_link
+              privacy_policy
+              privacy_policy_link
+              connector_and
+            }
             form_fields {
               name
               required
@@ -235,6 +246,7 @@ const LeadForm = ({
   );
   let yml = { ...page.node, ...form.node };
 
+  const captcha = useRef(null);
   const [formStatus, setFormStatus] = useState({ status: "idle", msg: "" });
   const [formData, setVal] = useState(_fields);
   const [consentValue, setConsentValue] = useState([]);
@@ -272,6 +284,13 @@ const LeadForm = ({
       );
   });
 
+  const captchaChange = () => {
+    const captchaValue = captcha?.current?.getValue();
+    if (captchaValue)
+      setVal({ ...formData, token: { value: captchaValue, valid: true } });
+    else setVal({ ...formData, token: { value: null, valid: false } });
+  };
+
   return (
     <Form
       id={id}
@@ -284,9 +303,10 @@ const LeadForm = ({
       marginTop={marginTop}
       marginTop_tablet={marginTop_tablet}
       marginTop_xs={marginTop_xs}
+      padding="24px"
       d_sm={d_sm}
       style={style}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
 
         if (formStatus.status === "error")
@@ -309,7 +329,11 @@ const LeadForm = ({
           setFormStatus({ status: "error", msg: locationSelector.error });
         } else {
           setFormStatus({ status: "loading", msg: yml.messages.loading });
-          formHandler(cleanedData, session)
+          const token = await captcha.current.executeAsync();
+          formHandler(
+            { ...cleanedData, token: { value: token, valid: true } },
+            session
+          )
             .then((data) => {
               if (data && data.error !== false && data.error !== undefined) {
                 setFormStatus({ status: "error", msg: data.error });
@@ -363,7 +387,7 @@ const LeadForm = ({
       )}
       {/* {heading && <H4 type="h4" fontSize="25px" width="auto" textAlign="center" textAlign_tablet={titleTextAlign || "left"} margin={landingTemplate ? "15px 0px 30px 0" : titleMargin || "20px 30px 15px 30px"} margin_tablet={titleMargin_tablet || "20px 40px 15px 40px"}>{heading}</H4>} */}
       {formStatus.status === "thank-you" ? (
-        <Paragraph margin="20px 0px 0px 0px">
+        <Paragraph color={textColor} margin="20px 0px 0px 0px">
           {thankyou || formStatus.msg}
         </Paragraph>
       ) : (
@@ -372,16 +396,18 @@ const LeadForm = ({
             display="block"
             className={"leadform-" + layout}
             size="12"
-            padding="0 24px"
             gap={gap}
           >
             {heading && (
               <H4
                 type="h4"
-                lineHeight="26px"
-                fontSize="22px"
+                // lineHeight="26px"
+                lineHeight=""
+                fontSize="45px"
                 padding={headerImage && "0 10% 0 0"}
-                fontWeight="700"
+                color={textColor}
+                fontWeight="400"
+                fontFamily="Archivo"
                 width="auto"
                 textAlign={titleTextAlign || "left"}
                 margin={
@@ -389,17 +415,19 @@ const LeadForm = ({
                     ? "25px 0px 10px 0"
                     : titleMargin || "20px 0px 10px 0px"
                 }
-                margin_tablet={titleMargin_tablet || "20px 0px 10px 0px"}
+                margin_tablet="0 0 18px 0"
               >
                 {heading}
               </H4>
             )}
             {motivation && (
               <Paragraph
-                style={{ fontWeight: "700", color: "#000" }}
+                style={{ fontWeight: "400", color: textColor || "#000" }}
+                fontFamily="Archivo"
                 textAlign="left"
                 padding={textPadding || "0px 0px 10px 0px"}
                 padding_tablet={textPadding_tablet || "0px 0px 20px 0px"}
+                opacity="1"
               >
                 {motivation}
               </Paragraph>
@@ -419,6 +447,7 @@ const LeadForm = ({
                         data-cy={f}
                         id={f}
                         bgColor={inputBgColor || "#FFFFFF"}
+                        opacity="1"
                         type={_field.type}
                         className="form-control"
                         placeholder={_field.place_holder}
@@ -448,6 +477,7 @@ const LeadForm = ({
                 return (
                   <PhoneInput
                     style={{ margin: "0 0 16px 0" }}
+                    inputStyle={{ opacity: 1 }}
                     key={i}
                     data-cy="phone"
                     id="phone"
@@ -467,6 +497,7 @@ const LeadForm = ({
                   options={selectProgram}
                   placeholder={courseSelector.place_holder}
                   valid={true}
+                  controlStyles={{ opacity: 1 }}
                   onChange={(selected, valid) =>
                     setVal({
                       ...formData,
@@ -483,6 +514,7 @@ const LeadForm = ({
                   options={selectLocation}
                   placeholder={locationSelector.place_holder}
                   valid={true}
+                  controlStyles={{ opacity: 1 }}
                   onChange={(selected, valid) => {
                     setVal({
                       ...formData,
@@ -548,10 +580,11 @@ const LeadForm = ({
                         fontSize="11px"
                         margin="5px 0 0 5px"
                         textAlign="left"
+                        color={textColor}
                         dangerouslySetInnerHTML={{
                           __html: consent.message,
                         }}
-                      ></Paragraph>
+                      />
                     </Div>
                   );
               })}
@@ -560,19 +593,31 @@ const LeadForm = ({
                 {formStatus.msg}
               </Alert>
             )}
+            <Div width="fit-content" margin="10px auto 0 auto">
+              <ReCAPTCHA
+                ref={captcha}
+                sitekey={process.env.GATSBY_CAPTCHA_KEY}
+                // onChange={captchaChange}
+                size="invisible"
+              />
+            </Div>
             {layout === "block" && (
-              <Div display="flex" padding="10px 0 0 0" width="100%">
+              <Div
+                display="flex"
+                padding="10px 0 0 0"
+                width="100%"
+                flexDirection="row-reverse"
+              >
                 <Button
-                  //variant="full"
                   type="submit"
-                  fontSize="17px"
+                  fontSize="21px"
+                  height="auto"
                   margin={marginButton}
                   margin_tablet={marginButton_tablet}
                   width_lg={widthButton}
-                  width_xs="100%"
                   justifyContent="center"
-                  background={Colors.blue}
-                  //textAlign="center"
+                  background={buttonStyles?.background || Colors.black}
+                  borderRadius="3px"
                   color={
                     formStatus.status === "loading"
                       ? Colors.darkGray
@@ -584,6 +629,30 @@ const LeadForm = ({
                 </Button>
               </Div>
             )}
+            <Paragraph fontSize="10px" textAlign="left" color={textColor}>
+              {yml.terms.agree_terms_text}{" "}
+              <a
+                href={yml.terms.terms_and_conditions_link}
+                style={{
+                  color:
+                    background === Colors.blue ? Colors.black : Colors.blue,
+                }}
+                target="_blank"
+              >
+                {yml.terms.terms_and_conditions}
+              </a>{" "}
+              {yml.terms.connector_and}{" "}
+              <a
+                href={yml.terms.privacy_policy_link}
+                style={{
+                  color:
+                    background === Colors.blue ? Colors.black : Colors.blue,
+                }}
+                target="_blank"
+              >
+                {yml.terms.privacy_policy}
+              </a>
+            </Paragraph>
           </Div>
         </>
       )}
@@ -601,6 +670,7 @@ LeadForm.propTypes = {
   fields: PropTypes.array,
   formHandler: PropTypes.func,
   handleClose: PropTypes.func,
+  buttonStyles: PropTypes.object,
 };
 LeadForm.defaultProps = {
   heading: null,
@@ -612,6 +682,7 @@ LeadForm.defaultProps = {
   layout: "block",
   id: "leadform",
   data: {},
+  buttonStyles: {},
   fields: ["full_name", "phone", "email"],
 };
 export default LeadForm;

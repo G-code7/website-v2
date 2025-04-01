@@ -1,8 +1,8 @@
 meta_info:
   slug: part-time-full-stack-developer
-  title: "Full Stack Developer Course by 4geeks Academy, master the Skills and Technologies"
+  title: "Full Stack Developer Bootcamp | 4Geeks Academy"
   bc_slug: "full-stack"
-  description: "Enroll in our Full Stack Developer Course and become a web development expert. Learn how to build applications from scratch. Join us today!"
+  description: "Become a Full Stack Developer with 4Geeks Academy. Master essential technologies like JavaScript and Python to launch your tech career with confidence today!"
   image: "/images/og-preview/full-stack.us.png"
   visibility: "visible"
   keywords: ""
@@ -70,7 +70,7 @@ partners:
 
 overlaped:
   heading: "Why learning Python and Javascript is essential"
-  paragraph: "Programming in Python and JavaScript offers some of the highest-paid career opportunities in the US. There are currently over 26 times more job opportunities in JavaScript compared to Ruby on Rails, and 10 times more jobs in Python compared to node.js. According to Indeed, Python and JavaScript developers enjoy average salaries exceeding $110k."
+  paragraph: "Programmers proficient in Python and JavaScript have access to some of the highest-paid career opportunities in the US. Currently, there are over 26 times more job opportunities for developers skilled in JavaScript than for those specializing in Ruby on Rails, and 10 times more positions for Python developers compared to those focusing on Node.js. According to Indeed, Python and JavaScript developers earn salaries averaging $110k."
   button:
     text: "LEARN MORE"
     color: "blue"  
@@ -86,10 +86,10 @@ two_columns:
     shadow: true  
   video: "https://www.youtube.com/watch?v=PWkgaAT8pHg&t=13s"
   heading:
-    text: "4Geeks, Miami and a story full of opportunities"
+    text: "4Geeks, Miami and a mission of creating opportunities"
     font_size: ["30px", "30px", "30px", "30px", "30px"]
   sub_heading:
-    text: "We are Miami based and we have been focusing in bringing on more opportunities in South Florida."
+    text: "With Miami as our home base, we're dedicated to fostering opportunities throughout South Florida."
     font_size: ["16px", "16px", "16px", "16px", "16px"]
   button:
     text: "Apply now"
@@ -98,13 +98,13 @@ two_columns:
     path: "#prices_and_payment"
   bullets:
     items: 
-    - text: "There is always a full or partial scholarship open"
-    - text: "There is always opportunities for everyone in Miami-Dade County, Broward and Palm Beach"
-    - text: "We have ongoing partnerships with Miami Dade College, Miami Tech Coalition, UWM, The City of Miami, Miami Dade County and many more."
+    - text: "Accessible scholarships, whether full or partial, are always available."
+    - text: "Exclusive opportunities await residents of Miami-Dade, Broward, and Palm Beach counties, ensuring local talent thrives."
+    - text: "We maintain ongoing partnerships with institutions such as Miami Dade College, Miami Tech Coalition, UWM, The City of Miami, Miami Dade County, and many more. "
 
 
 badges:
-  paragraph: "Kickstart your career at 4Geeks Academy, where developers grow and thrive. Named best <a href='/us/coding-bootcamp'>coding bootcamp</a> 2023 by Course Report, best center for coding bootcamps 2023 by Premios de Excelencia Educativa in Spain, listed among the top 10 in the US by Newsweek, and rated 4.92/5 on Switchup. Licensed by the Florida Department of Education, USA."
+  paragraph: "Kickstart your career at 4Geeks Academy, where developers grow and thrive. Named among the world’s <a href='/us/coding-bootcamp'>best coding bootcamps of 2024 by Course Report, chosen <a href='/us/trends-and-tech/celebrating-forbes-doble-recognition'>best coding bootcamp for students on a budget in 2024 by Forbes</a>, and rated 4.92/5 on Switchup. Licensed by the Florida Department of Education, USA."
 upcoming:
   no_dates_message: "There are currently no upcoming dates for this program"
   actionMessage: "Let me know when dates are available"
@@ -126,26 +126,30 @@ details:
         Reshape your mindset and embrace the programming, logic, and research skills to succeed in the tech industry."
       list:
         - label: "Duration"
-          content:  "16+2 Weeks"
-          icon: "calendar"
+          content: "16+2 Weeks"
+          icon: "duration-icon"
         - label: "Classes"
           content: "3 classes weekly"
-          icon: "book"
+          icon: "book-2"
+        - label: "Size of the Class"
+          content: "Ratio of 1 teacher per 7 students"
+          icon: "people"
         - label: "Certificate"
           content: "Full-Stack Developer"
           link_text: "See example"
           link: "https://certificate.breatheco.de/4ae7a46bba78dc19b823e124fea120c17b45e044"
-          icon: "certificate"
+          icon: "certification"
         - label: "Requisites"
           content: "No previous coding skills or advanced math are required."
           icon: "contract-checked"
         - label: "Language"
           content: "You can choose between English and Spanish for the syllabus and content. Live classes are taught in the language of your campus."
-          icon: "contract-checked"
+          icon: "language"
          
-  heading: Program Details Part-Time Full Stack Developer
+  heading: "Part-Time Full Stack Development Bootcamp"
   weeks: 18
-  sub_heading: "Hands-on learning through real-life projects. /n Master the 3 most used languages in the world: Master Python, JS and React."
+  week_unit: "wks"
+  sub_heading: "Hands-on learning through real-life projects. \n Master the 3 most used languages worldwide: Python, JS, and React."
   left_labels:
     description: "DESCRIPTION:"
     projects: "PROJECTS:"
@@ -154,7 +158,9 @@ details:
   details_modules:
     - module_name: "PREWORK"
       title: "Get Ready for the Prework"
-      description: "Starting with the basics: HTML5 + CSS3 + Javascript. We review the basics of coding and make sure we are all on the same page."
+      description: "We start with the basics: HTML5, CSS3, and JavaScript. We review the fundamentals of programming to ensure everyone is on the same page.
+
+        During the prework, you will learn how to create a website using HTML and CSS. Then, you will develop several projects and finally dive into the world of JavaScript, learning about variables, loops, conditionals, and functions."
       projects: "CSS Postcard, Minimal Instagram Version, etc."
       slug: "prework"
       duration: "~ 60 hours"
@@ -162,28 +168,28 @@ details:
     - module_name: "FOUNDATIONS"
       title: "Learn To Code"
       description: "Think like a computer: Control the flow of your code, code algorithms, loop, use conditionals, webpack, the command line, GIT, etc."
-      projects: "Instagram Application, Memory Card Game, Tic Tac Toe, Flappy Bird, etc."
+      projects: "Build your Instagram clone, a form with HTML5, an online resume, etc.."
       slug: "foundations"
       duration: "2 wks"
       step: 2
     - module_name: "THE WEB"
       title: "Web Development"
-      description: "Create your first React.js application, MVC Pattern, JS Modules, Bunding, Babel JS, The DOM, Events"
-      projects: "Coursera clone, Instagram clone, Youtube clone, etc."
+      description: "You will create your first application with React.js, MVC pattern, JS modules, bundling, Babel JS, the DOM, and events."
+      projects: "Instagram Feed clone, random card generator, unit testing with Jest, landing page with React, traffic light, to-do list with React, among others..."
       slug: "web-development"
       duration: "6 wks"
       step: 5.9
     - module_name: "API'S"
       title: "API Development"
-      description: "Mainly focused on Python, get ready to build your own API and interact with 3rd party applications like Twillio, Stripe and many more."
-      projects: "Coursera clone, Instagram clone, Youtube clone, etc."
+      description: "Mainly focused on Python. Get ready to build your own API and interact with 3rd party applications like Twillio, Stripe and many more."
+      projects: "Star Wars Blog page, JWT authentication, Jackson Families, CRUD (create, read, update, delete), build your own APIs and interact with others."
       slug: "web-development"
       duration: "2 wks"
       step: 2
     - module_name: "ADVANCED APPS"
       title: "Advanced Application"
-      description: "Python, Flask, REST API's, Databases, SQL, MVC Pattern, Publishing your website, etc."
-      projects: "During this phase you will have to design, code, test, and publish your own entire web application."
+      description: "Python, Flask, REST APIs, databases, SQL, MVC pattern, publish your website, etc."
+      projects: "During this phase, you will need to design, program, test, and publish your own web application."
       slug: "advanced-application"
       duration: "6 weeks"
       step: 8

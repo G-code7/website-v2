@@ -9,6 +9,7 @@ import { requestSyllabus } from "../../actions";
 import ReactPlayer from "../ReactPlayer";
 import TestimonialsCarrousel from "../Testimonials";
 import With4Geeks from "../With4Geeks";
+import FaqCard from "../FaqCard";
 // import WhyPython from '../WhyPython';
 import AlumniProjects from "../AlumniProjects";
 import SuccessStories from "../SuccessStories";
@@ -22,10 +23,12 @@ import About4Geeks from "../About4Geeks";
 import IconsBanner from "../IconsBanner";
 import Icon from "../Icon";
 import ChooseYourProgram from "../ChooseYourProgram";
+import JobGuaranteeSmall from "../JobGuaranteeSmall";
 import StarRating from "../StarRating";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { smartRedirecting, transferQuerystrings } from "../../utils/utils.js";
 import CardsCarousel from "../CardsCarousel";
+import SimpleCards from "../SimpleCards";
 import Overlaped from "../Overlaped";
 import TwoColumn from "../TwoColumn/index.js";
 import { SingleColumn } from "../TwoColumn/index.js";
@@ -37,7 +40,6 @@ const Title = ({ id, title, paragraph }) => {
     <GridContainer
       id={id}
       margin={paragraph ? "40px 0 20px 0" : "40px 0 30px 0"}
-      margin_tablet={paragraph ? "80px 0 20px 0" : "80px 0 60px 0"}
     >
       <H2 type="h2">{title}</H2>
       {paragraph && <Paragraph margin="26px 0">{paragraph}</Paragraph>}
@@ -94,26 +96,22 @@ export const MultiColumns = ({
         <Paragraph
           padding={heading ? "0" : "20px"}
           margin="15px 0"
-          fontSize={sh_xl || "16px"}
+          fontSize={sh_xl}
           fontSize_sm={sh_sm}
           fonSize_md={sh_md}
           fontSize_xs={sh_xs}
-          fontHeight="30px"
           style={sub_heading.style ? JSON.parse(sub_heading.style) : null}
-          // style={{textAlign:'center'}}
           dangerouslySetInnerHTML={{ __html: sub_heading.text }}
         />
       ) : sub_heading ? (
         <Paragraph
           padding={heading ? "0" : "20px"}
           margin="15px 0"
-          fontSize={sh_xl || "16px"}
+          fontSize={sh_xl}
           fontSize_sm={sh_sm}
           fonSize_md={sh_md}
           fontSize_xs={sh_xs}
-          fontHeight="30px"
           style={sub_heading.style ? JSON.parse(sub_heading.style) : null}
-          // style={{textAlign:'center'}}
         >
           {sub_heading.text}
         </Paragraph>
@@ -123,12 +121,10 @@ export const MultiColumns = ({
         <Paragraph
           padding={end_paragraph ? "0" : "20px"}
           margin="15px 0"
-          fontSize={p_xl || "16px"}
+          fontSize={p_xl}
           fontSize_sm={p_sm}
           fonSize_md={p_md}
           fontSize_xs={p_xs}
-          fontHeight="30px"
-          lineHeight="19px"
           style={{ textAlign: "center" }}
           dangerouslySetInnerHTML={{ __html: end_paragraph.text }}
           onClick={(e) => {
@@ -140,16 +136,13 @@ export const MultiColumns = ({
       {button && (
         <Button
           outline
-          // width="250px"
           colorHoverText={button.hover_color || Colors.blue}
           lineHeight="26px"
           textColor={Colors[button.color] || button.color}
           color={Colors[button.color] || button.color}
-          // padding_tablet="0"
           fontSize="15px"
           style={button.style ? JSON.parse(button.style) : null}
           background={Colors[button.background] || button.background}
-          // textAlign="left"
           margin="2rem 0"
           padding=".35rem.85rem"
           onClick={() => {
@@ -186,9 +179,6 @@ export const Columns = ({ columns, proportions, swipable }) => {
         <Div
           key={index}
           flexDirection="column"
-          // size={c.size[0]}
-          // size_sm={c.size[2]}
-          // size_xs={c.size[3]}
           textAlign={c.align}
           minWidth="250px"
           margin="25px 15px 0 15px"
@@ -332,98 +322,108 @@ export const landingSections = {
     );
   },
 
-  iconogram: ({ session, data, pageContext, yml, index }) => {
-    const { heading, sub_heading, icons, button } = yml;
-    return <Iconogram yml={yml} session={session} data={data} index={index} />;
+  iconogram: ({ yml, index }) => {
+    return <Iconogram yml={yml} index={index} />;
   },
 
-  badges: ({ session, data, pageContext, yml, course, index }) => {
-    let dataYml =
-      data.allLandingYaml.edges.length !== 0 &&
-      data.allLandingYaml.edges[0].node.badges !== null
-        ? data.allLandingYaml.edges
-        : data.allDownloadableYaml.edges;
-    let badges = dataYml[0].node.badges;
+  badges: ({ pageContext, yml, index }) => {
+    const title = yml.heading?.text || yml.heading;
+    const subHeading = yml.sub_heading?.text || yml.sub_heading;
     return (
       <React.Fragment key={index}>
-        <Div background={Colors.verylightGray2} width="100%">
+        <Div width="100%">
           <Badges
             link
-            // wrapped_images={true}
             id="badges"
+            variant="squares"
             lang={pageContext.lang}
-            background={Colors.verylightGray2}
-            paragraph={badges.heading}
+            title={title}
+            paragraph={subHeading}
+            imageBorder={`1px solid ${Colors.lightGray2}`}
             short_text
             padding="60px 0"
             padding_tablet="68px 0"
             margin_tablet="0 0 78px 0"
-            maxWidth="1366px"
+            maxWidth="1280px"
           />
         </Div>
       </React.Fragment>
     );
   },
 
-  rating_reviews: ({ session, data, pageContext, yml, course, index }) => {
+  rating_reviews: ({ data, pageContext, yml, course, index }) => {
     let dataYml =
       data.allLandingYaml.edges[0] || data.allDownloadableYaml.edges[0];
     let ratingReviews = dataYml.node.rating_reviews;
+    const { background } = ratingReviews;
 
     return (
       <Div
-        key={index}
-        padding="60px 0 60px 0"
-        display="flex"
-        flexDirection="column"
-        borderBottom="3px solid #F5F5F5"
+        background={Colors[background] || background}
+        padding="0 20px"
+        padding_tablet="0 40px"
       >
-        <H2 type="h2" fontSize="22px" fontWeight="700" padding="10px 0 60px 0">
-          {ratingReviews.heading}
-        </H2>
         <Div
+          key={index}
+          padding="60px 0 60px 0"
           display="flex"
           flexDirection="column"
-          flexDirection_tablet="row "
-          justifyContent="center"
-          gap="45px"
-          gap_tablet="10%"
+          margin="auto"
+          width="100%"
+          maxWidth="1280px"
         >
-          {ratingReviews.rating_list.map((item, i) => {
-            return (
-              <Div
-                key={i}
-                display="flex"
-                alignItems="center"
-                flexDirection="column"
-              >
-                <GatsbyImage
-                  style={{
-                    height: "50px",
-                    minWidth: "135px",
-                    width: "135px",
-                  }}
-                  imgStyle={{ objectFit: "contain" }}
-                  loading="eager"
-                  // draggable={false}
-                  // fadeIn={false}
-                  alt={item.alt}
-                  image={getImage(item.image.childImageSharp.gatsbyImageData)}
-                />
-                <StarRating rating={item.rating} />
-                <Paragraph
-                  padding="6px 0"
-                  fontSize="15px"
-                  letterSpacing="0.05em"
-                  fontWeight="bold"
+          <H2 type="h2" padding="10px 0 60px 0">
+            {ratingReviews.heading}
+          </H2>
+          <Div
+            display="flex"
+            flexDirection="column"
+            flexDirection_tablet="row "
+            justifyContent="center"
+            gap="45px"
+            gap_tablet="24px"
+          >
+            {ratingReviews.rating_list.map((item) => {
+              return (
+                <Div
+                  key={`rating-component-${item.alt}`}
+                  display="flex"
+                  alignItems="center"
+                  flexDirection="column"
+                  borderRadius="4px"
+                  background="white"
+                  width="100%"
+                  padding="10px"
                 >
-                  {`${item.rating} ${
-                    pageContext.lang === "us" ? "On Reviews" : "En reseñas"
-                  }`}
-                </Paragraph>
-              </Div>
-            );
-          })}
+                  <GatsbyImage
+                    style={{
+                      height: "50px",
+                      minWidth: "135px",
+                      width: "135px",
+                    }}
+                    imgStyle={{ objectFit: "contain" }}
+                    loading="eager"
+                    // draggable={false}
+                    // fadeIn={false}
+                    alt={item.alt}
+                    image={getImage(item.image.childImageSharp.gatsbyImageData)}
+                  />
+                  <StarRating rating={item.rating} />
+                  <Paragraph
+                    padding="6px 0"
+                    fontSize="9px"
+                    color={Colors.darkGray3}
+                    fontWeight="bold"
+                    textTransform="lowercase"
+                  >
+                    {`${item.rating} ${
+                      pageContext.lang === "us" ? "On Reviews" : "En reseñas"
+                    }`}
+                  </Paragraph>
+                </Div>
+              );
+            })}
+          </Div>
         </Div>
       </Div>
     );
@@ -526,16 +526,26 @@ export const landingSections = {
   geeks_vs_others: ({ session, pageContext, yml, course, index }) => {
     return (
       <React.Fragment key={index}>
-        <Title
-          id="geeks_vs_others"
-          title={yml.heading}
-          paragraph={yml.paragraph}
-        />
         <GeeksVsOthers
           lang={pageContext.lang}
-          limit={yml.total_rows}
-          title={yml.heading}
-          paragraph={yml.sub_heading}
+          limit={yml?.total_rows || 5}
+          title={yml?.heading}
+          paragraph={yml?.sub_heading}
+          mainBackround={Colors.white}
+          thirdBackground="#F9F9F9"
+          border={`1px solid ${Colors.lightGray}`}
+          borderRadius="4px"
+          style={{
+            background: Colors.veryLightBlue3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            padding: "20px",
+            padding_table: "20px",
+            padding_lg: "20px 40px",
+            margin: "0 auto",
+          }}
         />
       </React.Fragment>
     );
@@ -620,6 +630,23 @@ export const landingSections = {
     );
   },
 
+  simple_cards: ({ yml, index }) => {
+    const { heading, sub_heading, content, cards, button, width, background } =
+      yml;
+    return (
+      <SimpleCards
+        index={index}
+        heading={heading}
+        cardWidth={width}
+        background={background}
+        sub_heading={sub_heading}
+        content={content}
+        cards={cards}
+        button={button}
+      />
+    );
+  },
+
   choose_your_program: ({ session, pageContext, yml, data, index }) => {
     return (
       <React.Fragment key={index}>
@@ -678,45 +705,100 @@ export const landingSections = {
     </Div>
   ),
 
-  testimonials_new: ({ session, data, pageContext, yml, index }) => (
-    <Div
-      id="testimonials_new"
-      key={`${index}-testimonials_new`}
-      flexDirection="column"
-      margin="50px auto"
-      m_sm="0"
-      p_xs="0 10px"
-      width_tablet="100%"
-      maxWidth_tablet="1366px"
-    >
-      <SuccessStories
-        lang={pageContext.lang}
-        filterIndexes={yml.filter_indexes}
+  testimonials_new: ({ session, data, pageContext, yml, index }) => {
+    const [h_xl, h_lg, h_md, h_sm, h_xs] =
+      yml.heading && yml.heading.font_size ? yml.heading.font_size : [];
+
+    return (
+      <Div
+        id="testimonials_new"
+        key={`${index}-testimonials_new`}
+        flexDirection="column"
+        margin="50px auto"
+        m_sm="0"
+        p_xs="0 10px"
+        width_tablet="100%"
+        maxWidth_tablet="1280px"
+      >
+        {yml.heading && yml.heading.text !== "" && (
+          <H2
+            type="h2"
+            textAlign_tablet="center"
+            lineHeight="38px"
+            lineHeight_tablet="38px"
+            fontSize={h_xs || "30px"}
+            fs_xl={h_xl}
+            fontSize_lg={h_lg || "30px"}
+            fontSize_md={h_md || "30px"}
+            fontSize_sm={h_sm}
+            margin="30px 0 0px 0"
+            style={yml.heading.style ? JSON.parse(yml.heading.style) : null}
+          >
+            {yml.heading.text}
+          </H2>
+        )}
+        <SuccessStories
+          lang={pageContext.lang}
+          filterIndexes={yml.filter_indexes}
+          variant={yml.variant}
+        />
+      </Div>
+    );
+  },
+
+  job_guarantee_small: ({ data, yml, index }) => {
+    const { heading } = yml;
+
+    const { icons, link, title } = data.allJobGuaranteeSmallYaml.edges[0].node;
+    const formatedIcons = icons.map(({ title, icon }) => ({
+      icon,
+      content: title,
+    }));
+    return (
+      <JobGuaranteeSmall
+        key={`job-guarantee-small-${index}`}
+        content={{
+          title: heading?.text || title,
+          link,
+          icons: formatedIcons,
+        }}
       />
-    </Div>
+    );
+  },
+
+  faq: ({ data, yml, index }) => (
+    <FaqCard
+      key={`faq-${index}`}
+      faqs={data.allFaqYaml.edges[0].node.faq}
+      topicSlug={yml.topic}
+    />
   ),
 
-  why_4geeks: ({ session, pageContext, yml, index }) => (
-    <Div
-      id="why_4geeks"
-      key={index}
-      flexDirection="column"
-      margin="0"
-      padding="0"
-    >
-      <With4Geeks
-        text={yml.footer?.text}
-        sessionLocation={
-          session &&
-          session.location &&
-          session.location.breathecode_location_slug
-        }
-        text_link={yml.footer?.text_link}
-        lang={pageContext.lang}
-        playerHeight="auto"
-      />
-    </Div>
-  ),
+  why_4geeks: ({ session, pageContext, yml, index }) => {
+    const title = yml.heading?.text || yml.heading;
+    return (
+      <Div
+        id="why_4geeks"
+        key={index}
+        flexDirection="column"
+        margin="0"
+        padding="0"
+      >
+        <With4Geeks
+          text={yml.footer?.text}
+          sessionLocation={
+            session &&
+            session.location &&
+            session.location.breathecode_location_slug
+          }
+          text_link={yml.footer?.text_link}
+          lang={pageContext.lang}
+          playerHeight="auto"
+          title={title}
+        />
+      </Div>
+    );
+  },
   alumni_projects: ({ session, data, pageContext, yml, index }) => (
     <Div
       id="alumni_projects"
@@ -739,7 +821,7 @@ export const landingSections = {
         display_tablet="flex"
       />
       <AlumniProjects
-        lang={data.allAlumniProjectsYaml.edges}
+        data={data.allAlumniProjectsYaml.edges[0]?.node}
         yml={yml}
         hasTitle
         showThumbs="false"
@@ -769,6 +851,8 @@ export const landingSections = {
         margin_xs="60px 0 40px 0"
       >
         <OurPartners
+          multiLine
+          variant="carousel"
           images={hiring.partners.images}
           margin="0"
           padding="0 ​0 75px 0"
@@ -832,7 +916,7 @@ export const landingSections = {
         : [];
     return (
       <Div
-        id="two_column_left"
+        id={`two_column_left-${index}`}
         key={index}
         background={Colors[yml.background] || yml.background}
         flexDirection="column"
@@ -840,7 +924,7 @@ export const landingSections = {
         // padding_tablet="30px 40px"
         margin_tablet="0 auto"
         width_md="100%"
-        padding_xs="30px 0px"
+        // padding_xs="30px 0px"
       >
         {yml.section_heading && yml.section_heading !== "" && (
           <H2
@@ -863,7 +947,13 @@ export const landingSections = {
           </H2>
         )}
         <TwoColumn
-          left={{ image: yml.image, video: yml.video }}
+          left={{
+            image: yml.image,
+            video: yml.video,
+            videoHeight: yml.videoHeight,
+            videoWidth: yml.videoWidth,
+            justify: yml.justify,
+          }}
           right={{
             heading: yml.heading,
             sub_heading: yml.sub_heading,
@@ -871,6 +961,7 @@ export const landingSections = {
             content: yml.content,
             button: yml.button,
           }}
+          alignment={yml.alignment}
           proportions={yml.proportions}
           session={session}
         />
@@ -884,14 +975,14 @@ export const landingSections = {
         : [];
     return (
       <Div
-        id="two_column_right"
+        id={`two_column_right-${index}`}
         key={index}
         background={Colors[yml.background] || yml.background}
         flexDirection="column"
         //padding="40px 0 50px 0"
         margin_tablet="0 auto"
         width_md="100%"
-        padding_xs="30px 0px"
+        // padding_xs="30px 0px"
       >
         {yml.section_heading && yml.section_heading !== "" && (
           <H2
@@ -926,7 +1017,9 @@ export const landingSections = {
             video: yml.video,
             videoHeight: yml.videoHeight,
             videoWidth: yml.videoWidth,
+            justify: yml.justify,
           }}
+          alignment={yml.alignment}
           proportions={yml.proportions}
           session={session}
         />
@@ -977,15 +1070,6 @@ export const landingSections = {
   ),
   columns: ({ session, data, pageContext, yml, index }) => (
     <Div id="columns" key={index} flexDirection="column" margin="50px 0">
-      {/* <Title
-            size="10"
-            title={yml.heading.text}
-            paragraph={yml.sub_heading}
-            paragraphColor={Colors.darkGray}
-            maxWidth="800px"
-            margin="auto"
-            variant="primary"
-        /> */}
       <Columns columns={yml.columns} proportions={yml.proportions} />
     </Div>
   ),

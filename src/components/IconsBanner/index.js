@@ -1,80 +1,61 @@
 import React from "react";
-import { H2, H3, H4, Paragraph } from "../Heading";
-import { Colors } from "../Styling";
+import { H3, Paragraph } from "../Heading";
 import { Div } from "../Sections";
-import { Link } from "gatsby";
+import { Colors } from "../Styling";
 import Icon from "../Icon";
 
-const positions = [
-  {
-    position: "1/3/1/5",
-  },
-  {
-    position: "1/5/1/7",
-  },
-  {
-    position: "1/7/1/9",
-  },
-  {
-    position: "1/9/1/11",
-  },
-];
-
-export default ({ icon, title, content }) => {
+export default ({ icon, title, content, color, content_style }) => {
   return (
     <Div
-      gridGap="0"
-      //alignItems="stretch"
-      justifyContent_tablet="flex-start"
-      justifyContent_xs="flex-start"
-      flexDirection="column"
+      background="#FFF"
+      border="3px solid #000"
+      width="100%"
+      width_md="320px"
+      width_tablet="200px"
+      boxShadow="6px 6px 0px 0px rgba(0,0,0,1)"
+      boxShadow_tablet="9px 8px 0px 0px rgba(0,0,0,1)"
       flexDirection_tablet="column"
-      height="auto"
-      width_tablet="100%"
-      minWidth_lg="320px"
-      minWidth_tablet="120px"
-      minWidth_md="180px"
-      //minWidth_lg="240px"
-      width_xs="50%"
-      margin_tablet="0 10px"
-      margin_xxs="20px 0"
-      padding_xs="0"
+      justifyContent_tablet="start"
+      padding="15px"
+      alignItems="center"
+      alignItems_tablet="start"
+      borderRadius="4px"
     >
+      {icon && (
+        <Icon
+          icon={icon}
+          width="56px"
+          height="56px"
+          color={Colors[color] || color}
+        />
+      )}
       <Div
+        margin="0 0 0 15px"
+        margin_tablet="24px 0 0 0"
         display="flex"
         flexDirection="column"
-        alignItems="center"
-        padding_tablet="0"
-        padding_xs="0 10%"
-        width="100%"
+        display_tablet="block"
       >
-        <Icon icon={icon} width="94" height="98" margin="0 0 20px 0" />
         {title && (
-          <H2
-            type="h2"
+          <H3
+            textAlign="left"
+            fontFamily="Archivo"
+            fontWeight="600"
             fontSize="16px"
-            width="140px"
-            width_md="auto"
-            lineHeight="19px"
-            padding="0"
-            padding_tablet="20px 15%"
-            textAlign="center"
+            margin="0"
           >
             {title}
-          </H2>
+          </H3>
         )}
         {content && (
           <Paragraph
-            fontSize="14px"
-            lineHeight="17px"
-            color={Colors.black}
-            padding="0 15%"
-            margin_xs="10px 0 0 0"
-            width="100%"
-            textAlign="justify"
-          >
-            {content}
-          </Paragraph>
+            textAlign="left"
+            color={Colors.darkGray}
+            fontFamily="Archivo"
+            fontSize="18px"
+            style={content_style ? JSON.parse(content_style) : {}}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         )}
       </Div>
     </Div>

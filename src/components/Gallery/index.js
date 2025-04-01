@@ -1,15 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import { H1, H2, H3, H4, Title, Separator, Paragraph } from "../Heading";
-import { Anchor, Colors, Button } from "../Styling";
-import { Row, GridContainer, Div } from "../Sections";
-import Fragment from "../Fragment";
-import Icon from "../Icon";
+import React from "react";
+import { H4, Paragraph } from "../Heading";
+import { Div } from "../Sections";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { SessionContext } from "../../session";
 import Carousel from "../Carousel";
-import "../../assets/css/carousel.css";
-import MosaicImages from "../MosaicImages";
 
 const Gallery = ({
   heading,
@@ -18,7 +11,7 @@ const Gallery = ({
   customSettingsCarousel,
   widthImage,
   heightImage,
-  previewArrow,
+  previousArrow,
   nextArrow,
   horizontal,
 }) => {
@@ -32,7 +25,7 @@ const Gallery = ({
         padding_tablet="40px 40px 10px 40px"
         margin_tablet="0 auto 30px auto"
         margin="0 0 36px 0"
-        maxWidth={"1366px"}
+        maxWidth={"1280px"}
       >
         {heading && (
           <Div
@@ -45,7 +38,6 @@ const Gallery = ({
             <Div width_tablet="30%">
               <H4
                 fontSize="30px"
-                //textTransform="uppercase"
                 lineHeight="36px"
                 fontWeight="700"
                 textAlign="center"
@@ -56,7 +48,6 @@ const Gallery = ({
             </Div>
             <Div width_tablet="70%">
               <Paragraph
-                fontSize="15px"
                 textAlign="center"
                 textAlign_tablet="start"
                 margin="0 0 50px 0"
@@ -73,7 +64,7 @@ const Gallery = ({
           display="block"
         >
           <Carousel
-            customSettings={
+            settings={
               customSettingsCarousel || {
                 dotsClass: "slick-dots-staff",
                 slidesToShow: 3,
@@ -119,7 +110,7 @@ const Gallery = ({
                 ],
               }
             }
-            previewArrow={previewArrow}
+            previousArrow={previousArrow}
             nextArrow={nextArrow}
           >
             {Array.isArray(images) &&

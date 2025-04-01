@@ -3,7 +3,7 @@ meta_info:
   visibility: "visible" # visible (default), hidden (not indexed) or unlisted (listed but not in sitemap).
   canonical: "/"
   title: "Miami Coding Bootcamp, Madrid España, Santiago de Chile"
-  description: "The #1 Top coding bootcamp with over 3,000 graduates and life-long career support. USA, Spain, Portugal, Germany, Chile and Venezuela Bootcamp."
+  description: "The #1 coding bootcamp with over 3,000 graduates and life-long career support. USA, Spain, Portugal, Germany, Chile and Venezuela Bootcamp."
   image: "https://storage.googleapis.com/4geeks-academy-website/website-preview.png"
   keywords: "Coding Bootcamp Miami, Learn to code miami, learn to code, coding bootcamp, Miami Coding Bootcamp, Learn Code Miami, Learn python, Coding Bootcamp Madrid, Coding Bootcamp Spain, Coding Bootcamp españa"
   redirects: ["/home", "/us/home", "/en/home", "/us"]
@@ -11,86 +11,214 @@ meta_info:
 header_data:
   tagline: Coding Bootcamp
   title: Empower Your Life With Coding Skills
-  sub_heading: Lifetime Coding Mentorship, endless Career Support, and a tech-driven community of developers.
+  sub_heading: Lifelong coding mentorship, endless career support, and a tech-driven community of developers.
   bullets:
-    - Lifetime Coding Mentorship, endless Career Support, and a tech-driven community of developers.
-    - 'Job Guarantee: get a job within the next 6 months upon graduation or money back, <a href="https://storage.googleapis.com/4geeks-academy-website/PDF%20and%20Docs/Conditions%20Job%20Guaranteed%20Program.pdf" style="text-decoration: none; color: #000000;"> conditions apply. </a>'
-    - Learn everywhere, all the time, you choose the methodology.
+    - Lifelong coding mentorship, unlimited career support, and a tech-driven community of developers.
+    - 'Job Guarantee: Get a job within 6 months of graduation or your money back, <a href="https://storage.googleapis.com/4geeks-academy-website/PDF%20and%20Docs/Conditions%20Job%20Guaranteed%20Program.pdf" style="text-decoration: none; color: #000000; font-weight: 700;"> conditions apply. </a>'
+    - Learn anywhere, anytime, you choose the format.
   join_button_text: CHOOSE A PROGRAM
   join_button_path: "#choose-program"
-  free_button_text: TAKE FREE TRIAL AT NO COST
+  free_button_text: TAKE A FREE TRIAL AT NO COST
   free_button_path: ""
   #If it doesn't have a video it will show the image
-  #It must be a video from videoaks
+  #It must be a video from videoask
   # video: "https://www.videoask.com/f5rg0mmi4"
   video: ""
-  image: "../../../static/images/bg/more-new-main-home-bg.png"
+  image: "../../../static/images/bg/1250-sudents-bg.png"
 
 news:
-  heading: "Read about this coding bootcamp in the news..."
+  heading: "Read about our coding bootcamps in the news..."
   limit: 7
 button:
   button_text: See Programs
   button_link: "#programs"
+
 ## BADGES SECTION /components/Badges
 badges:
-  paragraph: "Benefit from an expert-designed coding education. Join a recognized academy with prestigious awards and prizes, and kickstart your coding career!"
+  title: "8 Years empowering people to succeed in tech"
+  paragraph: "Licensed by the Florida Department of Education, recognized by Forbes as a top 5 Coding School, and consistently ranked among the world's best coding bootcamps by major independent listings."
+
+success_cases:
+  title: Success stories
+  content: 86% of our students get hired
+
+two_column_carousel:
+  title: "We make it possible"
+  text: "Find out how we help you succeed."
+  videos:
+    - src: "/images/landing/alissa-video.webp"
+      video: "EcqasocRKHo"
+    # - src: "/images/landing/alissa-video.webp"
+    #   video: "EcqasocRKHo"
 
 ## CHOOSE YOUR PROGRAM /components/ChooseYourProgram
 choose_program:
   title: Choose your program
   paragraph: Find the path that’s right for you
 
+why_4geeks:
+  proportions: [6, 6]
+  image:
+    style: '{ "backgroundSize": "contain", "background-position": "center"}'
+    src: "/images/landing/hombre-con-laptop-2.png"
+    shadow: false
+  heading:
+    text: "Be part of a vibrant community"
+    style: '{ "fontWeight": 400}'
+  sub_heading:
+    text: "Join our international community of over 4000 students, teachers, partners, and alumni. Connect through various channels like Slack, GitHub, social media, and our exclusive platform 4Geeks.com. Where there’s a geek, there’s a way! What sets us apart:"
+  content:
+    text: |-
+      Belong to a community of like-minded people who genuinely support each other. Gain lifetime access to our online learning platform and mentorship services. We’ll always be there for you, even after you graduate.
+  button:
+    text: "Apply now"
+    color: "white"
+    background: "blue"
+    path: "/us/apply"
+  bullets:
+    items:
+    - text: "Lifelong and readily available coding mentorship"
+      icon: "check"
+    - text: "Unlimited and personalized career support"
+      icon: "check"
+    - text: "Award-winning syllabus and methodology"
+      icon: "check"
+    - text: "An extensive network of partners in tech"
+      icon: "check"
+
 ## TWO COLUMNS
 two_columns:
   proportions: [6, 6]
+  justify: "center"
   image:
-    style: '{ "backgroundSize": "cover" }'
-    src: "/images/landing/feliz-empresario-laptop.png"
-    shadow: true  
-  heading:
+    style: '{ "backgroundSize": "contain", "height": ["500px", "500px", "500px", "500px", "300px"], "minHeight": "auto" }'
+    src: "/images/landing/feliz-empresario-laptop-3.png"
+    shadow: false
+  section_heading:
     text: "Finance your future"
-    font_size: ["30px", "30px", "30px", "30px", "30px"]
-  sub_heading:
-    text: "We’re all about making our high-quality education affordable to everyone. That's why we offer multiple options to help you fund our coding bootcamps stress-free. Whether it's an ISA, scholarship, payment plan or Job Guarantee we're here to guide you every step of the way."
-    font_size: ["16px", "16px", "16px", "16px", "16px"]
+  heading:
+    text: "$20 million in scholarships"
+    style: '{ "fontWeight": 400, "marginBottom": "32px", "marginTop": "0px" }'
+  content:
+    text: |
+      "1,456 people from all walks of life have benefited from our scholarship programs." <a style="color: black; cursor:pointer; text-decoration: underline; opacity: 0.8;">read here</a> stories of the beneficiaries and projects.
+    path: "/us/20-million"
   button:
-    text: "SEE ALL FINANCING OPTIONS"
+    text: "See all financing options"
     color: "white"
-    background: "black"
-    path: "/us/financials"
+    background: "blue"
+    path: "/us/financials#prices_and_payment"
+  boxes:
+    - icon: rocket-2
+      title: "14"
+      text: Projects completed
+    - icon: handsheart
+      title: "1465"
+      text: Beneficiaries so far
+
+
+
+
+
+
+
+# Two Columns - Rigo
+two_columns_rigo:
+  proportions: [7, 5]
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center"}'
+    src: "/images/landing/rigobot-section.webp"
+    shadow: false
+  # video: "https://www.youtube.com/watch?v=PWkgaAT8pHg&t=13s"
+  heading: 
+    text: "Our AI-powered features make all the difference!"
+    font_size: ["33px", "33px", "33px", "33px", "33px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Through years of research and experience, we've perfected the strategies and tools to ensure your constant and efficient progress. To optimize your learning curve and empower you to tackle challenges with confidence, we've now incorporated the power of AI."
+    font_size: ["16px","16px","16px","16px","16px"]
+  content:
+    style: '{ "font-size":"16px", "margin":"15px 0" }'
+    text: "Experience the difference our AI-powered features make. Our tried-and-tested approach keeps you engaged, motivated, and on the fast track to achieving your coding goals!"
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Meet Rigobot, our AI coding assistant:"
+        text: |
+          • Instant tutoring as you code.
+          <br />
+          • Skill evaluations to track your progress.
+          <br />
+          • Expert bug fixing assistance.
+          <br /><br />
+          It perfectly complements our human mentorship program!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "Learnpack, our interactive learning software, provides:"
+        text: |
+          • There are hundreds of interactive exercises to help you master and retain skills.
+          <br />
+          • Automated tests to help track your progress.
+          <br />
+          • Structured practice.
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
 
 ## 4GEEKS VS OTHERS SECTION
 geeks_vs_others:
-  heading: "WHAT MAKES THIS CODING BOOTCAMP STAND OUT?"
-  sub_heading: "In a nutshell, the simplest way to compare coding focused schools:"
-  sub_heading_link: "/geeks-vs-others"
+  heading: "4Geeks Academy vs. other bootcamps"
+  sub_heading: "Discover what sets us apart:"
 
-why_4geeks:
-  heading: Why 4Geeks Academy?
-  sub_heading: ""
+iconogram:
+  heading:
+    text: "Our track record of success"
+    style: '{ "textAlign": "center" }'
+  swipable: false
+  background: veryLightBlue3
+  icons:
+    - icon: "graduation-2"
+      content: "4500+ Graduates"
+      content_style: '{ "fontSize": "24px" }'
+    - icon: "group-2"
+      color: "#23C520"
+      content: "7 Campuses"
+      content_style: '{ "fontSize": "24px" }'
+    - icon: "briefcase-new"
+      color: "#7D79FF"
+      content: "86% hired"
+      content_style: '{ "fontSize": "24px" }'
+    - icon: "star-2"
+      color: "#0084FF"
+      content: "4.85 rating"
+      content_style: '{ "fontSize": "24px" }'
+
+with_4geeks:
+  title: Hear it from our students
 
 ## JOIN 4GEEKS SECTION DATA
 join_geeks:
   heading: JOIN 4GEEKS
-  sub_heading: "By becoming part of 4Geeks, you get access to our main features: Lifelong Mentorship and Unlimited Career Support."
+  sub_heading: "When you join 4Geeks you gain lifelong access to unlimited mentorship and career support."
   geek_data:
     geek_pal_heading: Programming - Always - Limitless
     geek_pal_data:
-      content: Never code on your own again -A PAL for the rest of your life-. We will be together, by your side, for as long as you need - even after you get your first job. Mentorship Support, One-to-One, Q&A, Office Space and more.
+      content: Never code alone again - Gain a coding PAL for the rest of your life-. We will be by your side for as long as you need - even after you graduate and get your first job. Coding mentorship, One-to-Ones, community support, office hours and more.
       icon_link: "/geekpal-support"
     geek_force_heading: Career Empowerment
     geek_force_data:
-      content: "We will do everything necessary to help you find a job in the field! Including: Profile Building, Job Referrals, Tailored Interview Training, Weekly Coaching, Unlimited One-on-One's, Chat Support, Networking Events and more."
+      content: "We will do everything to help you find a job in tech! Including: profile building, job referrals, tailored interview training, weekly coaching, unlimited one-on-ones, networking events and more."
       icon_link: "/geekforce-career-support"
 
 ## ALUMNI SECTION
 alumni_header:
-  heading: "MEET OUR ALUMNI AND THEIR PROJECTS"
-  sub_heading: "Get to know our graduates and some of the projects they built during the program."
+  heading: "MEET OUR ALUMNI AND DISCOVER THEIR PROJECTS"
+  sub_heading: "Get to know our graduates and some of the final projects they built."
 
 ## TESTIMONIAL SECTION
 testimonial_header:
-  heading: "81% got hired within 6 months of graduation"
+  heading: "86% of our graduates successfully land a job after completing our program."
   button_text: "See all testimonials"
   button_link: ""

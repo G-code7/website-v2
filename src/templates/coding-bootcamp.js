@@ -32,7 +32,7 @@ import ScrollSpy from "../components/ScrollSpy";
 import Card from "../components/Card";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const Program = ({ data, pageContext, yml }) => {
+const CodingBootcamp = ({ data, pageContext, yml }) => {
   const { session } = React.useContext(SessionContext);
   const pageDetails = data.allPageYaml.edges[0].node;
   const [open, setOpen] = React.useState(false);
@@ -113,7 +113,7 @@ const Program = ({ data, pageContext, yml }) => {
             height={`350px`}
             borderRadius={`3px`}
             image={yml.header.image}
-            bgSize={`contain`}
+            bgSize="contain"
             alt={yml.header.image_alt}
           />
         </Div>
@@ -182,7 +182,7 @@ const Program = ({ data, pageContext, yml }) => {
             height={`350px`}
             borderRadius={`3px`}
             image={yml.what_will_you_learn.image}
-            bgSize={`contain`}
+            bgSize="contain"
             alt={yml.what_will_you_learn.image_alt}
           />
         </Div>
@@ -321,7 +321,7 @@ const Program = ({ data, pageContext, yml }) => {
             height={`800px`}
             borderRadius={`3px`}
             image={yml.content_with_subtitle_and_image.image}
-            bgSize={`contain`}
+            bgSize="contain"
             alt={yml.content_with_subtitle_and_image.image_alt}
           />
         </Div>
@@ -426,8 +426,8 @@ const Program = ({ data, pageContext, yml }) => {
                       type="h4"
                       textAlign="left"
                       fontSize="14px"
-                      align={`left`}
-                      align_sm={`left`}
+                      align="left"
+                      align_sm="left"
                       color={Colors.black}
                       paddingRight="5%"
                       textTransform="uppercase"
@@ -528,8 +528,8 @@ const Program = ({ data, pageContext, yml }) => {
                       type="h4"
                       textAlign="left"
                       fontSize="14px"
-                      align={`left`}
-                      align_sm={`left`}
+                      align="left"
+                      align_sm="left"
                       color={Colors.black}
                       textTransform="uppercase"
                       fontWeight="700"
@@ -565,6 +565,7 @@ const Program = ({ data, pageContext, yml }) => {
         lang={pageContext.lang}
         message={pageDetails.upcoming.no_dates_message}
         locations={data.allLocationYaml.edges}
+        showMoreRedirect
       />
       <GridContainer padding_tablet="0" margin_tablet="0 0 62px 0">
         <Div height="1px" background="#EBEBEB"></Div>
@@ -816,45 +817,6 @@ export const query = graphql`
         }
       }
     }
-    allAlumniProjectsYaml(filter: { fields: { lang: { eq: $lang } } }) {
-      edges {
-        node {
-          header {
-            tagline
-            sub_heading
-          }
-          projects {
-            project_name
-            slug
-            project_image {
-              childImageSharp {
-                gatsbyImageData(
-                  layout: CONSTRAINED # --> CONSTRAINED || FIXED || FULL_WIDTH
-                  width: 800
-                  placeholder: NONE # --> NONE || DOMINANT_COLOR || BLURRED | TRACED_SVG
-                )
-              }
-            }
-            project_content
-            project_video
-            live_link
-            github_repo
-            alumni {
-              first_name
-              last_name
-              job_title
-              github
-              linkedin
-              twitter
-            }
-          }
-          button_section {
-            button_text
-            button_link
-          }
-        }
-      }
-    }
     allTestimonialsYaml(filter: { fields: { lang: { eq: $lang } } }) {
       edges {
         node {
@@ -1013,6 +975,8 @@ export const query = graphql`
             visibility
             keywords
             redirects
+            cohort_exclude_regex
+            cohort_include_regex
           }
           header {
             sub_heading
@@ -1048,4 +1012,4 @@ export const query = graphql`
   }
 `;
 
-export default BaseRender(Program);
+export default BaseRender(CodingBootcamp);

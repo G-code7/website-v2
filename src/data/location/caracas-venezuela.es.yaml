@@ -6,15 +6,7 @@ meta_info:
   template: "location"
   image: "/images/og-preview/caracas-venezuela.es.png"
   keywords: "Coding Bootcamp Caracas, Curso Informatica Caracas, Curso Programacion Caracas"
-  redirects:
-    [
-      "/venezuela",
-      "/es/location/impact-hub-caracas",
-      "/es/coding-campus/bootcamp-programacion-venezuela",
-      "/es/location/caracas-venezuela",
-      "/es/coding-campus/bootcamp-programacion-caracas",
-      "/es/coding-campus/bootcamp-programacion-caracas-venezuela"
-    ]
+  redirects: [ "/venezuela"]
   region: "latam"
   dialCode: "58"
   related_clusters: ["desarrollador-full-stack"]
@@ -57,7 +49,7 @@ badges:
     4Geeks Academy es el lugar donde los desarrolladores crecen y prosperan. 
     Estamos autorizados por el Departamento de Educación de Florida. 
     Elegido como uno de los 35 mejores cursos de programacion del mundo y 
-    el mejor <a href="https://4geeksacademy.com/es/curso-de-programacion-desde-cero/?lang=es" rel="nofollow">curso de programacion</a> en Miami según SwitchUp. 
+    el mejor <a href="/es/curso-de-programacion-desde-cero">curso de programacion</a> en Miami según SwitchUp. 
     4Geeks Academy ha sido reconocida como uno de los 10 mejores bootcamps de codificación en los Estados Unidos según Newsweek. 
     Una comunidad construida para desarrolladores.
 news:
@@ -70,10 +62,10 @@ info_box:
   heading: "Encuéntranos en Caracas"
   address: "Torre Jalisco, nivel E2, Municipio Baruta Distrito Capital, 1080, Miranda, Venezuela"
   contact_heading: "Contacts"
-  whatsapp: "+584241711725"
-  whatsapp_link: "https://api.whatsapp.com/send?phone=+584241711725&text=Hola+4Geeks&utm_source=web_site&utm_medium=web_site&utm_campaign=web_site&utm_id=web_site&utm_term=web_site&utm_content=Web_site"
-  phone: "+58424-1711725"
-  email: "info@4GeeksAcademy.com"
+  phone: Llámanos +58 412 2326485
+  whatsapp: +58 412 2326485
+  whatsapp_link: "https://wa.me/+5804122326485"
+  email: "latam@4geeksacademy.com"
   image: "../../../static/images/locations/caracas-map.png"
   alt: ""
 images_box:
@@ -86,7 +78,7 @@ images_box:
       alt: "Caracas Office Jalisco"
     - path: "../../../static/images/ownpeoplecoding2.webp"
       alt: "4Geeks Own People Coding"
-    - path: "../../../static/images/ownmancoding.jpg"
+    - path: "../../../static/images/ownmancoding.webp"
       alt: "Remote-Coding-Bootcamp"
     - path: "../../../static/images/locations/caracas-graduates.png"
       alt: "4Geeeks Caracas graduates"
@@ -117,6 +109,52 @@ two_columns:
     - text: "Enfoque en habilidades prácticas para el mercado laboral"
     - text: "Descubre por qué 4Geeks Academy destaca como la mejor opción para aprender a programar"
 
+# Two Columns - Rigo
+two_columns_rigo:
+  proportions: [7, 5]
+  background: "#FFFFFF"
+  justify: "center" #start,end,center
+  image:
+    style: '{"backgroundSize": "contain", "background-position": "center", "border" : "2px solid black", "border-radius": "4px"}'
+    src: "/images/landing/ai-mentor-esp.jpg"
+    shadow: true
+  video: "cOFm_deKj6Q"
+  heading: 
+    text: "¡Nuestras herramientas de IA mejoran y agilizan tu aprendizaje!"
+    font_size: ["31px", "31px", "31px", "29px", "29px"]
+    style: '{ "lineHeight": "30px" }'
+    heading_image:
+      src: "/images/rigobot-logo.png"
+  sub_heading:
+    text: "Luego de años de investigación y experiencia, hemos perfeccionado nuestros métodos de enseñanza para optimizar tu curva de aprendizaje y tu tasa de éxito. A través de nuestra plataforma de aprendizaje 4Geeks.com, te brindamos las estrategias y herramientas para garantizar tu progreso constante y eficiente."
+    font_size: ["16px","16px","16px","16px","16px"]
+    style: '{ "font-size":"16px", "margin":"15px 0", "font-weight":"300", "text-align": "justify" }'
+  content:
+    style: '{ "font-size":"16px", "margin":"15px 0"}'
+    text: "¡Experimenta la diferencia que marcan nuestras nuevas herramientas de Inteligencia Artificial! Nuestro enfoque ha demostrado mantenerte comprometido, motivado y encaminado a lograr tus objetivos de programación."
+  bullets:
+    item_style: '{ "padding": "0", "font-weight": "100", "margin":"0" }'
+    items:
+      - heading: "Rigobot, nuestra IA personalizada, ofrece de forma ilimitada:"
+        text: |
+          • Tutoría instantánea mientras programas.
+          <br />
+          • Evaluaciones de habilidades para seguir tu progreso.
+          <br />
+          • Asistencia para corregir errores.
+          <br /><br />
+          ¡Es el complemento perfecto para nuestro programa de mentoría humana!
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
+      - heading: "LearnPack, nuestro software de aprendizaje fácil de usar, proporciona:"
+        text: |
+          • Cientos de ejercicios interactivos para ayudarte a dominar y retener habilidades.
+          <br />
+          • Pruebas automatizadas para ayudarte a seguir tu progreso.
+          <br />
+          • Y mucho más…
+        icon: "check" #string with icon for example ['check', 'cicle', etc]
+        icon_color: '#25BF6C'
 
 ## START FROM HERE - DON'T CHANGE ANYTHING ABOVE
 ## HEADING SECTION
@@ -135,6 +173,11 @@ consents:
     active: false
     message: 'Al completar este formulario acepto que mi información será utilizada para enviarme información comercial sobre 4Geeks Academy y que podría resultar una relación comercial a partir de esto. Revisa nuestra <a style={{ marginLeft: "5px" }} target="_blank" rel="noopener noreferrer nofollow" className="decorated" href="/es/privacidad">Política de Privacidad</a>'
     error_message: "Debes aceptar el consent de GDPR"
+  - slug: "wa_consent"
+    name: "WhatsApp Consent"
+    active: true
+    message: 'Acepto recibir información en mi email, WhatsApp y/o otros canales sobre talleres de programación, eventos, cursos y otros materiales de marketing. Nunca compartiremos tu información de contacto y puedes darte de baja fácilmente en cualquier momento.'
+    error_message: "Debes aceptar el consentimiento de Whatsapp."
 
 city: "Caracas"
 name: "Venezuela"

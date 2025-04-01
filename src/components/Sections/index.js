@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { Colors, StyledBackgroundSection } from "../Styling";
-import { H1, H2, Paragraph } from "../Heading";
+import { H1, H2, Paragraph, SubTitle } from "../Heading";
 import { Break } from "../Responsive";
 import { Devices } from "../Responsive";
 import Fragment from "../Fragment";
@@ -27,7 +27,7 @@ export const Container = styled(Fragment)`
   flex: ${(props) =>
     props.flex || props.size ? `0 0 ${(props.size / 12) * 100}%` : null};
   max-width: ${(props) =>
-    props.size ? `${(props.size / 12) * 100}%` : props.maxWidth || "1366px"};
+    props.size ? `${(props.size / 12) * 100}%` : props.maxWidth || "1280px"};
   max-height: ${(props) => (props.maxHeight ? props.maxHeight : "none")};
   overflow: ${(props) => props.overflow};
   overflow-wrap: ${(props) => props.overflowWrap};
@@ -358,6 +358,7 @@ export const Div = styled.div`
   margin: ${(props) => props.margin};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
+  color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
   background: ${(props) =>
     props.isActive ? props.backgroundActive : props.background};
@@ -401,6 +402,7 @@ export const Div = styled.div`
   &:hover {
     background: ${(props) => props.backgroundHover};
     border-bottom: ${(props) => props.borderBottomHover};
+    color: ${(props) => props.colorHover};
   }
   @media ${Devices.xxs} {
     column-count: ${(props) => props.columnCount_xxs};
@@ -475,7 +477,7 @@ export const Div = styled.div`
         : null};
     align-self: ${(props) => props.alignSelf_tablet};
     order: ${(props) => props.order_tablet};
-    gap: ${(props) => (props) => props.gap_tablet};
+    gap: ${(props) => props.gap_tablet};
     column-count: ${(props) => props.columnCount_tablet};
     place-self: ${(props) => props.placeSelf_tablet};
     background: ${(props) => props.background_tablet};
@@ -536,7 +538,7 @@ export const Div = styled.div`
     grid-area: ${(props) => props.gridArea_md};
     display: ${(props) => props.display_md};
     flex-direction: ${(props) => props.flexDirection_md};
-    gap: ${(props) => (props) => props.gap_md};
+    gap: ${(props) => props.gap_md};
     flex-wrap: ${(props) => props.flexWrap_md};
     justify-content: ${(props) =>
       justifyContentOptions[props.justifyContent_md]};
@@ -748,6 +750,7 @@ export const Header = ({
   height_tablet,
   background,
   margin,
+  margin_md,
   margin_tablet,
   margin_xxs,
   padding,
@@ -777,16 +780,19 @@ export const Header = ({
   zIndex,
   id,
 }) => {
+  const multilineTitle = title
+    .split("\n")
+    .map((l) => <span className="d-block">{l}</span>);
   return (
     <Grid
       background={background}
       height={height}
       height_tablet={height_tablet}
       position={position}
-      margin={margin || "70px 0 0 0"}
+      margin={margin}
       margin_tablet={margin_tablet}
+      margin_md={margin_md}
       margin_xxs={margin_xxs}
-      //padding={padding_xxs || "60px 20px"}
       padding={padding || "0 0"}
       padding_tablet={padding_tablet || "60px 40px"}
       padding_md={padding_md || "60px 80px"}
@@ -796,9 +802,9 @@ export const Header = ({
       id={id}
     >
       <Grid
-        gridTemplateColumns_tablet={`repeat(12, 1fr)`}
+        gridTemplateColumns_tablet="repeat(12, 1fr)"
         gridArea_tablet="1/1/1/15"
-        maxWidth="1366px"
+        maxWidth="1280px"
         margin="auto"
       >
         {/* hacer cambios aqui ... remover svg en mobile */}
@@ -807,46 +813,38 @@ export const Header = ({
           gridColumn_tablet={svg_image ? null : "1 / 13"}
           gridArea_tablet={svg_image ? "1/1/1/7" : null}
         >
-          <H2
-            type="h2"
-            textAlign_tablet={textAlign_tablet}
-            margin="0 0 11px 0"
-            padding={paddingTitle || "0 20px"}
-            color="#606060"
-            fontSize={fontSize_seo || "12px"}
-            //fontFamily={fontFamily_title}
-          >
-            {seo_title}
-          </H2>
           <H1
             type="h1"
             textAlign_tablet={textAlign_tablet}
+            margin="0 0 11px 0"
+            padding={paddingTitle || "0 20px"}
+            color={Colors.darkGray2}
+            fontSize={fontSize_seo}
+          >
+            {seo_title}
+          </H1>
+          <H2
+            type="h2"
+            textAlign_tablet={textAlign_tablet}
             padding="0 20px"
-            padding_tablet={
-              paddingTitle_tablet
-                ? paddingTitle_tablet
-                : paddingTitle || "0 20px"
-            }
+            padding_tablet={paddingTitle_tablet || paddingTitle || "0 20px"}
             fontSize={fontSize_title || "40px"}
             fontSize_tablet={fontSizeTitle_tablet || "50px"}
             lineHeight={lineHeight || "50px"}
             lineHeight_tablet={lineHeight_tablet || "60px"}
             fontFamily={fontFamily_title}
             textTransform={uppercase && "uppercase"}
-            //fontSize={fontSize || "40px"}
-            //fontSize_tablet={fontSize_tablet || "50px"}
             zindex={zIndex}
+            color={Colors.black}
           >
-            {hideArrowKey ? title : `< ${title} >`}
-          </H1>
-          <Paragraph
-            padding={paddingParagraph || "0"}
+            {multilineTitle}
+          </H2>
+          <SubTitle
             width="auto"
             letterSpacing="0.05em"
+            padding={paddingParagraph || "20px"}
             padding_tablet={
-              paddingParagraph_tablet
-                ? paddingParagraph_tablet
-                : paddingParagraph || 0
+              paddingParagraph_tablet || paddingParagraph || "0 20px"
             }
             textAlign_tablet={textAlign_tablet}
             margin={paragraphMargin || "26px 0"}
@@ -856,7 +854,7 @@ export const Header = ({
             color={Colors.black}
           >
             {paragraph}
-          </Paragraph>
+          </SubTitle>
           {children}
         </Div>
         {svg_image ? (
@@ -901,11 +899,13 @@ export const GridContainer = ({
   borderRadiusChild_tablet,
   backgroundChild,
   containerGridGap,
+  columnGap,
   gridGap,
   gridGap_xxs,
   gridGap_tablet,
   gridTemplateRows,
   gridTemplateRows_tablet,
+  width,
   height,
   height_tablet,
   minHeight,
@@ -933,6 +933,7 @@ export const GridContainer = ({
   maxWidth,
   childMaxWidth,
   childMargin,
+  childWidth,
   childHeight,
   displayChild,
   displayChild_tablet,
@@ -968,6 +969,7 @@ export const GridContainer = ({
       justifyContent_tablet={justifyContent_tablet}
       position={position}
       borderTop={borderTop}
+      width={width}
       maxWidth={maxWidth}
       height={height}
       height_tablet={height_tablet}
@@ -995,6 +997,7 @@ export const GridContainer = ({
         display_md={displayChild_md}
         overflow={overflowChild}
         background={backgroundChild}
+        columnGap={columnGap}
         gridGap={gridGap}
         gridGap_xxs={gridGap_xxs}
         gridGap_tablet={gridGap_tablet}
@@ -1023,6 +1026,7 @@ export const GridContainer = ({
         height={childHeight}
         margin={childMargin}
         maxWidth={childMaxWidth}
+        width={childWidth}
       >
         {children}
       </Grid>
@@ -1336,7 +1340,7 @@ Div.defaultProps = {
 };
 
 Container.defaultProps = {
-  maxWidth: "1366px",
+  maxWidth: "1280px",
   padding: "17px",
   padding_tablet: "0 40px",
   padding_md: "0 80px",

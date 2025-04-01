@@ -2,7 +2,7 @@ meta_info:
   slug: clases-de-programacion-santiago # <--- URL 4geeksacademy.com/us/landing/example
 
   # This will show on social media when shared
-  title: "Clases de programación en Santiago de Chile, aprende a programar en 9 o 16 sem y consigue trabajo como programador."
+  title: "Clases de programación en Santiago de Chile, aprende a programar en 10 o 16 sem y consigue trabajo como programador."
   description: "El más galardonado curso de programacion en Santiago, Chile. Con 4Geeks te convertiras en programador en unos pocos meses."
   image: "/images/bg/main-bg.jpg"
   keywords: "Clase de programación, Clase de python, clase de javascript, Clase de informática, Coding Bootcamp, 4Geeks Academy"
@@ -39,9 +39,15 @@ apply_schollarship: # form that is displayed at the end of the landing
 
 # jumbotron on the top (cannot be commented out)
 header_data:
-  background: "#FFF1D1"
+  background: "#ffffff"
   tagline: Clases de Programación Web
   sub_heading: "Aprende a programar desde cero y consigue trabajo como Full Stack Developer Junior"
+  tagline_color: "#1c1c1c"
+  form_styles:
+    background: "#0084FF"
+    color: "white"
+    button:
+      background: "black"
   badge: "../../../static/images/badges/Course-Report-Badge-2024.webp"
   image_filter: brightness(0.3)
 
@@ -152,10 +158,10 @@ components:
       link: "#leadform_header" # moves to start position
       
     - title: "Full Time"
-      sub_title: "9 semanas"
+      sub_title: "10 semanas"
       icon: "fullstack_2"
       description: |
-        Programa intensivo de 9 semanas, con clases de lunes a viernes durante todo el día, para vivir una experiencia inmersiva en el mundo del código.
+        Programa intensivo de 10 semanas, con clases de lunes a viernes durante todo el día, para vivir una experiencia inmersiva en el mundo del código.
 
         Precio: 3.800.000 CLP
         
@@ -172,7 +178,7 @@ components:
     background: "rgba(255, 183, 24, 0.2)"
     image:
       style: '{ "backgroundSize": "cover" }'
-      src: "/images/landing/GrupoVariasNacionalidades.png"
+      src: "/images/landing/GrupoVariasNacionalidades.webp"
       shadow: true
     heading:
       text: "Membresías"
@@ -196,6 +202,7 @@ components:
     layout: two_column_right
     background: "veryLightBlue2" # Name of the color(from components/Styling/index.js) or color code ex: #C9F9F9
     image:
+      style: '{ "background-size": "contain", "height":"200px", "min-height":"auto", "background-position": "center"}'
       src: "/images/why-4geeks/python-image.png"
     heading:
       text:

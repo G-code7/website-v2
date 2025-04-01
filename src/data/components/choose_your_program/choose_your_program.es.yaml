@@ -7,7 +7,8 @@ programs:
     icon: "fullstack_2"
     description: "Convierte en un programador que utiliza las tecnologias más búscadas, mentoria personalizada y un plan de estudios y career support para conseguir tu primer trabajo."
     description_mobile: "Online, presencial y flexible"
-    link: "/es/coding-bootcamps/full-stack-part-time"
+    link: "/es/coding-bootcamps/desarrollador-full-stack"
+    text_link: "Más Info"
 
   - title: "Data Science y Machine Learning"
     sub_title: "Desde cero"
@@ -15,12 +16,20 @@ programs:
     description: "Conviértete en un científico de datos, desarrolla modelos de predicción y uneté a una de las profesiones mejores pagadas del mundo."
     description_mobile: "Online, presencial y flexible"
     link: "/es/coding-bootcamps/curso-datascience-machine-learning"
+    text_link: "Más Info"
 
-  - title: "Blockchain y Web3"
-    sub_title: "Desde cero"
-    icon: "blockchain"
-    description: "Construye applicaciones en la Web3 utilizando Solidity y Etherium Blockchain. Obtén un trabajo como desarrolaldor de blockchain."
-    description_mobile: "Registro temprano"
-    link: "#"
-    text_link: Registro temprano
-    comming_soon: true
+  - title: "Curso de Ciberseguridad"
+    sub_title: "Para Windows y Linux"
+    description: "Conviértete en un especialista en ciberseguridad, preparado para identificar, gestionar y mitigar las vulnerabilidades del sistema de acuerdo con las normas ISO y otros estándares."  # Translated description
+    description_mobile: "En línea, presencial y flexible"
+    icon: "cyber-security"
+    link: "/es/coding-bootcamps/curso-ciberseguridad"
+    text_link: "Más Info"
+
+  - title: "Inteligencia Artificial Aplicada"
+    sub_title: "Sin código"
+    description: "Explora en detalle la inteligencia artificial y cómo aplicarla en diferentes industrias, roles y tu trabajo."  # Translated description
+    description_mobile: "En línea, presencial y flexible"
+    icon: "applied-ai"
+    link: "/es/coding-bootcamps/curso-inteligencia-artificial"
+    text_link: "Más Info"

@@ -17,6 +17,12 @@ meta_info:
   automation: soft # comma separated, "soft" is the default value
   tag: request_more_info # comma separated, "request_more_info" is the default value
 
+navbar:
+  logoUrl: "#" # relative(/apply), absolute(https://google.com) or id(#componentName)
+  buttonText: "Get more Info"
+  buttonUrl: "#leadform_bottom" # url accepts: relative(/apply), absolute(https://google.com), id(#componentName) or position(#top #bottom)
+
+
 form:
   # posible fields: "first_name", "last_name", "full_name", "phone", "email"
   # always the first_name, email and phone will be mandatory if added.
@@ -29,15 +35,21 @@ form:
 apply_schollarship: # form that is displayed at the end of the landing
   # title: "Apoyo Profesional Ilimitado"
   imageSide: "left"
-  image: "../../../static/images/landing/apply.png"  
+  image: "../../../static/images/landing/hombre-con-laptop.png"  
 
 # jumbotron on the top (cannot be commented out)
 header_data:
   tagline: Become a Software Developer and Boost your Career in Tech
   sub_heading: "Get a Career in Tech."
-  background: "#FFF1D1"
+  background: "#ffffff"
+  tagline_color: "#1c1c1c"
+  form_styles:
+    background: "#0084FF"
+    color: "white"
+    button:
+      background: "black"
   badge: "../../../static/images/badges/Course-Report-Badge-2024.webp"
-  image_filter: brightness(0.3)
+  # image_filter: brightness(0.1)
 
 features:
   marginTop: 0px #<-- separation between tagline and the bullets
@@ -48,17 +60,17 @@ features:
     - No previous experience or coding skills required.
     - Part-Time, Online and Hybrid programs available.
     - Get lifetime access to our mentors and Career Growth Support (Your first Job in Tech is our goal).
-    - Starting at $150 a month. Or you can pay after you get a job!
+    - Starting at $120 a month!
 
 follow_bar:
   position: "top" # top, bottom, hidden
   content:
-    text: "Get $1,500 off if you enroll with our Labor Day Deal."
+    text: "Join 4Geeks Academy with an Income Share Agreement, Finance Your Future"
     text_mobile: "ENROLL NOW and get $1,500 off when you use our code LABOR in our apply form"
     # devices:   XL      LG    MD      SM    XS
     font_size: ["25px", "25px", "25px", "20px", "18px"]
   button:
-    text: "Get more information"
+    text: "Get more Info"
     path: "#leadform_header"
   phone:
     text: "Call "
@@ -78,7 +90,7 @@ short_badges:
     alt: "Best coding bootcamp Switchup 2023"   
   - name: "Florida Department of Education"
     url: ""
-    image: "../../../static/images/badges/licensed.png"
+    image: "../../../static/images/badges/licensed-inverted.png"
     alt: "Florida Department of Education"
 
 #
@@ -89,6 +101,10 @@ program_details:
   position: 2
   heading: "Master Python, JS and React"
   sub_heading: "The 3 most used languages in the world"
+
+badges:
+  position: 3
+  heading: "4Geeks Academy has awards and recognitions that validate it's excellence"
 
 geeks_vs_others:
   position: 5
